@@ -1,8 +1,9 @@
 .dashboard{
-    width: 90%;
     height: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     flex-wrap: nowrap;
     justify-content: center;
+    background-attachment: fixed;
 }

@@ -1,12 +1,13 @@
 .custom-button {
-    min-width: 15vw;
-    width: auto;
+    min-width: 10vw;
+    max-width: 100px;
     height: 50px;
     letter-spacing: 0.5px;
     line-height: 50px;
     padding: 0 35px 0 35px;
     font-size: 15px;
     background-color: black;
+    border-radius: 30px;
     color: white;
     text-transform: uppercase;
     font-family: 'Open Sans Condensed';
@@ -17,9 +18,17 @@
     justify-content: center;
   
     &:hover {
-      background-color: rgb(252, 235, 235);
+      background-color:white;
       color: black;
       border: 1px solid black;
+    }
+    @media screen and (max-width: 800px){
+      min-width: 24vw;
+      &:hover{
+          background-color: black;
+          color: white;
+          border: 1px solid black;
+      }
     }
     &.google-button{
         background-color: #4285f4;
@@ -39,6 +48,13 @@
         background-color: black;
         color: white;
         border: none;
+      }
+      @media screen and (max-width: 800px){
+        &:hover{
+            background-color: white;
+            color: black;
+            border: 1px solid black
+        }
       }
     }
   }
