@@ -2,7 +2,7 @@ import FLIGHT_ACTION_TYPES from "./flight.types";
 import { startFlightFetching,flightFetchFailure,flightFetchStatus,flightFetchingSuccess } from "./flight.actions";
 
 const FLIGHT_FETCHED_INITIAL_STATE = {
-    flights :[],
+    flight :[],
     isFligthFething: false,
     isFlightFetchedError: false
 }

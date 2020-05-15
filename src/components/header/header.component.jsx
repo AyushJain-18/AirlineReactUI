@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { withRouter } from 'react-router-dom';
-// import HeaderStyles from './Header.module.scss';
+import { Menu, MenuItem } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle'
 
+import { ReactComponent as Logo } from '../../assets/logo.svg';
+
+import { withRouter } from 'react-router-dom';
+
+import LoginStyles from './header.styles.scss';
+
+// import HeaderStyles from './Header.module.scss';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 
 const Header = (props) => {
     const classes = useStyles();
+    const imageURL = AccountCircle;
 
     const routeToHomePage = () => {
         props.history.push('/');
@@ -50,7 +59,14 @@ const Header = (props) => {
                          AIRWAYS
                     </IconButton>
                     <div variant="h6" className={classes.title}></div>
-                    {/* <SignIn></SignIn> */}
+                    <Fragment>
+                    <img src={imageURL}  className={LoginStyles.logoImg} alt="user-profile-pic"></img>
+                    {true && <Menu
+                        id="simple-menu">
+                        <MenuItem >Logout</MenuItem>
+                    </Menu>}
+                </Fragment>
+                <AccountCircle role="button"  className={LoginStyles.logoIcon} ></AccountCircle>
                 </Toolbar>
             </AppBar>
         </header>
@@ -58,3 +74,5 @@ const Header = (props) => {
 }
 
 export default withRouter(Header);
+
+// anchorEl={this.state.anchorEl}

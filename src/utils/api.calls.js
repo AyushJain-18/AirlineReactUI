@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const serverUrl ='http://localhost:3001/';
+const serverUrl ='http://localhost:3001';
 
 
 export const getRequest =(endpoint)=>{

@@ -6,12 +6,17 @@ import {connect} from 'react-redux'
 import Header from '../components/header/header.component'
 import  DashboardContainer from '../containers/dashboard-container/dashboardContainer';
 import {startFlightFetching} from '../store/flight/flight.actions';
-import SignInComponent from '../components/sign-in/sign-in.component'
+import {selectFlights} from '../store/flight/flight.selector';
+import SignInContainer from '../containers/sign-in-container/signIn-container'
+import PassengerDashBoard from '../components/passengerDashBoard/passengerDashBoard.component';
+
 
 class AllRoutesComponent extends React.Component{
     componentWillMount(){
-        const{startFetchingFlights} = this.props;
-        startFetchingFlights()
+        const{startFetchingFlights, flights} = this.props;
+        if(flights.length===0){
+            startFetchingFlights()
+        }
     }
     render(){
         return(
@@ -20,7 +25,8 @@ class AllRoutesComponent extends React.Component{
                 <div className= 'routes-div-container'>
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
-                            <Route exact path= '/signUp' component={SignInComponent}/>
+                            <Route exact path= '/signIn' component={SignInContainer}/>
+                            <Route exact path ='/passengerDashboard'component={PassengerDashBoard} />
                     </Switch>
                 </div>
             </div>
@@ -28,9 +34,14 @@ class AllRoutesComponent extends React.Component{
     }
 }
 
+const mapStateToProps =(state)=>{
+    return{
+        flights: selectFlights(state)
+    }
+}
 const mapDispatchToProps =(dispatch)=>{
     return{
         startFetchingFlights: ()=>dispatch(startFlightFetching())
     }
 }
-export default connect(null, mapDispatchToProps)(AllRoutesComponent); 
+export default connect(mapStateToProps, mapDispatchToProps)(AllRoutesComponent); 
