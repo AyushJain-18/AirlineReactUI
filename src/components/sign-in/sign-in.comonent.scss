@@ -1,0 +1,25 @@
+.sign-in{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .sign-in-form-title{
+        margin: 3vw 2vw;
+    }
+    .sign-in-form{
+        display: flex;
+        flex-direction: column;
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        .sign-in-label{
+            width: 100%;
+                // margin-left: 2vw;
+        }
+        .form-button{
+            align-self: center;
+            
+        }
+    }
+   
+}
