@@ -1,5 +1,4 @@
 import React from 'react'
-import './flight-overview.styles.scss'
 
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom'
@@ -12,7 +11,7 @@ import CustumButton from '../CustumComponents/CustumButon/custumButton.component
 import {selectUserSignInStatus,selectSignUserType} from '../../store/user/user.selector'
 
 
-const FilghtOverview = ({FlightSummaryDetails,isUserSignIn,userType})=>{
+const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType})=>{
     const {
             name,
             airlineNumber,
@@ -24,43 +23,32 @@ const FilghtOverview = ({FlightSummaryDetails,isUserSignIn,userType})=>{
             totalSeats,
             type,
             date} = FlightSummaryDetails;
+      const{FlightContainer,FlightDetails,FlightName,FlightButton} = styles;      
             console.log('USER TYPE', userType)
     return(
-            <div className = 'flight-container'>
-                <div className = 'flight-name-info'>
+        <FlightContainer>
+                <FlightName>
                         <Flight/>
-                        <div className='flight-name'>{name}</div>
-                </div>
+                        {name}
+                </FlightName>
                         
-                <div className= 'flight-detail-info'>
-                        <div className='flight-type'> 
-                                    FLIGHT-TYPE:   &nbsp; {type}
-                                    
-                        </div>
-                        <div className='flight-number'>
-                              Airline Number:  &nbsp; {airlineNumber}
-                        </div>
-                        <div className = 'flight-price'>
-                                AirLine Price:  &nbsp; {price} 
-                        </div>
+                <FlightDetails>
+                        <div> FLIGHT-TYPE:   &nbsp; {type} </div>
 
-                        <div className='flight-from'>
-                                From: &nbsp;  <FlightTakeoff/> &nbsp; {from}
-                        </div>
-                        <div className='flightdeparture-time'>
-                            Departure Time:  &nbsp; {takeOffTime}
-                        </div>
-                        <div className='flight-total-seats'>
-                            Total Seats:&nbsp; {totalSeats}
-                        </div>
-                        <div className='flight-to'>
-                            To: &nbsp;  <FlightLandIcon/> &nbsp; {destination}
-                        </div>
-                        <div className='flight-arrivial-time'>
-                             Arrivial Time:  &nbsp; {landingTime}
-                        </div>
-                        <div className='flight-buttons'>
-                                {isUserSignIn?  
+                        <div>Airline Number:  &nbsp; {airlineNumber}</div>
+
+                        <div>AirLine Price:  &nbsp; {price} </div>
+
+                        <div>From: &nbsp;  <FlightTakeoff/> &nbsp; {from}</div>
+
+                        <div>Departure Time:  &nbsp; {takeOffTime}</div>
+
+                        <div>Total Seats:&nbsp; {totalSeats}</div>
+
+                        <div>To: &nbsp;  <FlightLandIcon/> &nbsp; {destination}</div>
+
+                        <div> Arrivial Time:  &nbsp; {landingTime}</div>
+                        <FlightButton> {isUserSignIn?  
                                 <Link to={`/${userType}`}>
                                        <CustumButton inverted >
                                                 {userType}
@@ -69,9 +57,9 @@ const FilghtOverview = ({FlightSummaryDetails,isUserSignIn,userType})=>{
                                         :
                                         <Link to='/signin'>Sign In to Continue</Link>
                                 }
-                        </div>
-                </div>
-            </div>
+                        </FlightButton>
+                </FlightDetails>
+        </FlightContainer>
     )
 }
 const mapStateToProps = (state)=>{

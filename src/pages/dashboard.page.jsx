@@ -4,6 +4,7 @@ import './dashboard.page.styles.scss'
 import {connect} from 'react-redux';
 
 import  FilghtOverview  from '../components/flightOverView/flight-overviev.compoent';
+import {FlightContainer,FlightDetails,FlightName,FlightButton} from './flight-over.styles'
 import {selectFlights} from '../store/flight/flight.selector';
 import { selectPassenger } from '../store/user/user.selector';
 
@@ -14,15 +15,21 @@ class Dashboard extends React.Component {
     
     render(){
         console.log('Renders', this.props.flights)
-        const { flights,passenger } = this.props;
+        const { flights,passenger} = this.props;
+        const flightOverViewStyles ={FlightContainer,FlightDetails,FlightName,FlightButton}
         return(
             <div className='dashboard'>
                 {
                     flights.map(flight => {
                         if(!passenger){
-                           return <FilghtOverview key={flight.airlineNumber} FlightSummaryDetails={flight}/>
+                           return <FilghtOverview 
+                                        key={flight.airlineNumber} 
+                                        styles ={flightOverViewStyles}
+                                        FlightSummaryDetails={flight}/>
                         }else if(passenger && passenger.airlineNumber === flight.airlineNumber ){
-                            return <FilghtOverview key={flight.airlineNumber} FlightSummaryDetails={flight}/>
+                            return <FilghtOverview key={flight.airlineNumber} 
+                                                styles ={flightOverViewStyles}
+                                                FlightSummaryDetails={flight}/>
                         }
                       })
                     }
@@ -31,7 +38,7 @@ class Dashboard extends React.Component {
     }
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state,ownProp)=>{
     return{
         flights: selectFlights(state),
         passenger: selectPassenger(state)
