@@ -18,6 +18,19 @@ export const selectUserData = createSelector(
 export const selectUserSignInStatus = createSelector(
     [selectUser], user=>(!!user.userData)
 )
+export const selectSignUserType = createSelector(
+    [selectUser], user=>{
+            if(user.userData && user.userData.isAdmin){
+                return 'Admin'
+            } 
+            if(user.userData && user.userData.isCrew){
+                return 'Crew'
+            } 
+            if(user.userData &&  user.userData.isPassenger){
+                return 'In-flight'
+            } 
+        }
+    )
 
 export const selectUserEnteredWrongCredentialStatue = createSelector(
     [selectUser], user=>user.isWrongCredentialsEntered

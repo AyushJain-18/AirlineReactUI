@@ -25,7 +25,7 @@ class AllRoutesComponent extends React.Component{
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
                             <Route exact path= '/signIn' component={SignInContainer}/>
-                            <Route exact path ='/passengerDashboard'component={InFlightDashBoardContainer} />
+                            <Route exact path ='/In-flight'component={InFlightDashBoardContainer} />
                     </Switch>
                 </div>
             </div>

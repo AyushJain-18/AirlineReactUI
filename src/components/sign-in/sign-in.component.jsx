@@ -30,7 +30,7 @@ const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userDat
         { 
             isWrongCredentialEntered?
               <div className='wrongCredentials'>Incorrect user Id Or Password</div>
-              :userData?(userData.isPassenger?<Redirect to='/passengerDashboard'/>:<Redirect to='/'/>)
+              :userData?(userData.isPassenger?<Redirect to='/In-flight'/>:<Redirect to='/'/>)
                     : null 
         }
                 <form className = 'sign-in-form'onSubmit={handleSubmit}> 

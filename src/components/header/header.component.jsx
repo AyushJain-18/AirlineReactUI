@@ -45,10 +45,10 @@ const Header = ({history,passengerDetails,isUserSingIn,logOut}) => {
     const imageURL = AccountCircle;
     const [anchorEl, setanchorEl]= useState(null);
 
-    const routeToHomePage = () => {
+    const redirectToHomePage = () => {
         history.push('/');
     };
-    const routeToSignInPage = () => {
+    const redirectToSignInPage = () => {
         history.push('/signIn');
     };
     const setCurrentAnchorPosition = event => {
@@ -61,18 +61,18 @@ const Header = ({history,passengerDetails,isUserSingIn,logOut}) => {
     }
     const signOut =()=>{
         resetAnchorPositionToNull();
-        console.log('logout')
         logOut()
+        redirectToHomePage()
     }
 
     return (
         <header className={classes.root}>
             <AppBar position="static" className={classes.Appbar}>
                 <Toolbar>
-                    <div onClick={routeToHomePage} className ={classes.logoIcon}>
+                    <div onClick={redirectToHomePage} className ={classes.logoIcon}>
                         <Logo/>
                     </div>
-                    <IconButton onClick={routeToHomePage}
+                    <IconButton onClick={redirectToHomePage}
                       role="menu" edge="start"
                       className={classes.menuButton}
                       color="inherit" aria-label="menu">
@@ -97,7 +97,7 @@ const Header = ({history,passengerDetails,isUserSingIn,logOut}) => {
                                         <MenuItem onClick={signOut}>Logout</MenuItem>
                                 </Menu>
                     </Fragment>:
-                    <AccountCircle role="button" className='logoIcon' onClick={routeToSignInPage}/>}
+                    <AccountCircle role="button" className='logoIcon' onClick={redirectToSignInPage}/>}
                     </Toolbar>
             </AppBar>
         </header>
