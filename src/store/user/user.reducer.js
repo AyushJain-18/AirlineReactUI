@@ -52,9 +52,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                     passenger: action.payload,
                 }
         default:
-            return{
-                ...state
-            }
+            return state
     }
 }
 

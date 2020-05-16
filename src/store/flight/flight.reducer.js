@@ -32,9 +32,7 @@ const flightRecucer = (state = FLIGHT_FETCHED_INITIAL_STATE ,action)=>{
                         isFlightFetchedError: true
             } 
             default:
-                return{
-                    ...state
-                }
+                return state
     }
 }
 
