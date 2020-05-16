@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import './InFlight-Dashboard.styles.scss';
 
 import ToggleTab from '../CustumComponents/Toggle-tab/ToggleTab.compoent'
 
