@@ -8,8 +8,7 @@ import  DashboardContainer from '../containers/dashboard-container/dashboardCont
 import {startFlightFetching} from '../store/flight/flight.actions';
 import {selectFlights} from '../store/flight/flight.selector';
 import SignInContainer from '../containers/sign-in-container/signIn-container'
-import PassengerDashBoard from '../components/passengerDashBoard/passengerDashBoard.component';
-
+import InFlightDashBoardContainer from '../containers/InFlightDashBoard/inFlight-Dashboard.container';
 
 class AllRoutesComponent extends React.Component{
     componentWillMount(){
@@ -26,7 +25,7 @@ class AllRoutesComponent extends React.Component{
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
                             <Route exact path= '/signIn' component={SignInContainer}/>
-                            <Route exact path ='/passengerDashboard'component={PassengerDashBoard} />
+                            <Route exact path ='/passengerDashboard'component={InFlightDashBoardContainer} />
                     </Switch>
                 </div>
             </div>

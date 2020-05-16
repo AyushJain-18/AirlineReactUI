@@ -9,11 +9,11 @@ import {createStructuredSelector} from 'reselect'
 import SignInComponent from '../../components/sign-in/sign-in.component';
 import WithSpinnerContainer from '../with-spinner-container/with-spinner.container';
 import ErrorContainer from '../errorContainer/error-container';
-import {selectUserSignInProgressStatus,selectUserSignInOutError} from '../../store/user/user.selector'
+import {selectDisplaySpinnerStatus,selectUserError} from '../../store/user/user.selector'
 
 const mapStateToProps = createStructuredSelector({
-    isLoading:selectUserSignInProgressStatus,
-    isError:selectUserSignInOutError
+    isLoading:selectDisplaySpinnerStatus,
+    isError:selectUserError
 })
 const SignInContainer = compose(
     connect(mapStateToProps),

@@ -1,11 +1,5 @@
 import USER_TYPES  from './user.types';
 
-export const wrongCredentials =()=>{
-    return{
-        type: USER_TYPES.USER_ENTERED_WRONG_CREDENTIALS
-    }
-}
-
 export const userSignInStart =(userCredentials)=>{
     //we want user credentials so we pass them as payload but we will not use them in reducer
     // insted we us e them in our saga and pass them to our next saga call 
@@ -42,5 +36,29 @@ export const userLogOutSuccess =()=>{
 export const userLogOutFailure =()=>{
     return{
         type:USER_TYPES.USER_LOGOUT_FAILURE
+    }
+}
+
+export const wrongCredentials =()=>{
+    return{
+        type: USER_TYPES.USER_ENTERED_WRONG_CREDENTIALS
+    }
+}
+
+export const fetchingPessangerDetailsStart=(PNR)=>{
+    return{
+        type: USER_TYPES.PASSANGER_INFO_FETCHING_START,
+        payload: PNR
+    }
+}
+export const fetchingPessangerDetailsSuccess=(passenger)=>{
+    return{
+        type: USER_TYPES.PASSANGER_INFO_FETCHING_SUCCESS,
+        payload: passenger
+    }
+}
+export const fetchingPessangerDetailsFailure=()=>{
+    return{
+        type: USER_TYPES.PASSANGER_INFO_FETCHING_FAILURE
     }
 }

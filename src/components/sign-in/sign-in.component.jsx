@@ -36,7 +36,7 @@ const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userDat
                 <form className = 'sign-in-form'onSubmit={handleSubmit}> 
                     <div className='sign-in-label'>
                         <FormInput 
-                            type="email" 
+                            type="text" 
                             name="email" 
                             label={"PNR/ Email"}
                             value={userCrendetial.email} 

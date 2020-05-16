@@ -1,7 +1,7 @@
 import {all, call} from 'redux-saga/effects';
 
 import {flightSaga} from './flight/flight.saga';
-import userSagas from './user/user.sagas'
+import userSagas from './user/user-saga/user.sagas'
 
 
 export default function* rootSaga(){

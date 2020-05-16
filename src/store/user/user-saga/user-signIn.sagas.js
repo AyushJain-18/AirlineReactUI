@@ -5,8 +5,8 @@ import {
     postRequest,
     deleteRequest,
     updateRequest
-} from '../../utils/api.calls'
-import USER_TYPES from './user.types'
+} from '../../../utils/api.calls'
+import USER_TYPES from '../user.types'
 import {
     userSignInStart,
     userSignInSuccess,
@@ -14,8 +14,10 @@ import {
     userLogOutStart,
     userLogOutSuccess,
     userLogOutFailure,
-    wrongCredentials
-} from './user.actions'
+    wrongCredentials,
+    fetchingPessangerDetailsStart
+    
+} from '../user.actions';
 
 function * userSignIn({payload:{email,password}}){
         try{
@@ -24,29 +26,24 @@ function * userSignIn({payload:{email,password}}){
             const {data} = yield getRequest(endpoint);
             yield console.log(data)
             if(data.length!==0){
-                yield put(userSignInSuccess(data[0]))
+                yield put(userSignInSuccess(data[0]));
+                if(data[0].isPassenger){
+                    yield put(fetchingPessangerDetailsStart(email));
+                }
                 return;
             }else{
                 yield put(wrongCredentials());
                 return
             }
         } catch(error){
+            console.log(error)
             yield put(userSignInFailure())
         }
-      
-    //    yield put(userSignInSuccess())
 }
-export  function* userSignInSaga(){
+export default function* userSignInSaga(){
     yield takeLatest(USER_TYPES.USER_SIGNIN_START, userSignIn) 
 }
 
-export  function* userLogOutSaga(){
-    yield takeLatest(USER_TYPES.USER_SIGNIN_START, userSignIn) 
-}
 
- export default function* userSagas(){
-    yield all([
-        call(userSignInSaga),
-        call(userSignInSaga)
-    ])
- } 
+
+ 

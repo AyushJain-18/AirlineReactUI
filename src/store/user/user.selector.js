@@ -3,12 +3,12 @@ import {createSelector} from 'reselect';
 export const selectUser = (state)=> state.user;
 
 
-export const selectUserSignInProgressStatus = createSelector(
-    [selectUser], user=>user.userSignInOutInProgress
+export const selectDisplaySpinnerStatus = createSelector(
+    [selectUser], user=>user.isDisplayUserSpinner
 )
 
-export const selectUserSignInOutError = createSelector(
-    [selectUser], user=>user.userSignInOutError
+export const selectUserError = createSelector(
+    [selectUser], user=>user.userError
 )
 
 export const selectUserData = createSelector(
@@ -21,4 +21,8 @@ export const selectUserSignInStatus = createSelector(
 
 export const selectUserEnteredWrongCredentialStatue = createSelector(
     [selectUser], user=>user.isWrongCredentialsEntered
+)
+
+export const selectPassenger = createSelector(
+    [selectUser], user=>user.passenger
 )
