@@ -3,7 +3,7 @@ import './routes.styles.scss'
 import {Switch , Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-import Header from '../components/header/header.component'
+import Header from '../components/header/header.component';
 import  DashboardContainer from '../containers/dashboard-container/dashboardContainer';
 import {startFlightFetching} from '../store/flight/flight.actions';
 import {selectFlights} from '../store/flight/flight.selector';

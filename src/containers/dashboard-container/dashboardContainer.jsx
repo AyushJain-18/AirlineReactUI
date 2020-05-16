@@ -5,7 +5,7 @@ import {createStructuredSelector} from 'reselect';
 import {compose} from 'redux'
 
 
-import Dashboard from '../../pages/dashboard.page';
+import Dashboard from '../../pages/DashBoard/dashboard.page';
 import WithSpinnerContainer from '../with-spinner-container/with-spinner.container';
 import ErrorContainer from '../errorContainer/error-container'
 

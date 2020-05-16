@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
-import ToggleTab from '../CustumComponents/Toggle-tab/ToggleTab.compoent'
+import ToggleTab from '../../components/CustumComponents/Toggle-tab/ToggleTab.compoent'
 
 import {connect} from 'react-redux';
 import {selectPassenger} from '../../store/user/user.selector';
 
-import FlightDetailsComponent from '../flight-deatils/flight-details.component'
+import FlightDetailsComponent from '../../components/flight-deatils/flight-details.component'
 
 
 class InFlightDashBoardComponent extends React.Component{

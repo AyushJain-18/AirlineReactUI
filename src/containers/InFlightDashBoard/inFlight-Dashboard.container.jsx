@@ -1,5 +1,5 @@
 import React from 'react';
-import InFlightDashBoardComponent from '../../components/InFlight/InFlight-Dashboard.component';
+import InFlightDashBoardComponent from '../../pages/InFlight/InFlight-Dashboard.component';
 import ErrorContainer from '../errorContainer/error-container';
 import WithSpinnerContainer from '../with-spinner-container/with-spinner.container';
 
