@@ -1,21 +1,19 @@
 import React, {Fragment,useState} from 'react';
+import './header.styles.scss';
 
 import { makeStyles } from '@material-ui/core/styles';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import { Menu, MenuItem } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+
+import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
-
-import { withRouter } from 'react-router-dom';
-
-import './header.styles.scss';
-
 import {selectPassenger,selectUserSignInStatus} from '../../store/user/user.selector';
+import {userLogOutStart} from '../../store/user/user.actions'
 
 
 
@@ -42,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Header = ({history,passengerDetails,isUserSingIn}) => {
+const Header = ({history,passengerDetails,isUserSingIn,logOut}) => {
     const classes = useStyles();
     const imageURL = AccountCircle;
     const [anchorEl, setanchorEl]= useState(null);
@@ -62,7 +60,9 @@ const Header = ({history,passengerDetails,isUserSingIn}) => {
         setanchorEl(null)
     }
     const signOut =()=>{
+        resetAnchorPositionToNull();
         console.log('logout')
+        logOut()
     }
 
     return (
@@ -111,8 +111,12 @@ const mapStateToProps =(state)=>{
         passengerDetails: selectPassenger(state)
         }
 }
-
-      
-export default withRouter(connect(mapStateToProps)(Header));
+const mapDispatchToProps = (dispatch)=>{
+        return{
+            logOut: ()=>dispatch(userLogOutStart())
+        }
+}
+  
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
 
 // anchorEl={this.state.anchorEl}

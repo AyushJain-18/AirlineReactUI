@@ -29,13 +29,7 @@ export const userLogOutStart =()=>{
 }
 export const userLogOutSuccess =()=>{
     return{
-        type:USER_TYPES.USER_LOGOUT_SUCCESS,
-        payload: null
-    }
-}
-export const userLogOutFailure =()=>{
-    return{
-        type:USER_TYPES.USER_LOGOUT_FAILURE
+        type:USER_TYPES.USER_LOGOUT_SUCCESS
     }
 }
 

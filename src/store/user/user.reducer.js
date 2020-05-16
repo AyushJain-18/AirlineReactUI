@@ -2,8 +2,8 @@ import USER_TYPES from './user.types';
 
 const INTIAL_USER_STATE ={
     isDisplayUserSpinner: false,
-    userError: null,
     isWrongCredentialsEntered: false,
+    userError: null,
     passenger: null,
     userData: null
 };
@@ -19,17 +19,15 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                 userError:null,
                 isWrongCredentialsEntered: false
             }
-        case USER_TYPES.USER_SIGNIN_SUCCESS:
-        case USER_TYPES.USER_LOGOUT_SUCCESS:  
+        case USER_TYPES.USER_SIGNIN_SUCCESS:  
             return {
                 ...state,
                 isDisplayUserSpinner: false,
-                userError:null,
                 isWrongCredentialsEntered: false,
+                userError:null,
                 userData: action.payload,
             }
         case USER_TYPES.USER_SIGNIN_FAILURE:
-        case USER_TYPES.USER_LOGOUT_FAILURE:
         case USER_TYPES.PASSANGER_INFO_FETCHING_FAILURE:
             return {
                 ...state,
@@ -50,6 +48,15 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                     userError:null,
                     isWrongCredentialsEntered: false,
                     passenger: action.payload,
+                }
+            case USER_TYPES.USER_LOGOUT_SUCCESS:
+                return{
+                    ...state,
+                    isDisplayUserSpinner: false,
+                    isWrongCredentialsEntered: false,
+                    userError:null,
+                    passenger : null,
+                    userData: null
                 }
         default:
             return state

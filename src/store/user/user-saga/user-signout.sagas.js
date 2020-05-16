@@ -1,6 +1,13 @@
-import {takeLatest,put,all,call,delay} from 'redux-saga/effects';
+import {takeLatest,put} from 'redux-saga/effects';
+
+import {userLogOutSuccess} from '../user.actions';
+import USER_TYPES from '../user.types';
+
+function* signOut(){
+        yield put(userLogOutSuccess())   
+ }
+
 
 export default function* userLogOutSaga(){
-    yield console.log('logout')
-    // yield takeLatest(USER_TYPES.USER_SIGNIN_START, userSignIn) 
+    yield takeLatest(USER_TYPES .USER_LOGOUT_START, signOut) 
 }

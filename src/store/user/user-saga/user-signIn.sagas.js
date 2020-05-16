@@ -1,4 +1,4 @@
-import {takeLatest,put,all,call,delay} from 'redux-saga/effects';
+import {takeLatest,put,delay} from 'redux-saga/effects';
 
 import {
     getRequest,
@@ -8,12 +8,8 @@ import {
 } from '../../../utils/api.calls'
 import USER_TYPES from '../user.types'
 import {
-    userSignInStart,
     userSignInSuccess,
     userSignInFailure,
-    userLogOutStart,
-    userLogOutSuccess,
-    userLogOutFailure,
     wrongCredentials,
     fetchingPessangerDetailsStart
     
