@@ -1,0 +1,32 @@
+.seat-map-arrangement{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: repeat(10,1fr);
+    gap: 10px;
+    @media screen and (max-width: 400px){
+        column-gap: 2px;  
+      }
+}
+.seprator-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .seprator{
+        font-size: 30px;
+        color: rgb(138, 84, 84);
+        margin-left:20px;
+        @media screen and (max-width: 400px){
+            margin-left:5px;
+          }
+        
+    }
+}
+
+
+// cadetblue
+// chartreuse
+// coral
+// cornflowerblue;
+// darkgrey
+// gainsboro
+//blanchedalmond

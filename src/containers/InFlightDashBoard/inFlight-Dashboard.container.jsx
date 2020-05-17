@@ -6,12 +6,12 @@ import WithSpinnerContainer from '../with-spinner-container/with-spinner.contain
 import {connect} from 'react-redux';
 import {compose} from 'redux'
 
-import{selectDisplaySpinnerStatus, selectUserError} from '../../store/user/user.selector';
+import{selectDisplaySpinnerStatus,selectisError} from '../../store/user/user.selector';
 
 const mapStateToProps =(state)=>(
     {
         isLoading: selectDisplaySpinnerStatus(state),
-        isError: selectUserError(state)
+        isError: selectisError(state)
     }
 )
 const InFlightDashBoardContainer = compose(

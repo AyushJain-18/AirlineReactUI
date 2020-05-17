@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {selectPassenger} from '../../store/user/user.selector';
 
 import FlightDetailsComponent from './flight-deatils/flight-details.component'
+import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.container';
 
 
 class InFlightDashBoardComponent extends React.Component{
@@ -20,9 +21,9 @@ class InFlightDashBoardComponent extends React.Component{
             <Fragment>
                 {passenger&& 
                   <ToggleTab 
-                    componentsArray={[FlightDetailsComponent]}
-                    labelArray={['Flight Info']}
-                    propsArray={[{airlineNo}]} />
+                    componentsArray={[FlightDetailsComponent,SeatMapContainer]}
+                    labelArray={['Flight Info','Seat-Map']}
+                    propsArray={[{airlineNo},{airlineNo}]} />
                 }
             </Fragment>
         )

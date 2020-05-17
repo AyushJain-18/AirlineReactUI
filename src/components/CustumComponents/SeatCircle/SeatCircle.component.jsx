@@ -3,9 +3,9 @@ import React from 'react';
 import {CustumCircle} from './SeatCircle.styles'
 
 
-const SeatCircle =({color='red',children})=>{
+const SeatCircle =({color='red',children ,otherProps})=>{
     
-return <CustumCircle buttonColor= {`${color}`}>{children}</CustumCircle>
+return <CustumCircle {...otherProps} buttonColor= {`${color}`}>{children}</CustumCircle>
 }
 
-export default SeatCircle;
+export default  SeatCircle;
