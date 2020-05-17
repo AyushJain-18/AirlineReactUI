@@ -3,7 +3,7 @@ import USER_TYPES from './user.types';
 const INTIAL_USER_STATE ={
     isDisplayUserSpinner: false,
     isWrongCredentialsEntered: false,
-    userError: null,
+    isError: null,
     passenger: null,
     userData: null
 };
@@ -16,7 +16,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
             return {
                 ...state,
                 isDisplayUserSpinner: true,
-                userError:null,
+                isError:null,
                 isWrongCredentialsEntered: false
             }
         case USER_TYPES.USER_SIGNIN_SUCCESS:  
@@ -24,7 +24,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                 ...state,
                 isDisplayUserSpinner: false,
                 isWrongCredentialsEntered: false,
-                userError:null,
+                isError:null,
                 userData: action.payload,
             }
         case USER_TYPES.USER_SIGNIN_FAILURE:
@@ -33,7 +33,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                 ...state,
                 isDisplayUserSpinner: false,
                 isWrongCredentialsEntered: false,
-                userError: true
+                isError: true
             }
             case USER_TYPES.USER_ENTERED_WRONG_CREDENTIALS:
                 return {
@@ -45,7 +45,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                 return {
                     ...state,
                     isDisplayUserSpinner: false,
-                    userError:null,
+                    isError:null,
                     isWrongCredentialsEntered: false,
                     passenger: action.payload,
                 }
@@ -54,7 +54,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                     ...state,
                     isDisplayUserSpinner: false,
                     isWrongCredentialsEntered: false,
-                    userError:null,
+                    isError:null,
                     passenger : null,
                     userData: null
                 }

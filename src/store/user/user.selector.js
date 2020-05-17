@@ -7,8 +7,8 @@ export const selectDisplaySpinnerStatus = createSelector(
     [selectUser], user=>user.isDisplayUserSpinner
 )
 
-export const selectUserError = createSelector(
-    [selectUser], user=>user.userError
+export const selectisError = createSelector(
+    [selectUser], user=>user.isError
 )
 
 export const selectUserData = createSelector(
