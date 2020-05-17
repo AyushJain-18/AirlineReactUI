@@ -33,6 +33,7 @@ const PassengerComponent = ({passengerSeatNo, passengerData})=>{
                         <div className='passenger-info-unoccupied'>Selected Seat No- {passengerSeatNo} is Unoccupied</div>
                 
                 }</div>}
+                {!passengerSeatNo&& <div className='passenger-info-unoccupied'> No Seats Selected </div>}
         </Fragment>
     )
 }

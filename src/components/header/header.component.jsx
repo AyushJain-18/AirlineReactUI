@@ -14,6 +14,7 @@ import {connect} from 'react-redux'
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import {selectPassenger,selectUserSignInStatus} from '../../store/user/user.selector';
 import {userLogOutStart} from '../../store/user/user.actions'
+import {removeFetchedPassengers} from '../../store/allpassenger/allpassenger.action'
 
 
 
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Header = ({history,passengerDetails,isUserSingIn,logOut}) => {
+const Header = ({history,passengerDetails,isUserSingIn,logOut, removePassengers}) => {
     const classes = useStyles();
     const imageURL = AccountCircle;
     const [anchorEl, setanchorEl]= useState(null);
@@ -61,8 +62,9 @@ const Header = ({history,passengerDetails,isUserSingIn,logOut}) => {
     }
     const signOut =()=>{
         resetAnchorPositionToNull();
-        logOut()
-        redirectToHomePage()
+        logOut();
+        removePassengers();
+        redirectToHomePage();
     }
 
     return (
@@ -113,7 +115,8 @@ const mapStateToProps =(state)=>{
 }
 const mapDispatchToProps = (dispatch)=>{
         return{
-            logOut: ()=>dispatch(userLogOutStart())
+            logOut: ()=>dispatch(userLogOutStart()),
+            removePassengers: ()=> dispatch(removeFetchedPassengers())
         }
 }
   
