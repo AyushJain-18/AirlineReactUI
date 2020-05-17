@@ -5,7 +5,7 @@ import ToggleTab from '../../components/CustumComponents/Toggle-tab/ToggleTab.co
 import {connect} from 'react-redux';
 import {selectPassenger} from '../../store/user/user.selector';
 
-import FlightDetailsComponent from '../../components/flight-deatils/flight-details.component'
+import FlightDetailsComponent from './flight-deatils/flight-details.component'
 
 
 class InFlightDashBoardComponent extends React.Component{

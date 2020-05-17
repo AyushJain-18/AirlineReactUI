@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 
 export const FlightContainer =styled.div`
-        width: 40%;
+        width: 80%;
         height: 90%;
         border: 1px solid rgb(211, 211, 211);
         display: flex;
         flex-direction: column;
         align-content:space-around ;
-        margin: 5% 7% 5% 5%;
+        margin: 5% 10%;
         font-family: 'Open Sans Condensed';
         font-size: 22px;
         @media screen and (max-width: 800px){
-            width: 80%;
             font-size: 16px;
         };
         &:hover{

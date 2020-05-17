@@ -2,9 +2,9 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-import {selectFlightForSelectedPassenger} from '../../store/flight/flight.selector';
+import {selectFlightForSelectedPassenger} from '../../../store/flight/flight.selector';
 
-import FilghtOverview from '../flightOverView/flight-overviev.compoent';
+import FilghtOverview from '../../../components/flightOverView/flight-overviev.compoent';
 import {FlightContainer,FlightDetails,FlightName,FlightButton,FlightDetailsEachComponent} from './flight-details.styles'
 
 class FlightDetailsComponent extends React.Component{
