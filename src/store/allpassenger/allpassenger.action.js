@@ -22,3 +22,9 @@ export const removeFetchedPassengers =()=>{
         type:ALL_PASSANGER_TYPES.REMOVE_FETCHED_PASSENGERS
     }
 }
+export const setSelectedPassengerSeatNo =(seatNo)=>{
+    return{
+        type:ALL_PASSANGER_TYPES.SET_SELECTED_PASSENGER_SEAT_NO,
+        payload: seatNo
+    }
+}

@@ -6,6 +6,7 @@ import { fetchingAllPassengerStart } from '../../store/allpassenger/allpassenger
 import { selectAllPassengerData } from '../../store/allpassenger/allpassenger.select';
 import SeatArrangement from './seats-arrangement/seat-arrangement.component';
 import SeatCircle from '../CustumComponents/SeatCircle/SeatCircle.component';
+import PassengerComponent from './passenger-info/passenger-info.component';
 
 const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})=>{
     const  isPassengerFetched=()=>(passengers.length!==0)
@@ -18,9 +19,7 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
          <Fragment>{
                 isPassengerFetched()&&
                 <div className = 'seat-map-container'>
-                        <div className="selected-passenger-description">
-                            Passenger Info
-                        </div>
+                        <PassengerComponent/>
                         <div className="seat-map-layout-container">
                             <div>SEAT-MAP</div>
                             <div className="seat-map-layout-discription">

@@ -7,20 +7,6 @@
         column-gap: 2px;  
       }
 }
-.seprator-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    .seprator{
-        font-size: 30px;
-        color: rgb(138, 84, 84);
-        margin-left:20px;
-        @media screen and (max-width: 400px){
-            margin-left:5px;
-          }
-        
-    }
-}
 
 
 // cadetblue

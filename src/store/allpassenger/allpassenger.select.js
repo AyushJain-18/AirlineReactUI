@@ -16,3 +16,7 @@ export const selectAllPassengerData = createSelector(
 
     [selectAllPassenger], AllPassenger=> AllPassenger.passengers
 )
+export const selectSeatNoOfSelectedPassenger = createSelector(
+
+    [selectAllPassenger], AllPassenger=> AllPassenger.selectedPassengerSeatNo
+)

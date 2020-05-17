@@ -2,6 +2,7 @@ import All_PASSANGER_TYPES from './allpassenger.types';
 
 const ALL_PASSANGER_INITIAL_STATE={
     passengers: [],
+    selectedPassengerSeatNo: null,
     isError: null,
     isFetching: false
 }
@@ -12,7 +13,7 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
             return{
                 ...state,
                 isFetching: true,
-                isError:false
+                isError:false,
             }
         case All_PASSANGER_TYPES.ALL_PASSANGER_INFO_FETCHING_SUCCESS:
         return{
@@ -32,7 +33,13 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
                 ...state,
                 isFetching: false,
                 isError:false,
+                selectedPassengerSeatNo: null,
                 passengers:[]
+            }
+        case All_PASSANGER_TYPES.SET_SELECTED_PASSENGER_SEAT_NO:
+            return{
+                ...state,
+                selectedPassengerSeatNo: action.payload
             }
         default:
             return state
