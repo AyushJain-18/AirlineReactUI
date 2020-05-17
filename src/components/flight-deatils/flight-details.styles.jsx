@@ -46,3 +46,10 @@ export const FlightButton = styled.div`
         place-self: center center;       
         margin-bottom: 10px;
 `
+
+export const FlightDetailsEachComponent =styled.div`
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        justify-content: start;
+
+`

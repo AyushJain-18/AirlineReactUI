@@ -4,7 +4,7 @@ import './dashboard.page.styles.scss'
 import {connect} from 'react-redux';
 
 import  FilghtOverview  from '../../components/flightOverView/flight-overviev.compoent';
-import {FlightContainer,FlightDetails,FlightName,FlightButton} from './flight-over.styles'
+import {FlightContainer,FlightDetails,FlightName,FlightButton,FlightDetailsEachComponent} from './flight-over.styles'
 import {selectFlights} from '../../store/flight/flight.selector';
 import { selectPassenger } from '../../store/user/user.selector';
 
@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
     
     render(){
         const { flights,passenger} = this.props;
-        const flightOverViewStyles ={FlightContainer,FlightDetails,FlightName,FlightButton}
+        const flightOverViewStyles ={FlightContainer,FlightDetails,FlightName,FlightButton,FlightDetailsEachComponent}
         return(
             <div className='dashboard'>
                 {

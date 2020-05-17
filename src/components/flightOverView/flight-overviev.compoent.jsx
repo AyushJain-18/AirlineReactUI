@@ -23,7 +23,7 @@ const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType})=>{
             totalSeats,
             type,
             date} = FlightSummaryDetails;
-      const{FlightContainer,FlightDetails,FlightName,FlightButton} = styles;      
+      const{FlightContainer,FlightDetails,FlightName,FlightButton, FlightDetailsEachComponent} = styles;      
             console.log('USER TYPE', userType)
     return(
         <FlightContainer>
@@ -33,21 +33,21 @@ const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType})=>{
                 </FlightName>
                         
                 <FlightDetails>
-                        <div> FLIGHT-TYPE:   &nbsp; {type} </div>
+                        <FlightDetailsEachComponent> <span>FLIGHT-TYPE:</span><span>{type}</span></FlightDetailsEachComponent>
 
-                        <div>Airline Number:  &nbsp; {airlineNumber}</div>
+                        <FlightDetailsEachComponent><span>Airline Number:</span> <span>{airlineNumber}</span></FlightDetailsEachComponent>
 
-                        <div>AirLine Price:  &nbsp; {price} </div>
+                        <FlightDetailsEachComponent> <span> AirLine Price:  </span>  <span> {price} </span></FlightDetailsEachComponent>
 
-                        <div>From: &nbsp;  <FlightTakeoff/> &nbsp; {from}</div>
+                        <FlightDetailsEachComponent><span> From: </span><span><FlightTakeoff/>&nbsp;{from} </span></FlightDetailsEachComponent>
 
-                        <div>Departure Time:  &nbsp; {takeOffTime}</div>
+                        <FlightDetailsEachComponent> <span>To: </span><span><FlightLandIcon/> &nbsp;{destination}</span> </FlightDetailsEachComponent>
 
-                        <div>Total Seats:&nbsp; {totalSeats}</div>
+                        <FlightDetailsEachComponent><span>Total Seats:</span><span>{totalSeats}</span></FlightDetailsEachComponent>
 
-                        <div>To: &nbsp;  <FlightLandIcon/> &nbsp; {destination}</div>
+                        <FlightDetailsEachComponent><span> Departure Time: </span> <span>{takeOffTime}</span> </FlightDetailsEachComponent>
 
-                        <div> Arrivial Time:  &nbsp; {landingTime}</div>
+                        <FlightDetailsEachComponent><span>Arrivial Time: </span>  <span>{landingTime}</span></FlightDetailsEachComponent>
                         <FlightButton> {isUserSignIn?  
                                 <Link to={`/${userType}`}>
                                        <CustumButton inverted >

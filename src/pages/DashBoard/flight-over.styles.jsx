@@ -53,3 +53,7 @@ export const FlightButton = styled.div`
             grid-column: span 1;
         }
 `
+
+export const FlightDetailsEachComponent =styled.div`
+        display: block;
+`
