@@ -7,8 +7,7 @@ import PassengerGerenralInfo from '../../passenger-info/passenger-gerenral-info/
 const AuxilaryServicesComponent = ({passenger})=>{
     return(
         <div className='aux-ser-container'>
-                <PassengerAuxilaryServiceInfo passengerData={passenger}/>
-                <PassengerGerenralInfo passengerData={passenger}/>
+                <PassengerAuxilaryServiceInfo passengerData={passenger} editable/>
         </div>
     )
 }

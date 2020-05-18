@@ -61,3 +61,19 @@ export const clearUserError=()=>{
         type: USER_TYPES.CLEAR_USER_ERROR
     }
 }
+export const startPassengerInfoUpdate=(id,airlineNumber,updatedData)=>{
+    return{
+        type: USER_TYPES.START_UPDATE,
+        payload: {id,airlineNumber, updatedData}
+    }
+}
+export const passengerInfoUpdateFailure=()=>{
+    return{
+        type: USER_TYPES.UPDATE_FAILURE
+    }
+}
+export const passengerInfoUpdateSuccess=()=>{
+    return{
+        type: USER_TYPES.UPDATE_SUCCESSFULL
+    }
+}

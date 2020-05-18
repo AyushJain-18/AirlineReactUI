@@ -1,27 +1,47 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './passenger-auxilarys-decription.styles.scss';
 import CustumButon from '../../CustumComponents/CustumButon/custumButton.component';
 import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.component';
+import {startPassengerInfoUpdate} from '../../../store/user/user.actions'
+import {connect} from 'react-redux';
 
-const PassengerAuxilaryServiceInfo= ({passengerData})=>{
-    
-    const [editable, seteditable]         = useState(false);
+const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, editable})=>{
+    const id = passengerData.id;
+    const airlineNumber= passengerData.airlineNumber;
     const [luggage, setluggae]         = useState(passengerData.luggage);
     const [meal, setmeal]              = useState(passengerData.meal)
-    const [PayPerView, setPayPerView]  = useState(passengerData.PayPerView)
+    const [payPerView, setPayPerView]  = useState(passengerData.payPerView)
     const [infants, setinfants]        = useState(passengerData.infants)
     const [wheelChair, setwheelChair]  = useState(passengerData.wheelChair)
 
     const lagguageOptions  =[{value:'N/A'}, {value: '15kg'},{value:'20 Kg'},{value:'25Kg'}];
     const mealOptions      =[{value:'N/A'}, {value:'Veg'}   ,  {value:'Non-Veg'}];
     const PayPerViewOptions=[{value:'N/A'}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
-    const infantsOptions   =[{value: 'Yes'},{value: 'No'}];
-    const wheelChairOptions=[{value: 'Yes'},{value: 'No'}];
+    const infantsOptions   =[{value: 'True'},{value: 'False'}];
+    const wheelChairOptions=[{value: 'True'},{value: 'False'}];
 
-    console.log('Default value are',luggage,meal,PayPerView,infants,wheelChair)
+    useEffect(()=>{
+        console.log('component did mount')
+        if(luggage === undefined) setluggae('');
+        if(meal === undefined) setmeal('');
+        if(payPerView === undefined)setPayPerView('');
+    },[])
     const handelSubmitForAuxilaryService =(event)=>{
         event.preventDefault();
-        console.log('Auxilary Service submitted', luggage)
+
+        let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
+        let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
+        
+
+        const updatedData = {
+            ...passengerData,
+            luggage,meal ,payPerView,
+            infants:infantValueToUpdate,
+            wheelChair:wheelChairValueToUpdate
+
+        }
+        console.log(updatedData)
+        saveChange(id,airlineNumber,updatedData);
     }
     return(
         <div className='passenger-auxilary-services-container'>
@@ -42,29 +62,31 @@ const PassengerAuxilaryServiceInfo= ({passengerData})=>{
                 <div className= 'passenger-info-items'>
                      <span>PayPerView</span> 
                      <DisplayValue editable={editable} name='PayPerView' id='PayPerView' options={PayPerViewOptions}
-                         defaultValue={PayPerView} handleChange={setPayPerView}/> 
+                         defaultValue={payPerView} handleChange={setPayPerView}/> 
                  </div>
 
                 <div className= 'passenger-info-items'> 
                         <span>With Infants</span>
                         <DisplayValue editable={editable} name='Infants' id='Infants' options={infantsOptions}
-                         defaultValue={infants?'Yes':'No'} handleChange={setinfants}/> 
+                         defaultValue={infants?'True':'False'} handleChange={setinfants}/> 
                  </div>
                 <div className= 'passenger-info-items'> 
                         <span>With WheelChair</span>
                         <DisplayValue editable={editable} name='WheelChair' id='WheelChair' options={wheelChairOptions}
-                         defaultValue={wheelChair?'Yes':'No'} handleChange={setwheelChair}/> 
+                         defaultValue={wheelChair?'True':'False'} handleChange={setwheelChair}/> 
                  </div>
 
                 <div className= 'passenger-info-button'>
-                {editable? <CustumButon type= 'submit'>Save Changes</CustumButon>:
-                    <CustumButon onClick={()=>seteditable(true)} >Edit Aux-Services</CustumButon>
-                }
+                {editable && <CustumButon type= 'submit'>Save Changes</CustumButon>}
                 </div>
             </form>
         </div>
     )
 }
+const mapSateToProps =(dispatch)=>{
+    return{
+        saveChange: (id,airlineNumber,updatedData)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData))
+    }
+}
 
-
-export default PassengerAuxilaryServiceInfo;
+export default connect(null,mapSateToProps)(PassengerAuxilaryServiceInfo);

@@ -15,6 +15,7 @@ export const postRequest =(endpoint, payload)=>{
 export const deleteRequest =(endpoint, idForDeleteItem )=>{
     return axios.delete(serverUrl+endpoint/idForDeleteItem)
 }
-export const updateRequest =(endpoint, id, payload)=>{
-    return axios.put(serverUrl+endpoint/id ,{...payload})
+export const updateRequest =(endpoint, payload)=>{
+    console.log(serverUrl+endpoint);
+    return axios.put(serverUrl+endpoint,{...payload})
 }
