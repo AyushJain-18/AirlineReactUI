@@ -7,10 +7,9 @@ import Header from '../components/header/header.component';
 import  DashboardContainer from '../containers/dashboard-container/dashboardContainer';
 import {startFlightFetching} from '../store/flight/flight.actions';
 import {selectFlights} from '../store/flight/flight.selector';
-import {clearUserError} from '../store/user/user.actions';
-import {selectisError} from '../store/user/user.selector';
+
 import SignInContainer from '../containers/sign-in-container/signIn-container'
-import InFlightDashBoardContainer from '../containers/InFlightDashBoard/inFlight-Dashboard.container';
+import DashboardToogleBarContainer from '../containers/DashBoard-ToogleBar-container/Dashboard-toogleBarContainer';
 
 class AllRoutesComponent extends React.Component{
     
@@ -26,7 +25,9 @@ class AllRoutesComponent extends React.Component{
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
                             <Route exact path= '/signIn' component={SignInContainer}/>
-                            <Route exact path ='/In-flight'component={InFlightDashBoardContainer} />
+                            <Route exact path ='/In-flight'component={DashboardToogleBarContainer} />
+                            <Route exact path ='/Admin'component={DashboardToogleBarContainer} />
+                            <Route exact path ='/Crew'component={DashboardToogleBarContainer} />
                     </Switch>
                 </div>
             </div>

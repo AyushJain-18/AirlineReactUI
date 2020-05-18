@@ -51,7 +51,13 @@ const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType,clear
 
                         <FlightDetailsEachComponent><span>Arrivial Time: </span>  <span>{landingTime}</span></FlightDetailsEachComponent>
                         <FlightButton> {isUserSignIn?  
-                                <Link to={`/${userType}`}>
+                                <Link to= {
+                                        {
+                                          pathname: `/${userType}`,
+                                          FlightNumber: airlineNumber
+                                        }
+                                }
+                                >
                                        <CustumButton inverted >
                                                 {userType}
                                         </CustumButton>

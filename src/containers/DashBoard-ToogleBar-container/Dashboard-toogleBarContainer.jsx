@@ -1,5 +1,5 @@
 import React from 'react';
-import InFlightDashBoardComponent from '../../pages/InFlight/InFlight-Dashboard.component';
+import DashboardToogleBarComponent from '../../pages/Dashboard-with-toogleBar/DashboardToogleBar.component';
 import ErrorContainer from '../errorContainer/error-container';
 import WithSpinnerContainer from '../with-spinner-container/with-spinner.container';
 
@@ -14,10 +14,10 @@ const mapStateToProps =(state)=>(
         isError: selectisError(state)
     }
 )
-const InFlightDashBoardContainer = compose(
+const DashboardToogleBarContainer = compose(
 connect(mapStateToProps),
 WithSpinnerContainer,
 ErrorContainer
-)(InFlightDashBoardComponent);
+)(DashboardToogleBarComponent);
 
-export default InFlightDashBoardContainer;
+export default DashboardToogleBarContainer;
