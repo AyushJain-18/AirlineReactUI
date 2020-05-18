@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import ErrorContainer from '../errorContainer/error-container';
 import WithSpinnerContaienr from '../with-spinner-container/with-spinner.container';
-import SaetMapComponent from '../../components/seat-map/seat-map-container/seat-map.component';
+import SaetMapComponent from '../../components/seat-map/seat-map/seat-map.component';
 import { 
     selectAllPassengerFetchngStatus,
     selectAllPassengerErrorStatus
