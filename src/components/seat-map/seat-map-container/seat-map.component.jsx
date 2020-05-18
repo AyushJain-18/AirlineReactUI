@@ -2,11 +2,10 @@ import './seat-map.styles.scss';
 import React,{useEffect, Fragment} from 'react';
 
 import {connect} from 'react-redux';
-import { fetchingAllPassengerStart } from '../../store/allpassenger/allpassenger.action';
-import { selectAllPassengerData } from '../../store/allpassenger/allpassenger.select';
-import SeatArrangement from './seats-arrangement/seat-arrangement.component';
-import SeatCircle from '../CustumComponents/SeatCircle/SeatCircle.component';
-import PassengerComponent from './passenger-info/passenger-info.component';
+import { fetchingAllPassengerStart } from '../../../store/allpassenger/allpassenger.action';
+import { selectAllPassengerData } from '../../../store/allpassenger/allpassenger.select';
+import SeatArrangement from '../seats-arrangement/seat-arrangement.component';
+import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
 
 const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})=>{
     const  isPassengerFetched=()=>(passengers.length!==0)
@@ -17,9 +16,6 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
         }, [airlineNo])
     return(
          <Fragment>
-                    {/* {isPassengerFetched()&&
-                    <div className = 'seat-map-container'> */}
-                        {/* <PassengerComponent/> */}
                         { isPassengerFetched()&&<div className="seat-map-layout-container">
                             <div>SEAT-MAP</div>
                             <div className="seat-map-layout-discription">
@@ -31,7 +27,6 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
                             </div>
                             <SeatArrangement passengers={passengers} totalSeats={60}/>
                         </div>
-                // </div>
                 }
         </Fragment>
     )
