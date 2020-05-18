@@ -16,11 +16,11 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
             }
         }, [airlineNo])
     return(
-         <Fragment>{
-                isPassengerFetched()&&
-                <div className = 'seat-map-container'>
+         <Fragment>
+                    {/* {isPassengerFetched()&&
+                    <div className = 'seat-map-container'> */}
                         {/* <PassengerComponent/> */}
-                        <div className="seat-map-layout-container">
+                        { isPassengerFetched()&&<div className="seat-map-layout-container">
                             <div>SEAT-MAP</div>
                             <div className="seat-map-layout-discription">
                                     <div className='item-description'> Occupied<SeatCircle color='gainsboro'/></div>
@@ -31,7 +31,7 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
                             </div>
                             <SeatArrangement passengers={passengers} totalSeats={60}/>
                         </div>
-                </div>
+                // </div>
                 }
         </Fragment>
     )

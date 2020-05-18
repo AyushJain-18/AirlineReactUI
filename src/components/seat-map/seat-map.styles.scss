@@ -1,28 +1,35 @@
-.seat-map-container{
-  font-family: 'Open Sans Condensed';
-   width: 80%;
-   margin: 5% 10% ;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   @media screen and (max-width: 1000px){
-     width: 80%;  
-     flex-direction: column;
-     align-content: space-around;
-     margin: 5% 15%  ;  
-   }
-   @media screen and (max-width: 400px){
-    width: 100%;  
-    flex-direction: column;
-    margin: 5% 0%  ;  
-  }
+// .seat-map-container{
+//   font-family: 'Open Sans Condensed';
+//    width: 80%;
+//    margin: 5% 10% ;
+//    display: flex;
+//    flex-direction: row;
+//    justify-content: space-between;
+//    align-items: center;
+//    @media screen and (max-width: 1000px){
+//      width: 80%;  
+//      flex-direction: column;
+//      align-content: space-around;
+//      margin: 5% 15%  ;  
+//    }
+//    @media screen and (max-width: 400px){
+//     width: 100%;  
+//     flex-direction: column;
+//     margin: 5% 0%  ;  
+//   }
    .seat-map-layout-container{
         display: flex;
+        width: 60%;
+        margin: 5% 20% ;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         height: 930px;
+        @media screen and (max-width: 700px){
+          height: 750px;
+        }
         .seat-map-layout-discription{
+          width: 80%;
           display: grid;
           grid-template-columns: repeat(auto-fit,minmax(100px,1fr)) ;
           .item-description{
@@ -32,4 +39,4 @@
           }
         }
    }    
-}
+// }
