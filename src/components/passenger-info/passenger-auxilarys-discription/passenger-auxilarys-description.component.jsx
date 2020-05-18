@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import './passenger-decription.styles.scss';
+import './passenger-auxilarys-decription.styles.scss';
 import CustumButon from '../../CustumComponents/CustumButon/custumButton.component';
 import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.component';
 
-export const PassengerAuxilaryServiceInfo= ({passengerData, editable})=>{
+const PassengerAuxilaryServiceInfo= ({passengerData})=>{
+    
+    const [editable, seteditable]         = useState(false);
     const [luggage, setluggae]         = useState(passengerData.luggage);
     const [meal, setmeal]              = useState(passengerData.meal)
     const [PayPerView, setPayPerView]  = useState(passengerData.PayPerView)
@@ -55,39 +57,14 @@ export const PassengerAuxilaryServiceInfo= ({passengerData, editable})=>{
                  </div>
 
                 <div className= 'passenger-info-button'>
-                {editable && <CustumButon type= 'submit' inverted>Update</CustumButon>  }
+                {editable? <CustumButon type= 'submit'>Save Changes</CustumButon>:
+                    <CustumButon onClick={()=>seteditable(true)} >Edit Aux-Services</CustumButon>
+                }
                 </div>
             </form>
         </div>
     )
 }
-export const PassengerGerenralInfo =({passengerData, editable})=>{
-    const{firstName,lastName,contactNumber,age,seatNo,PNR} = passengerData
-    return(
-        <div className= 'passenger-general-info-container'>
-            <form>
-            <div className= 'passenger-heading'>Passenger Info</div>
-            <div className= 'passenger-info-items'> <span>FirstName</span>  <span>{firstName}</span> </div>
-            <div className= 'passenger-info-items'> <span>LastName</span>   <span>{lastName}</span> </div>
-            <div className= 'passenger-info-items'> <span>ContactNo.</span> <span>{contactNumber}</span> </div>
-            <div className= 'passenger-info-items'> <span>Age</span>        <span>{age}</span> </div>
-            <div className= 'passenger-info-items'> <span>SeatNo</span>     <span>{seatNo}</span> </div> 
-            <div className= 'passenger-info-items'> <span>PNR</span>        <span>{PNR}</span> </div>
-            {editable && <CustumButon type= 'submit' isGoogleSignIN>Update</CustumButon>  }
-            </form>
-        </div>
-    )
-}
 
-const PassengerDescription =({passengerData})=>{
 
-    return(
-        <div className= 'passenger-info-container'>
-
-                    <PassengerGerenralInfo passengerData ={passengerData}/>
-                    <PassengerAuxilaryServiceInfo passengerData ={passengerData}/>
-              </div>
-    )
-}
-
-export default PassengerDescription;
+export default PassengerAuxilaryServiceInfo;

@@ -1,0 +1,5 @@
+@import'../passenger-auxilarys-discription/passenger-auxilarys-decription.styles.scss';
+
+.passenger-general-info-container{
+    @include container-style()
+}

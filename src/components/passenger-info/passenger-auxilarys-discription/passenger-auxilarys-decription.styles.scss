@@ -24,9 +24,6 @@
         justify-content: space-between;
     }
 }
-.passenger-general-info-container{
-    @include container-style()
-}
 .passenger-auxilary-services-container{
     @include container-style()
 }

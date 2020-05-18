@@ -9,9 +9,9 @@ export const CustumCircle = styled.div`
         display: flex;
         align-items: center;
         font-family:Open Sans Condensed;
-        @media screen and (max-width: 600px){
+        @media screen and (max-width: 800px){
                 border: 14px solid ${({ buttonColor}) => `${buttonColor}`};
-                font-size:12px;
+                font-size:14px;
               }
         @media screen and (max-width: 400px){
                 border: 8px solid ${({ buttonColor}) => `${buttonColor}`};
