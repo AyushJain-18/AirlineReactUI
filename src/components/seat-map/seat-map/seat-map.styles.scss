@@ -18,6 +18,7 @@
 //     margin: 5% 0%  ;  
 //   }
    .seat-map-layout-container{
+        font-family: 'Open Sans Condensed';
         display: flex;
         width: 60%;
         margin: 5% 20% ;
@@ -25,13 +26,15 @@
         justify-content: space-between;
         align-items: center;
         height: 930px;
-        @media screen and (max-width: 700px){
+        @media screen and (max-width: 600px){
           height: 750px;
+          margin: 5% 5% ;
+          font-size: 10px;
         }
         .seat-map-layout-discription{
           width: 80%;
           display: grid;
-          grid-template-columns: repeat(auto-fit,minmax(100px,1fr)) ;
+          grid-template-columns: repeat(auto-fit,minmax(60px,1fr)) ;
           .item-description{
             display: flex;
             flex-direction: column;

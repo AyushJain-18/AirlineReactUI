@@ -1,0 +1,36 @@
+@mixin container-style{
+    width:inherit;
+    padding: 5px;
+    border: 1px solid black;
+    font-size: large;
+    font-family: 'Open Sans Condensed';
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 10px;
+    
+
+    .passenger-heading{
+        font-weight: bold;
+        background-color: darkgrey;
+    }
+    .passenger-info-button{
+        display: flex;
+        justify-content: center
+    }
+    .passenger-info-items{
+        padding: 10px 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+.passenger-general-info-container{
+    @include container-style()
+}
+.passenger-auxilary-services-container{
+    @include container-style()
+}
+.passenger-info-container{
+    width: 1000px;
+    display: flex;
+}

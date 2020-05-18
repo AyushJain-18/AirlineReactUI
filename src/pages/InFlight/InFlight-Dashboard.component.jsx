@@ -7,6 +7,8 @@ import {selectPassenger} from '../../store/user/user.selector';
 
 import FlightDetailsComponent from './flight-deatils/flight-details.component'
 import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.container';
+import AuxilaryServicesComponent from '../../components/auxilary-service/auxilary-service-display/auxlilary-service.component';
+
 
 
 class InFlightDashBoardComponent extends React.Component{
@@ -21,9 +23,9 @@ class InFlightDashBoardComponent extends React.Component{
             <Fragment>
                 {passenger&& 
                   <ToggleTab 
-                    componentsArray={[FlightDetailsComponent,SeatMapContainer]}
-                    labelArray={['Flight Info','Seat-Map']}
-                    propsArray={[{airlineNo},{airlineNo}]} />
+                    componentsArray={[FlightDetailsComponent,SeatMapContainer,AuxilaryServicesComponent]}
+                    labelArray={['Flight Info','Seat-Map','Auxilary-Service']}
+                    propsArray={[{airlineNo},{airlineNo},{passenger}]} />
                 }
             </Fragment>
         )
