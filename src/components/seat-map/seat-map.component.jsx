@@ -19,7 +19,7 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
          <Fragment>{
                 isPassengerFetched()&&
                 <div className = 'seat-map-container'>
-                        <PassengerComponent/>
+                        {/* <PassengerComponent/> */}
                         <div className="seat-map-layout-container">
                             <div>SEAT-MAP</div>
                             <div className="seat-map-layout-discription">
