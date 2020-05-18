@@ -7,16 +7,17 @@ import Header from '../components/header/header.component';
 import  DashboardContainer from '../containers/dashboard-container/dashboardContainer';
 import {startFlightFetching} from '../store/flight/flight.actions';
 import {selectFlights} from '../store/flight/flight.selector';
+import {clearUserError} from '../store/user/user.actions';
+import {selectisError} from '../store/user/user.selector';
 import SignInContainer from '../containers/sign-in-container/signIn-container'
 import InFlightDashBoardContainer from '../containers/InFlightDashBoard/inFlight-Dashboard.container';
 
 class AllRoutesComponent extends React.Component{
+    
     componentWillMount(){
-        const{startFetchingFlights, flights} = this.props;
-        if(flights.length===0){
-            startFetchingFlights()
-        }
-    }
+        const{startFetchingFlights} = this.props;
+            startFetchingFlights();
+         }
     render(){
         return(
             <div>

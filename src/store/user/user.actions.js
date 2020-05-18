@@ -56,3 +56,8 @@ export const fetchingPessangerDetailsFailure=()=>{
         type: USER_TYPES.PASSANGER_INFO_FETCHING_FAILURE
     }
 }
+export const clearUserError=()=>{
+    return{
+        type: USER_TYPES.CLEAR_USER_ERROR
+    }
+}

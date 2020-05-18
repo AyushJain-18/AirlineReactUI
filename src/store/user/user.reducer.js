@@ -58,6 +58,11 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                     passenger : null,
                     userData: null
                 }
+                case USER_TYPES.CLEAR_USER_ERROR:
+                    return{
+                        ...state,
+                        isError:null
+                    }
         default:
             return state
     }

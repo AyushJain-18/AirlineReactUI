@@ -8,10 +8,12 @@ import FlightTakeoff from '@material-ui/icons/FlightTakeoff';
 import Flight from  '@material-ui/icons/Flight';
  
 import CustumButton from '../CustumComponents/CustumButon/custumButton.component';
-import {selectUserSignInStatus,selectSignUserType} from '../../store/user/user.selector'
+import {selectUserSignInStatus,selectSignUserType} from '../../store/user/user.selector';
+import { clearUserError } from '../../store/user/user.actions';
 
 
-const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType})=>{
+
+const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType,clearUserError})=>{
     const {
             name,
             airlineNumber,
@@ -55,7 +57,7 @@ const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType})=>{
                                         </CustumButton>
                                 </Link>
                                         :
-                                        <Link to='/signin'>Sign In to Continue</Link>
+                                        <Link to='/signin' onClick= {clearUserError}>Sign In to Continue</Link>
                                 }
                         </FlightButton>
                 </FlightDetails>
@@ -68,5 +70,11 @@ const mapStateToProps = (state)=>{
                 userType: selectSignUserType(state)
         }
 }
+const mapDispatchToProps =(dispatch)=>{
+        return{
+                clearUserError:()=>dispatch(clearUserError())
+        }
+}
 
-export default connect(mapStateToProps)(FilghtOverview);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilghtOverview);

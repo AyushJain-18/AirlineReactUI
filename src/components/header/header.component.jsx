@@ -13,9 +13,8 @@ import {connect} from 'react-redux'
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import {selectPassenger,selectUserSignInStatus} from '../../store/user/user.selector';
-import {userLogOutStart} from '../../store/user/user.actions'
+import {userLogOutStart, clearUserError} from '../../store/user/user.actions'
 import {removeFetchedPassengers} from '../../store/allpassenger/allpassenger.action'
-
 
 
 // import HeaderStyles from './Header.module.scss';
@@ -41,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Header = ({history,passengerDetails,isUserSingIn,logOut, removePassengers}) => {
+const Header = ({history,passengerDetails,isUserSingIn,logOut, removePassengers,clearUserError}) => {
     const classes = useStyles();
     const imageURL = AccountCircle;
     const [anchorEl, setanchorEl]= useState(null);
@@ -51,6 +50,7 @@ const Header = ({history,passengerDetails,isUserSingIn,logOut, removePassengers}
     };
     const redirectToSignInPage = () => {
         history.push('/signIn');
+        clearUserError();
     };
     const setCurrentAnchorPosition = event => {
         event.persist();
@@ -116,7 +116,8 @@ const mapStateToProps =(state)=>{
 const mapDispatchToProps = (dispatch)=>{
         return{
             logOut: ()=>dispatch(userLogOutStart()),
-            removePassengers: ()=> dispatch(removeFetchedPassengers())
+            removePassengers: ()=> dispatch(removeFetchedPassengers()),
+            clearUserError: ()=>dispatch(clearUserError())
         }
 }
   

@@ -1,14 +1,14 @@
 import { takeLatest, delay, put } from 'redux-saga/effects'
 import FLIGHT_ACTION_TYPES from './flight.types';
-import {flightFetchFailure, flightFetchingSuccess} from './flight.actions'
+import {flightFetchFailure, flightFetchingSuccess} from './flight.actions';
+import {getRequest} from '../../utils/api.calls'
 
 export function* getAllFlights(){
   try{
     yield delay(2000);
     //  throw new Error()
-   const response = yield fetch('http://localhost:3001/flight');
-   const flights = yield response.json() 
-   yield put(flightFetchingSuccess(flights))
+   const flights = yield getRequest('/flight');
+   yield put(flightFetchingSuccess(flights.data))
   }
   catch(error){
     yield console.log(error.message)
