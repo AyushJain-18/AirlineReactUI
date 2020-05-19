@@ -20,17 +20,20 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,
     const [wheelChair, setwheelChair]  = useState(passengerData.wheelChair)
     console.log(id, luggage,meal,payPerView,infants,wheelChair)
 
-    const lagguageOptions  =[{value:'N/A',id}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];
-    const mealOptions      =[{value:'N/A',id}, {value:'Veg'}   ,  {value:'Non-Veg'}];
-    const PayPerViewOptions=[{value:'N/A',id}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
-    const infantsOptions   =[{value: 'True',id},{value: 'False'}];
-    const wheelChairOptions=[{value: 'True',id},{value: 'False'}];
+    const lagguageOptions  =[{value:'N/A'}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];
+    const mealOptions      =[{value:'N/A'}, {value:'Veg'}   ,  {value:'Non-Veg'}];
+    const PayPerViewOptions=[{value:'N/A'}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
+    const infantsOptions   =[{value: 'True'},{value: 'False'}];
+    const wheelChairOptions=[{value: 'True'},{value: 'False'}];
 
     useEffect(()=>{
         console.log('component did mount')
         if(luggage === undefined) setluggae('');
         if(meal === undefined) setmeal('');
         if(payPerView === undefined)setPayPerView('');
+        if(infants=== undefined) setinfants(false);
+        if(wheelChair === undefined) setwheelChair(false);
+        console.log(id, luggage,meal,payPerView,infants,wheelChair)
     },[])
 
     // useEffect(()=>{

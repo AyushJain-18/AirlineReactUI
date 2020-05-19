@@ -32,16 +32,20 @@ class DashboardToogleBarComponent extends React.Component{
                   <ToggleTab 
                     componentsArray={[FlightDetailsComponent,SeatMapContainer,AuxilaryServicesComponent]}
                     labelArray={['Flight Info','Seat-Map','Auxilary-Service']}
-                    propsArray={[{airlineNo},{airlineNo},{passenger}]} />
+                    propsArray={[{airlineNo},{airlineNo},{passenger}]} 
+                    keyArray={[`info${airlineNo}`,`seat${airlineNo}`, ,`aux${airlineNo}`]}
+                    />
                 }
 
                 {
                     userType==='Crew'&& 
                     <Fragment>
                         {!airlineNo?<Redirect to='/'/>:
-                        <ToggleTab componentsArray={[FlightDetailsComponent,SeatMapContainer]}
+                        <ToggleTab key ={airlineNo} componentsArray={[FlightDetailsComponent,SeatMapContainer]}
                         labelArray={['Flight Info','Seat-Map']}
-                        propsArray={[{airlineNo},{airlineNo,showPassenger}]} />
+                        propsArray={[{airlineNo},{airlineNo,showPassenger}]}
+                        keyArray={[`info${airlineNo}`,`seat${airlineNo}`]}
+                        />
                          }
                      </Fragment>
                 }

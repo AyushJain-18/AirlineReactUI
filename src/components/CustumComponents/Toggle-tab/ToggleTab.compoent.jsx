@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ToggleTab=({componentsArray, labelArray,propsArray})=> {
+const ToggleTab=({componentsArray, labelArray,propsArray,keyArray})=> {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -83,7 +83,7 @@ const ToggleTab=({componentsArray, labelArray,propsArray})=> {
           >
           {componentsArray.map((EachItem, index)=>
               <TabPanel key={index} value={value} index={index} dir={theme.direction}>
-                  <EachItem key ={index} {...propsArray[index]}/>
+                  <EachItem key ={keyArray[index]} {...propsArray[index]}/>
               </TabPanel>)}
       </SwipeableViews>
     </div>

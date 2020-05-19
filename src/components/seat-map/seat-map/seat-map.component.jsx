@@ -10,13 +10,15 @@ import PassengerInfoWithSeatNumberComponent from '../../passenger-info/passenger
 
 
 const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers, showPassenger})=>{
-    const  isPassengerFetched=()=>(passengers.length!==0)
+    const  isPassengerFetched=()=>(passengers.length!==0);
+    const  flightNoChanged=()=>{
+       return  (passengers.length!==0 && passengers[0].PNR.split('X')[0]) === (airlineNo)}
     const widthOfSeatLayout =showPassenger? '60%':'';
         useEffect(() => {
-            if(!isPassengerFetched()){
+            if(!flightNoChanged()){
                 startFetchingAllPassengersList(airlineNo);
             }
-        }, [airlineNo])
+        })
     return(
          <Fragment>
                         { isPassengerFetched()&& <div className='seat-map-container'>
