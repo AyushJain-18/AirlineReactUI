@@ -1,15 +1,13 @@
-import {takeLatest, put, delay} from 'redux-saga/effects';
+import {takeLatest, put} from 'redux-saga/effects';
 import All_PASSANGER_TYPES from './allpassenger.types';
 
 import {getRequest} from '../../utils/api.calls';
 import {fetchingAllPassengerFailure,fetchingAllPassengerSuccess} from './allpassenger.action'
 
 
-function* getAllPassengers({payload}){
-    delay(5000)
-    yield console.log('payload',payload)
+function* getAllPassengers({payload: airlineNo}){
     try{
-      const allPassenger =  yield getRequest(`/${payload}`);
+      const allPassenger =  yield getRequest(`/${airlineNo}`);
         yield put(fetchingAllPassengerSuccess(allPassenger.data))
     } catch(error){
         yield put(fetchingAllPassengerFailure())

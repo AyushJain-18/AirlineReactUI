@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react';
 import './passenger-auxilarys-decription.styles.scss';
 import CustumButon from '../../CustumComponents/CustumButon/custumButton.component';
 import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.component';
-import {startPassengerInfoUpdate} from '../../../store/user/user.actions'
+import {startPassengerInfoUpdate} from '../../../store/user/user.actions';
+import {selectSignUserType} from '../../../store/user/user.selector'
+import {selectSeatNoOfSelectedPassenger} from '../../../store/allpassenger/allpassenger.select'
 import {connect} from 'react-redux';
 
-const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable})=>{
+const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,logedInUserType,newSeatNumber})=>{
     const id = passengerData.id;
     const airlineNumber= passengerData.airlineNumber;
     const [luggage, setluggae]         = useState(passengerData.luggage);
@@ -38,17 +40,19 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable}
 
         let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
         let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
+        let newSeat = newSeatNumber?newSeatNumber: passengerData.seatNo;
         
 
         const updatedData = {
             ...passengerData,
             luggage,meal ,payPerView,
+            seatNo:newSeat,
             infants:infantValueToUpdate,
             wheelChair:wheelChairValueToUpdate
 
         }
         console.log(updatedData)
-        saveChange(id,airlineNumber,updatedData);
+        saveChange(id,airlineNumber,updatedData,logedInUserType);
     }
     return(
         <div className='passenger-auxilary-services-container' style={{width:`${width}`}}>
@@ -90,10 +94,16 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable}
         </div>
     )
 }
-const mapSateToProps =(dispatch)=>{
+const mapStateToProps =state=>{
     return{
-        saveChange: (id,airlineNumber,updatedData)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData))
+        logedInUserType : selectSignUserType(state),
+        newSeatNumber: selectSeatNoOfSelectedPassenger(state)
+    }
+}
+const mapDispatchToProps =(dispatch)=>{
+    return{
+        saveChange: (id,airlineNumber,updatedData,logedInUserType)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData,logedInUserType))
     }
 }
 
-export default connect(null,mapSateToProps)(PassengerAuxilaryServiceInfo);
+export default connect(mapStateToProps,mapDispatchToProps)(PassengerAuxilaryServiceInfo);

@@ -31,7 +31,7 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers, 
                                 </div>
                                 <SeatArrangement passengers={passengers} totalSeats={60}/>
                             </div>
-                            {showPassenger&&<PassengerInfoWithSeatNumberComponent passengersData={passengers} />} 
+                            {showPassenger&&<PassengerInfoWithSeatNumberComponent editable ={true}/>} 
                         </div>
                 }
         </Fragment>

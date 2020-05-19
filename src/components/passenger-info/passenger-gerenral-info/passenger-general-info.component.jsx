@@ -5,15 +5,19 @@ import {connect} from 'react-redux';
 import DisplayValue from '../../CustumComponents/custum-select/custumSelect.component';
 import CustumButon from '../../CustumComponents/CustumButon/custumButton.component';
 import {onNewSeatSelected} from '../../../store/allpassenger/allpassenger.action';
+import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.select';
 
- const PassengerGerenralInfo =({passengerData, editable, updateSeatNumberAction})=>{
+ const PassengerGerenralInfo =({passengerData, editable, updateSeatNumberAction,unOccupiedSeats})=>{
     const [firstName, setfirstName]    = useState(passengerData.firstName);
     const [lastName, setlastName]      = useState(passengerData.lastName)
     const [age, setage]         = useState(passengerData.age)
     const [seatNo, setseatNo]   = useState(passengerData.seatNo)
     const [PNR, setPNR]         = useState(passengerData.PNR)
     const [contactNumber, setcontactNumber]  = useState(passengerData.contactNumber)
-    let otherSeatOptions=[{value:'23'},{value:'24'},{value:'25'}];
+    let otherSeatOptions= unOccupiedSeats.reduce((acc, eachUnOccupiedSeats)=>{
+        return [ ...acc,{'value': eachUnOccupiedSeats}]
+           },[]);
+    console.log('otherSeatOptions',otherSeatOptions)
     const onSeatNumberChange =(value)=>{
         updateSeatNumberAction(value)
         // setseatNo(value);
@@ -47,9 +51,14 @@ import {onNewSeatSelected} from '../../../store/allpassenger/allpassenger.action
         </div>
     )
 }
+const mapStateToProps =(state, ownProps)=>{
+    return{
+        unOccupiedSeats: selectUnoccupiedSeat(ownProps.passengerData.seatNo)(state)
+    }
+}
 const mapDispatchToProps =(dispatch)=>{
     return{
         updateSeatNumberAction: (newSeatNo)=>dispatch(onNewSeatSelected(newSeatNo))
     }
 }
-export default connect(null, mapDispatchToProps)(PassengerGerenralInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(PassengerGerenralInfo);

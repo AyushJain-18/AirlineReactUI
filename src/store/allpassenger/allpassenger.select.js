@@ -1,4 +1,8 @@
 import {createSelector} from 'reselect';
+import {
+    mapPassengersToSeat,
+    getUnOccupiedSeats
+} from '../../utils/seat.utils'
 
 export const selectAllPassenger =state=>state.AllPassenger;
 
@@ -21,4 +25,15 @@ export const selectSeatNoOfSelectedPassenger = createSelector(
     [selectAllPassenger], AllPassenger=> AllPassenger.selectedPassengerSeatNo
 )
 
-export const selectUnoccupiedSeat =createSelector();
+
+
+export const selectMappedAllPassengerToSeat = createSelector(
+
+    [selectAllPassengerData], AllPassenger=> mapPassengersToSeat(AllPassenger)
+)
+
+export const selectUnoccupiedSeat = (passengerSeatNo)=>{
+    return createSelector([selectMappedAllPassengerToSeat],
+         mappedPassengersToSeat=>  getUnOccupiedSeats(passengerSeatNo,mappedPassengersToSeat)
+    )
+}

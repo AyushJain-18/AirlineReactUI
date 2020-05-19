@@ -10,9 +10,16 @@ export const mapPassengersToSeat =(passengers)=>{
     },{})
     return passengerToSeatMap; 
 }
-
-export const getSeatColorForSeatNumber =(seatNumber, passengerSeatMap)=>{
-   const passenger = passengerSeatMap[seatNumber];
+/** 
+* getSeatColorForSeatNumber fn return seat color passed on there informaion
+* darkgrey -                   both infant and wheelchair
+* cornflowerblue/blue-         inflant
+* coral/dark red-              wheelchair
+* blanchedalmond/ light red -  occupied
+* light gray-                  unoccupied
+*/
+export const getSeatColorForSeatNumber =(seatNumber, mappedPassengersToSeat)=>{
+   const passenger = mappedPassengersToSeat[seatNumber];
    let seatColor = 'blanchedalmond'
     if(passenger){
     seatColor= passenger.infants?(passenger.wheelChair? 'darkgrey':'cornflowerblue'):
@@ -20,8 +27,19 @@ export const getSeatColorForSeatNumber =(seatNumber, passengerSeatMap)=>{
          }
          return seatColor;
 }
-// darkgrey -                   both infant and wheelchair
-// cornflowerblue/blue-         inflant
-// coral/dark red-              wheelchair
-// blanchedalmond/ light red -  occupied
-// light gray-                  unoccupied
+
+export const getUnOccupiedSeats =(seatNo, mappedPassengersToSeat)=>{
+        const seatColumnNumber= ['A','B','C','D','E','F']
+        const allSeats =[];
+        // create seat Array
+        for(let i=1;i<=10;i++){
+            seatColumnNumber.forEach(eachColumn=>{
+                let newSeatNumber = eachColumn+i;
+                allSeats.push(newSeatNumber)
+            })
+        }
+        const allOccupiedSeats = Object.keys(mappedPassengersToSeat);
+        let unOccupiedSeats = allSeats.filter(eachSeat=>!(allOccupiedSeats.includes(eachSeat)))
+        unOccupiedSeats.push(seatNo)
+        return unOccupiedSeats;
+}
