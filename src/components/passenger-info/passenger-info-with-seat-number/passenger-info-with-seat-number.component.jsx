@@ -20,8 +20,8 @@ const PassengerInfoWithSeatNumber = ({editable,selectedPassengerSeatNo,mappedPas
             {selectedPassengerSeatNo&& <div>{
                 selectedPassenger? 
                     <div className= 'passenger-info-container'>
-                        <PassengerGerenralInfo passengerData={selectedPassenger} editable={editable}/>
-                        <PassengerAuxilaryServiceInfo passengerData={selectedPassenger} editable={editable}/>
+                        <PassengerGerenralInfo key={selectedPassenger.id+'p'} passengerData={selectedPassenger} editable={editable}/>
+                        <PassengerAuxilaryServiceInfo  key={selectedPassenger.id+'A'} passengerData={selectedPassenger} editable={editable}/>
                     </div> : 
                         <div className='passenger-info-unoccupied'>Selected Seat No- {selectedPassengerSeatNo} is Unoccupied</div>
                 

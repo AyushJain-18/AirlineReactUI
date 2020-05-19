@@ -12,11 +12,17 @@ import './custumSelect.styles.scss'
  *  */ 
 
 const CustumSelect =({name, id, options , defaultValue, handleChange})=>{
+        // console.log('Display Value',name, id, options , defaultValue );
         return(
-                <select className="select-css" name={name} id={id} defaultValue={defaultValue}  onChange={(event)=>handleChange(event.target.value)}>
+                <select className="select-css" 
+                        name={name} 
+                        id={id} 
+                        key={id}
+                        defaultValue={defaultValue}  
+                        onChange={(event)=>handleChange(event.target.value)}>
                  {
                     options.map((option,index)=>        
-                        <option key= {index} 
+                        <option key= {index+id} 
                                 value={option.value}
                                 >{option.value}</option>)
                  }  
@@ -25,9 +31,10 @@ const CustumSelect =({name, id, options , defaultValue, handleChange})=>{
         }
   
 const DisplayValue = ({name, id, options , editable, defaultValue, handleChange})=>(
+       
     editable?
             <CustumSelect  name={name} id={id} options={options}
-            defaultValue={defaultValue} handleChange={handleChange}/>
+            defaultValue={defaultValue} handleChange={handleChange} key={id}/>
             :
             (defaultValue? defaultValue: 'N/A')
 )    

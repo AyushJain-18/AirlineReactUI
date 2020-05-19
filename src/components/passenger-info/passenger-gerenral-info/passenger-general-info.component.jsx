@@ -8,6 +8,7 @@ import {onNewSeatSelected} from '../../../store/allpassenger/allpassenger.action
 import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.select';
 
  const PassengerGerenralInfo =({passengerData, editable, updateSeatNumberAction,unOccupiedSeats})=>{
+    const [id,setid] = useState(passengerData.id) 
     const [firstName, setfirstName]    = useState(passengerData.firstName);
     const [lastName, setlastName]      = useState(passengerData.lastName)
     const [age, setage]         = useState(passengerData.age)
@@ -24,6 +25,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
         updateSeatNumberAction(value)
     }
     useEffect(()=>{
+            setid(passengerData.id)
              setfirstName(passengerData.firstName);
              setlastName(passengerData.lastName)
              setage(passengerData.age)
@@ -42,7 +44,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
             <div className= 'passenger-info-items'> <span>Age</span>        <span>{age}</span> </div>
             <div className= 'passenger-info-items'> <span>PNR</span>        <span>{PNR}</span> </div>
             <div className= 'passenger-info-items'> <span>SeatNo</span>      
-                <DisplayValue editable ={editable} name={'seat-no'+seatNo} id={'seat-no'}
+                <DisplayValue editable ={editable} name={'seat-no'+seatNo} id={'seat-no'+id}
                     options={otherSeatOptions} handleChange={onSeatNumberChange}
                 />
             </div>

@@ -9,20 +9,22 @@ import {connect} from 'react-redux';
 
 const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,logedInUserType,newSeatNumber})=>{
     
-    const id = passengerData.id;
+    
     let newSeat= passengerData.seatNo;
     const airlineNumber= passengerData.airlineNumber;
+    const [id, setid] = useState(passengerData.id);
     const [luggage, setluggae]         = useState(passengerData.luggage);
     const [meal, setmeal]              = useState(passengerData.meal)
     const [payPerView, setPayPerView]  = useState(passengerData.payPerView)
     const [infants, setinfants]        = useState(passengerData.infants)
     const [wheelChair, setwheelChair]  = useState(passengerData.wheelChair)
+    console.log(id, luggage,meal,payPerView,infants,wheelChair)
 
-    const lagguageOptions  =[{value:'N/A'}, {value: '15kg'},{value:'20 Kg'},{value:'25Kg'}];
-    const mealOptions      =[{value:'N/A'}, {value:'Veg'}   ,  {value:'Non-Veg'}];
-    const PayPerViewOptions=[{value:'N/A'}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
-    const infantsOptions   =[{value: 'True'},{value: 'False'}];
-    const wheelChairOptions=[{value: 'True'},{value: 'False'}];
+    const lagguageOptions  =[{value:'N/A',id}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];
+    const mealOptions      =[{value:'N/A',id}, {value:'Veg'}   ,  {value:'Non-Veg'}];
+    const PayPerViewOptions=[{value:'N/A',id}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
+    const infantsOptions   =[{value: 'True',id},{value: 'False'}];
+    const wheelChairOptions=[{value: 'True',id},{value: 'False'}];
 
     useEffect(()=>{
         console.log('component did mount')
@@ -31,14 +33,13 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,
         if(payPerView === undefined)setPayPerView('');
     },[])
 
-    useEffect(()=>{
-        console.log('passenger Data', passengerData);
-        setluggae(passengerData.luggage);
-        setmeal(passengerData.meal)
-        setPayPerView(passengerData.payPerView)
-        setinfants(passengerData.infants)
-        setwheelChair(passengerData.wheelChair)
-    },[passengerData])
+    // useEffect(()=>{
+    //     setluggae(passengerData.luggage);
+    //     setmeal(passengerData.meal)
+    //     setPayPerView(passengerData.payPerView)
+    //     setinfants(passengerData.infants)
+    //     setwheelChair(passengerData.wheelChair)
+    // },[passengerData])
 
     useEffect(()=>{
          newSeat = newSeatNumber;
@@ -68,7 +69,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,
                 <div className= 'passenger-heading'>Auxilary Info</div>
                 <div className= 'passenger-info-items'>
                      <span>Luggage</span>
-                        <DisplayValue editable={editable} name='Luggage' id='Luggage' options={lagguageOptions}
+                        <DisplayValue key={id} editable={editable} name='Luggage' id={'Luggage'+id} options={lagguageOptions}
                          defaultValue={luggage} handleChange={setluggae}/> 
                 </div>
  
