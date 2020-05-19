@@ -4,7 +4,8 @@ const ALL_PASSANGER_INITIAL_STATE={
     passengers: [],
     selectedPassengerSeatNo: null,
     isError: null,
-    isFetching: false
+    isFetching: false,
+    newSeatNumber: null
 }
 
 const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
@@ -40,6 +41,11 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
             return{
                 ...state,
                 selectedPassengerSeatNo: action.payload
+            }
+            case All_PASSANGER_TYPES.SELECT_NEW_SEAT:
+            return{
+                ...state,
+                newSeatNumber: action.payload
             }
         default:
             return state

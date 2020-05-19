@@ -28,3 +28,9 @@ export const setSelectedPassengerSeatNo =(seatNo)=>{
         payload: seatNo
     }
 }
+export const onNewSeatSelected =(seatno)=>{
+    return{
+        type: ALL_PASSANGER_TYPES.SELECT_NEW_SEAT,
+        payload: seatno
+    }
+}

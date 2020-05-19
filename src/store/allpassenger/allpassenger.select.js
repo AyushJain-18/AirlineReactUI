@@ -20,3 +20,5 @@ export const selectSeatNoOfSelectedPassenger = createSelector(
 
     [selectAllPassenger], AllPassenger=> AllPassenger.selectedPassengerSeatNo
 )
+
+export const selectUnoccupiedSeat =createSelector();

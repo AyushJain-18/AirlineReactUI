@@ -21,7 +21,7 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers, 
          <Fragment>
                         { isPassengerFetched()&& <div className='seat-map-container'>
                             <div className="seat-map-layout-container" style={{width:`${widthOfSeatLayout}`}}>
-                                <div>SEAT-MAP</div>
+                                <div>Flight No-{airlineNo}</div>
                                 <div className="seat-map-layout-discription">
                                         <div className='item-description'> Occupied<SeatCircle color='gainsboro'/></div>
                                         <div className='item-description'>Unoccupied <SeatCircle color='blanchedalmond'/> </div>

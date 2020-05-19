@@ -12,6 +12,7 @@ import {setSelectedPassengerSeatNo} from '../../../store/allpassenger/allpasseng
 // Seat compoent contains total seats a flight have 
 
 const Seat = ({passengers,totalSeats,setPassengerSeatNoAction})=>{
+    console.log('passengesr', passengers);
     const seatNumberArray = new Array(totalSeats).fill(1);
     const seatColumnNumber= ['A','B','C','D','E','F']
     let rowCounter = 0;
