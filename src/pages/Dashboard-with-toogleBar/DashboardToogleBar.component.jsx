@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import ToggleTab from '../../components/CustumComponents/Toggle-tab/ToggleTab.compoent'
 
 import {connect} from 'react-redux';
-import {selectPassenger,selectSignUserType} from '../../store/user/user.selector';
+import {selectPassenger,selectSignUserType,selectFlightNo} from '../../store/user/user.selector';
 
 import FlightDetailsComponent from '../flight-deatils/flight-details.component'
 import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.container';
@@ -23,7 +23,7 @@ class DashboardToogleBarComponent extends React.Component{
              airlineNo = passenger.airlineNumber;
         }
         if(userType!=='In-flight'){
-            airlineNo = this.props.location.FlightNumber;
+            airlineNo = this.props.flightNo;
         }
         return(
             <Fragment>
@@ -56,7 +56,8 @@ class DashboardToogleBarComponent extends React.Component{
 const mapStateToprops = (state)=>{
     return{
         passenger: selectPassenger(state),
-        userType: selectSignUserType(state)
+        userType: selectSignUserType(state),
+        flightNo: selectFlightNo(state)
     }
 }
 

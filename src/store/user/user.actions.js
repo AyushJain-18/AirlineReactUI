@@ -77,3 +77,10 @@ export const passengerInfoUpdateSuccess=()=>{
         type: USER_TYPES.UPDATE_SUCCESSFULL
     }
 }
+
+export const setFlightNo=(flightNo)=>{
+    return{
+        type: USER_TYPES.SET_FLIGHT_NO,
+        payload: flightNo
+    }
+}

@@ -14,13 +14,14 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
     const [seatNo, setseatNo]   = useState(passengerData.seatNo)
     const [PNR, setPNR]         = useState(passengerData.PNR)
     const [contactNumber, setcontactNumber]  = useState(passengerData.contactNumber)
+
     let otherSeatOptions= unOccupiedSeats.reduce((acc, eachUnOccupiedSeats)=>{
         return [ ...acc,{'value': eachUnOccupiedSeats}]
            },[]);
-    console.log('otherSeatOptions',otherSeatOptions)
+           otherSeatOptions.reverse();
+
     const onSeatNumberChange =(value)=>{
         updateSeatNumberAction(value)
-        // setseatNo(value);
     }
     useEffect(()=>{
              setfirstName(passengerData.firstName);
@@ -29,6 +30,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
              setseatNo(passengerData.seatNo)
              setPNR(passengerData.PNR)
              setcontactNumber(passengerData.contactNumber)
+             console.log('Passenger Data changes',seatNo)
     },[passengerData])
     return(
         <div className= 'passenger-general-info-container'>
@@ -40,7 +42,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
             <div className= 'passenger-info-items'> <span>Age</span>        <span>{age}</span> </div>
             <div className= 'passenger-info-items'> <span>PNR</span>        <span>{PNR}</span> </div>
             <div className= 'passenger-info-items'> <span>SeatNo</span>      
-                <DisplayValue editable ={editable} name={'seat-no'} id={'seat-no'} defaultValue={seatNo}
+                <DisplayValue editable ={editable} name={'seat-no'+seatNo} id={'seat-no'}
                     options={otherSeatOptions} handleChange={onSeatNumberChange}
                 />
             </div>

@@ -4,11 +4,13 @@ import CustumButon from '../../CustumComponents/CustumButon/custumButton.compone
 import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.component';
 import {startPassengerInfoUpdate} from '../../../store/user/user.actions';
 import {selectSignUserType} from '../../../store/user/user.selector'
-import {selectSeatNoOfSelectedPassenger} from '../../../store/allpassenger/allpassenger.select'
+import {selectUpdatedSeat} from '../../../store/allpassenger/allpassenger.select'
 import {connect} from 'react-redux';
 
 const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,logedInUserType,newSeatNumber})=>{
+    
     const id = passengerData.id;
+    let newSeat= passengerData.seatNo;
     const airlineNumber= passengerData.airlineNumber;
     const [luggage, setluggae]         = useState(passengerData.luggage);
     const [meal, setmeal]              = useState(passengerData.meal)
@@ -28,21 +30,27 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,
         if(meal === undefined) setmeal('');
         if(payPerView === undefined)setPayPerView('');
     },[])
+
     useEffect(()=>{
+        console.log('passenger Data', passengerData);
         setluggae(passengerData.luggage);
         setmeal(passengerData.meal)
         setPayPerView(passengerData.payPerView)
         setinfants(passengerData.infants)
         setwheelChair(passengerData.wheelChair)
-},[passengerData])
+    },[passengerData])
+
+    useEffect(()=>{
+         newSeat = newSeatNumber;
+         console.log('newSeatNumber',newSeatNumber);
+    },[newSeatNumber])
     const handelSubmitForAuxilaryService =(event)=>{
         event.preventDefault();
 
         let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
         let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
-        let newSeat = newSeatNumber?newSeatNumber: passengerData.seatNo;
         
-
+        console.log(newSeatNumber);
         const updatedData = {
             ...passengerData,
             luggage,meal ,payPerView,
@@ -97,7 +105,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,
 const mapStateToProps =state=>{
     return{
         logedInUserType : selectSignUserType(state),
-        newSeatNumber: selectSeatNoOfSelectedPassenger(state)
+        newSeatNumber: selectUpdatedSeat(state)
     }
 }
 const mapDispatchToProps =(dispatch)=>{

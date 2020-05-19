@@ -39,3 +39,6 @@ export const selectUserEnteredWrongCredentialStatue = createSelector(
 export const selectPassenger = createSelector(
     [selectUser], user=>user.passenger
 )
+export const selectFlightNo = createSelector(
+    [selectUser], user=>user.flightNo
+)

@@ -5,7 +5,8 @@ const INTIAL_USER_STATE ={
     isWrongCredentialsEntered: false,
     isError: null,
     passenger: null,
-    userData: null
+    userData: null,
+    flightNo: null
 };
 
 const userReducer = (state = INTIAL_USER_STATE, action)=>{
@@ -56,13 +57,19 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                     isWrongCredentialsEntered: false,
                     isError:null,
                     passenger : null,
-                    userData: null
+                    userData: null,
+                    flightNo: null
                 }
                 case USER_TYPES.CLEAR_USER_ERROR:
                     return{
                         ...state,
                         isError:null
                     }
+                case USER_TYPES.SET_FLIGHT_NO:
+                        return{
+                            ...state,
+                            flightNo: action.payload
+                        }
         default:
             return state
     }

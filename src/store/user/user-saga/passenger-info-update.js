@@ -17,9 +17,8 @@ function * startUserUpdate({payload}){
         yield put(passengerInfoUpdateSuccess(updatedPassenger.data))
         if(logedInUserType==='In-flight'){
             yield put(fetchingPessangerDetailsSuccess(updatedPassenger.data))
-        }else{
-            yield put(fetchingAllPassengerStart(airlineNumber))
         }
+            yield put(fetchingAllPassengerStart(airlineNumber))
        
     } catch(error){
         yield put(passengerInfoUpdateFailure())

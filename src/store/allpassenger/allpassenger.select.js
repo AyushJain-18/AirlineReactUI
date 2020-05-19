@@ -24,6 +24,10 @@ export const selectSeatNoOfSelectedPassenger = createSelector(
 
     [selectAllPassenger], AllPassenger=> AllPassenger.selectedPassengerSeatNo
 )
+export const selectUpdatedSeat = createSelector(
+
+    [selectAllPassenger], AllPassenger=> AllPassenger.newSeatNumber
+)
 
 
 
