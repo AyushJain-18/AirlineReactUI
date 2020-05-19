@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment,useEffect} from 'react';
 import './passenger-info-with-seat-number.styles.scss';
 
 import {connect} from 'react-redux';
@@ -7,19 +7,28 @@ import {
     selectSeatNoOfSelectedPassenger,
     selectAllPassengerData
 } from '../../../store/allpassenger/allpassenger.select'
-import PassengerDescription from '../passenger-discription/passenger-description.component';
+import PassengerAuxilaryServiceInfo from '../passenger-auxilarys-discription/passenger-auxilarys-description.component';
+import PassengerGerenralInfo from '../passenger-gerenral-info/passenger-general-info.component';
 
 
-const PassengerInfoWithSeatNumber = ({passengerSeatNo, passengerData})=>{
+const PassengerInfoWithSeatNumber = ({passengerSeatNo, passengerData,editable})=>{
     const passengerMapedToSeats =  mapPassengersToSeat(passengerData);
-    const selectedPassenger = passengerMapedToSeats[passengerSeatNo];
+    let selectedPassenger= passengerMapedToSeats[passengerSeatNo];
+    console.log('render');
+    // useEffect(()=>{
+        
+    //     selectedPassenger= passengerMapedToSeats[passengerSeatNo];
+    // },[passengerSeatNo])
+   
 
     return(
         <Fragment>
             {passengerSeatNo&& <div>{
                 selectedPassenger? 
-                    <PassengerDescription passengerData={selectedPassenger}/>
-                        : 
+                    <div className= 'passenger-info-container'>
+                        <PassengerGerenralInfo passengerData={selectedPassenger} editable={editable}/>
+                        <PassengerAuxilaryServiceInfo passengerData={selectedPassenger} editable={editable}/>
+                    </div> : 
                         <div className='passenger-info-unoccupied'>Selected Seat No- {passengerSeatNo} is Unoccupied</div>
                 
                 }</div>}

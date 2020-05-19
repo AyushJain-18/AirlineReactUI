@@ -5,7 +5,7 @@ import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.co
 import {startPassengerInfoUpdate} from '../../../store/user/user.actions'
 import {connect} from 'react-redux';
 
-const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, editable})=>{
+const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable})=>{
     const id = passengerData.id;
     const airlineNumber= passengerData.airlineNumber;
     const [luggage, setluggae]         = useState(passengerData.luggage);
@@ -26,6 +26,13 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, editable})=>{
         if(meal === undefined) setmeal('');
         if(payPerView === undefined)setPayPerView('');
     },[])
+    useEffect(()=>{
+        setluggae(passengerData.luggage);
+        setmeal(passengerData.meal)
+        setPayPerView(passengerData.payPerView)
+        setinfants(passengerData.infants)
+        setwheelChair(passengerData.wheelChair)
+},[passengerData])
     const handelSubmitForAuxilaryService =(event)=>{
         event.preventDefault();
 
@@ -44,7 +51,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, editable})=>{
         saveChange(id,airlineNumber,updatedData);
     }
     return(
-        <div className='passenger-auxilary-services-container'>
+        <div className='passenger-auxilary-services-container' style={{width:`${width}`}}>
             <form onSubmit= {handelSubmitForAuxilaryService}> 
                 <div className= 'passenger-heading'>Auxilary Info</div>
                 <div className= 'passenger-info-items'>

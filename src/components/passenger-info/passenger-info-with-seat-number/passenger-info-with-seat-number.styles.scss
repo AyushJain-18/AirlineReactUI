@@ -1,6 +1,31 @@
 .passenger-info-unoccupied{
     margin-bottom: 340px;
-    @media screen  and (max-width: 1000px){
+    @media screen  and (max-width: 800px){
         margin-bottom: 10px;
     }
+}
+.passenger-info-container{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: space-around;
+     @media screen  and (max-width: 1000px){
+        width: 250px;
+    }
+    @media screen  and (max-width: 800px){
+        width: 500px;
+        margin: 5% 5%;
+        // display:  grid;
+        // grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+        
+    }
+    @media screen  and (max-width: 600px){
+        width: 350px;
+        margin: 5% 5%;
+    }
+    @media screen  and (max-width: 425px){
+        width: 250px;
+        margin: 5% 5%;
+    }
+    
 }

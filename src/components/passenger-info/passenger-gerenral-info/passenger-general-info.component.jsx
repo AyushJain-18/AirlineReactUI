@@ -1,17 +1,24 @@
-import React ,{useState} from 'react';
+import React ,{useState,useEffect} from 'react';
 import './passenger-general-info.styles.scss'
 
 import CustumButon from '../../CustumComponents/CustumButon/custumButton.component';
 
 
- const PassengerGerenralInfo =({passengerData})=>{
-    const [editable, seteditable]      = useState(false);
+ const PassengerGerenralInfo =({passengerData,editable})=>{
     const [firstName, setfirstName]    = useState(passengerData.firstName);
     const [lastName, setlastName]      = useState(passengerData.lastName)
     const [age, setage]         = useState(passengerData.age)
     const [seatNo, setseatNo]   = useState(passengerData.seatNo)
     const [PNR, setPNR]         = useState(passengerData.PNR)
     const [contactNumber, setcontactNumber]  = useState(passengerData.contactNumber)
+    useEffect(()=>{
+             setfirstName(passengerData.firstName);
+             setlastName(passengerData.lastName)
+             setage(passengerData.age)
+             setseatNo(passengerData.seatNo)
+             setPNR(passengerData.PNR)
+             setcontactNumber(passengerData.contactNumber)
+    },[passengerData])
     return(
         <div className= 'passenger-general-info-container'>
             <form>

@@ -18,6 +18,7 @@ class DashboardToogleBarComponent extends React.Component{
         console.log('props', this.props.location)
         const {passenger, userType} =this.props;
         let airlineNo ='';
+        let showPassenger = true;
         if(passenger){
              airlineNo = passenger.airlineNumber;
         }
@@ -40,7 +41,7 @@ class DashboardToogleBarComponent extends React.Component{
                         {!airlineNo?<Redirect to='/'/>:
                         <ToggleTab componentsArray={[FlightDetailsComponent,SeatMapContainer]}
                         labelArray={['Flight Info','Seat-Map']}
-                        propsArray={[{airlineNo},{airlineNo}]} />
+                        propsArray={[{airlineNo},{airlineNo,showPassenger}]} />
                          }
                      </Fragment>
                 }

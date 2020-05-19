@@ -6,9 +6,12 @@ import { fetchingAllPassengerStart } from '../../../store/allpassenger/allpassen
 import { selectAllPassengerData } from '../../../store/allpassenger/allpassenger.select';
 import SeatArrangement from '../seats-arrangement/seat-arrangement.component';
 import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
+import PassengerInfoWithSeatNumberComponent from '../../passenger-info/passenger-info-with-seat-number/passenger-info-with-seat-number.component';
 
-const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})=>{
+
+const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers, showPassenger})=>{
     const  isPassengerFetched=()=>(passengers.length!==0)
+    const widthOfSeatLayout =showPassenger? '60%':'';
         useEffect(() => {
             if(!isPassengerFetched()){
                 startFetchingAllPassengersList(airlineNo);
@@ -16,16 +19,19 @@ const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers})
         }, [airlineNo])
     return(
          <Fragment>
-                        { isPassengerFetched()&&<div className="seat-map-layout-container">
-                            <div>SEAT-MAP</div>
-                            <div className="seat-map-layout-discription">
-                                    <div className='item-description'> Occupied<SeatCircle color='gainsboro'/></div>
-                                    <div className='item-description'>Unoccupied <SeatCircle color='blanchedalmond'/> </div>
-                                    <div className='item-description'>Infant<SeatCircle color='cornflowerblue'/> </div>
-                                    <div className='item-description'>Wheelchair<SeatCircle color='coral'/> </div>
-                                    <div className='item-description'>Infant & wheelchair<SeatCircle color='darkgrey'/></div>
+                        { isPassengerFetched()&& <div className='seat-map-container'>
+                            <div className="seat-map-layout-container" style={{width:`${widthOfSeatLayout}`}}>
+                                <div>SEAT-MAP</div>
+                                <div className="seat-map-layout-discription">
+                                        <div className='item-description'> Occupied<SeatCircle color='gainsboro'/></div>
+                                        <div className='item-description'>Unoccupied <SeatCircle color='blanchedalmond'/> </div>
+                                        <div className='item-description'>Infant<SeatCircle color='cornflowerblue'/> </div>
+                                        <div className='item-description'>Wheelchair<SeatCircle color='coral'/> </div>
+                                        <div className='item-description'>Infant & wheelchair<SeatCircle color='darkgrey'/></div>
+                                </div>
+                                <SeatArrangement passengers={passengers} totalSeats={60}/>
                             </div>
-                            <SeatArrangement passengers={passengers} totalSeats={60}/>
+                            {showPassenger&&<PassengerInfoWithSeatNumberComponent passengersData={passengers} />} 
                         </div>
                 }
         </Fragment>
