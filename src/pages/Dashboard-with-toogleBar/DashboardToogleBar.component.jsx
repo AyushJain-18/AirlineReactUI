@@ -9,6 +9,7 @@ import FlightDetailsComponent from '../flight-deatils/flight-details.component'
 import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.container';
 import AuxilaryServicesComponent from '../../components/auxilary-service/auxilary-service-display/auxlilary-service.component';
 import { withRouter,Redirect } from 'react-router-dom';
+import WebCheckInStepperComponent from '../../components/stepper-web-check-in/web-check-in.component';
 
 
 
@@ -41,10 +42,10 @@ class DashboardToogleBarComponent extends React.Component{
                     userType==='Crew'&& 
                     <Fragment>
                         {!airlineNo?<Redirect to='/'/>:
-                        <ToggleTab key ={airlineNo} componentsArray={[FlightDetailsComponent,SeatMapContainer]}
-                        labelArray={['Flight Info','Seat-Map']}
+                        <ToggleTab key ={airlineNo} componentsArray={[FlightDetailsComponent,SeatMapContainer,WebCheckInStepperComponent]}
+                        labelArray={['Flight Info','Seat-Map','Web-Check-In']}
                         propsArray={[{airlineNo},{airlineNo,showPassenger}]}
-                        keyArray={[`info${airlineNo}`,`seat${airlineNo}`]}
+                        keyArray={[`info${airlineNo}`,`seat${airlineNo}`, `webcheckin${airlineNo}`]}
                         />
                          }
                      </Fragment>

@@ -41,3 +41,7 @@ export const selectUnoccupiedSeat = (passengerSeatNo)=>{
          mappedPassengersToSeat=>  getUnOccupiedSeats(passengerSeatNo,mappedPassengersToSeat)
     )
 }
+
+export const selectNextButtonState = createSelector(
+    [selectAllPassenger], allPassengers=> allPassengers.nextDisplayButtonState
+)

@@ -5,7 +5,8 @@ const ALL_PASSANGER_INITIAL_STATE={
     selectedPassengerSeatNo: null,
     isError: null,
     isFetching: false,
-    newSeatNumber: null
+    newSeatNumber: null,
+    nextDisplayButtonState: false
 }
 
 const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
@@ -42,10 +43,15 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
                 ...state,
                 selectedPassengerSeatNo: action.payload
             }
-            case All_PASSANGER_TYPES.SELECT_NEW_SEAT:
+        case All_PASSANGER_TYPES.SELECT_NEW_SEAT:
             return{
                 ...state,
                 newSeatNumber: action.payload
+            }
+        case All_PASSANGER_TYPES.CHANGE_DISPLAY_BUTTON_NEXT:
+            return {
+                ...state,
+                nextDisplayButtonState: action.payload
             }
         default:
             return state

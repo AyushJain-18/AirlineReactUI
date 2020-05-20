@@ -7,7 +7,7 @@ import {selectSignUserType} from '../../../store/user/user.selector'
 import {selectUpdatedSeat} from '../../../store/allpassenger/allpassenger.select'
 import {connect} from 'react-redux';
 
-const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,logedInUserType,newSeatNumber})=>{
+const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,logedInUserType,newSeatNumber})=>{
     
     
     let newSeat= passengerData.seatNo;
@@ -35,14 +35,6 @@ const PassengerAuxilaryServiceInfo= ({passengerData,saveChange, width, editable,
         if(wheelChair === undefined) setwheelChair(false);
         console.log(id, luggage,meal,payPerView,infants,wheelChair)
     },[])
-
-    // useEffect(()=>{
-    //     setluggae(passengerData.luggage);
-    //     setmeal(passengerData.meal)
-    //     setPayPerView(passengerData.payPerView)
-    //     setinfants(passengerData.infants)
-    //     setwheelChair(passengerData.wheelChair)
-    // },[passengerData])
 
     useEffect(()=>{
          newSeat = newSeatNumber;

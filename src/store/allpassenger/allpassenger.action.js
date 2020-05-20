@@ -34,3 +34,10 @@ export const onNewSeatSelected =(seatno)=>{
         payload: seatno
     }
 }
+
+export const changeStateOfDisplayNext =(value)=>{
+    return{
+        type:ALL_PASSANGER_TYPES.CHANGE_DISPLAY_BUTTON_NEXT,
+        payload: value
+    }
+}
