@@ -3,7 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import FormInput from '../CustumComponents/form-input/form-input.component';
 import { connect } from 'react-redux';
-import {changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.action'
+import {changeStateOfDisplayNext,addPassengerPNRToReducer} from '../../store/allpassenger/allpassenger.action'
 const useStyle = makeStyles(()=>{
     return{
         pnrContainer:{
@@ -19,7 +19,7 @@ const useStyle = makeStyles(()=>{
     }
 })
 
-const PNRInputCompoennt =({changeNextButtonState})=>{
+const PNRInputCompoennt =({changeNextButtonState,addPNRToStore})=>{
     const classes = useStyle()
     const [pnrValue, setpnrValue] = useState('');
     const [displayPNRFormatError, setdisplayPNRFormatError] = useState(false);
@@ -30,10 +30,13 @@ const PNRInputCompoennt =({changeNextButtonState})=>{
         if(pnrValue.length>0 && !displayPNRFormatError){
             console.log('event Fired')
             changeNextButtonState(true)
+            addPNRToStore(pnrValue)
+        } else{
+            changeNextButtonState(false)
         } 
       }, [pnrValue,displayPNRFormatError])
     const checkPNRPatter=(value)=>{
-        const regexPattern= /PQ00[1-5]XY[0-3][0-9]$/;
+        const regexPattern= /PQ00([1-5])XY([0][1-9]|[1-2][0-9]|[3][0])$/; 
         let isEnterPNRmatched =  regexPattern.test(value);
         console.log(isEnterPNRmatched)
         setdisplayPNRFormatError(!isEnterPNRmatched)
@@ -63,7 +66,8 @@ const PNRInputCompoennt =({changeNextButtonState})=>{
 }
 const mapDispatchToProps =(dispatch)=>{
     return{
-        changeNextButtonState: (value)=>dispatch(changeStateOfDisplayNext(value))
+        changeNextButtonState: (value)=>dispatch(changeStateOfDisplayNext(value)),
+        addPNRToStore: (PNR)=> dispatch(addPassengerPNRToReducer(PNR))
     }
    
 }

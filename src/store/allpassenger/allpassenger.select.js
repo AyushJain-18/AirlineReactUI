@@ -47,5 +47,14 @@ export const selectNextButtonState = createSelector(
 )
 
 export const selectPNRPassengerInfo = createSelector(
-    [selectAllPassenger], allPassengers=> allPassengers.pnrPassenger
+    [selectAllPassenger], AllPassenger=> AllPassenger.passengerPNR
+)
+
+export const selectFlightNoFromPNREnteredWhileWebCheckIn = createSelector(
+    [selectPNRPassengerInfo], pnr=>{
+        if(pnr){
+            return pnr.split('X')[0]
+        }
+        
+    } 
 )

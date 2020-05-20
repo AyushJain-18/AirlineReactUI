@@ -28,6 +28,11 @@ export const setSelectedPassengerSeatNo =(seatNo)=>{
         payload: seatNo
     }
 }
+export const clearSelectedPassengerSeatNo =()=>{
+    return{
+        type:ALL_PASSANGER_TYPES.REMOVE_SELECTED_PASSENGER_SEAT_NO,
+    }
+}
 
 export const onNewSeatSelected =(seatno)=>{
     return{

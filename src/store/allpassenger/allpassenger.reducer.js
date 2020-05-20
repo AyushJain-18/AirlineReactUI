@@ -51,6 +51,11 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
                 ...state,
                 selectedPassengerSeatNo: action.payload
             }
+        case All_PASSANGER_TYPES.REMOVE_SELECTED_PASSENGER_SEAT_NO:
+            return{
+                ...state,
+                selectedPassengerSeatNo: null
+            }
         case All_PASSANGER_TYPES.SELECT_NEW_SEAT:
             return{
                 ...state,
