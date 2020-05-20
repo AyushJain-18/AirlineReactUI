@@ -45,3 +45,7 @@ export const selectUnoccupiedSeat = (passengerSeatNo)=>{
 export const selectNextButtonState = createSelector(
     [selectAllPassenger], allPassengers=> allPassengers.nextDisplayButtonState
 )
+
+export const selectPNRPassengerInfo = createSelector(
+    [selectAllPassenger], allPassengers=> allPassengers.pnrPassenger
+)

@@ -9,7 +9,7 @@ import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
 import PassengerInfoWithSeatNumberComponent from '../../passenger-info/passenger-info-with-seat-number/passenger-info-with-seat-number.component';
 
 
-const SaetMapComponent = ({airlineNo,startFetchingAllPassengersList,passengers, showPassenger})=>{
+const SaetMapComponent = ({airlineNo,showPassenger,startFetchingAllPassengersList,passengers})=>{
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
        return  (passengers.length!==0 && passengers[0].PNR.split('X')[0]) === (airlineNo)}

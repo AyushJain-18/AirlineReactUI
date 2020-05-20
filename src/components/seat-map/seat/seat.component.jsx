@@ -7,11 +7,11 @@ import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
 
 import {connect} from 'react-redux'
 
-import {setSelectedPassengerSeatNo} from '../../../store/allpassenger/allpassenger.action';
+import {setSelectedPassengerSeatNo, clearNewSeatSelectedByPassenger} from '../../../store/allpassenger/allpassenger.action';
 
 // Seat compoent contains total seats a flight have 
 
-const Seat = ({passengers,totalSeats,setPassengerSeatNoAction})=>{
+const Seat = ({passengers,totalSeats,setPassengerSeatNoAction, clearNewSeatSelected})=>{
     const seatNumberArray = new Array(totalSeats).fill(1);
     const seatColumnNumber= ['A','B','C','D','E','F']
     let rowCounter = 0;
@@ -27,6 +27,7 @@ const Seat = ({passengers,totalSeats,setPassengerSeatNoAction})=>{
     }
     const setPassengerSeatNo =(seatNo)=>{
         setPassengerSeatNoAction(seatNo)
+        clearNewSeatSelected()
     }
     return(
         <Fragment >
@@ -51,7 +52,8 @@ const Seat = ({passengers,totalSeats,setPassengerSeatNoAction})=>{
 }
 const mapDispatchToProps =(dispatch)=>{
     return{
-        setPassengerSeatNoAction : (seatNo)=>dispatch(setSelectedPassengerSeatNo(seatNo))
+        setPassengerSeatNoAction : (seatNo)=>dispatch(setSelectedPassengerSeatNo(seatNo)),
+        clearNewSeatSelected: ()=>dispatch(clearNewSeatSelectedByPassenger()),
     }
 }
 export default connect(null,mapDispatchToProps)(Seat);

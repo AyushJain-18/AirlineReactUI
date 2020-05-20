@@ -5,12 +5,11 @@ import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.co
 import {startPassengerInfoUpdate} from '../../../store/user/user.actions';
 import {selectSignUserType} from '../../../store/user/user.selector'
 import {selectUpdatedSeat} from '../../../store/allpassenger/allpassenger.select'
+import {clearNewSeatSelectedByPassenger} from '../../../store/allpassenger/allpassenger.action'
 import {connect} from 'react-redux';
 
 const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,logedInUserType,newSeatNumber})=>{
-    
-    
-    let newSeat= passengerData.seatNo;
+
     const airlineNumber= passengerData.airlineNumber;
     const [id, setid] = useState(passengerData.id);
     const [luggage, setluggae]         = useState(passengerData.luggage);
@@ -18,6 +17,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,
     const [payPerView, setPayPerView]  = useState(passengerData.payPerView)
     const [infants, setinfants]        = useState(passengerData.infants)
     const [wheelChair, setwheelChair]  = useState(passengerData.wheelChair)
+    const[newSeat, setnewSeat] = useState(passengerData.seatNo)
     console.log(id, luggage,meal,payPerView,infants,wheelChair)
 
     const lagguageOptions  =[{value:'N/A'}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];
@@ -33,20 +33,25 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,
         if(payPerView === undefined)setPayPerView('');
         if(infants=== undefined) setinfants(false);
         if(wheelChair === undefined) setwheelChair(false);
-        console.log(id, luggage,meal,payPerView,infants,wheelChair)
+        console.log(id, luggage,meal,payPerView,infants,wheelChair,newSeat)
     },[])
 
     useEffect(()=>{
-         newSeat = newSeatNumber;
-         console.log('newSeatNumber',newSeatNumber);
+        if(newSeatNumber){
+            console.log('1.newSeatNumber from action',newSeatNumber)
+            setnewSeat(newSeatNumber);
+        }
+        console.log('2.newSeatNumber from passenger and then update ',newSeat);
     },[newSeatNumber])
+
+
     const handelSubmitForAuxilaryService =(event)=>{
         event.preventDefault();
 
         let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
         let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
         
-        console.log(newSeatNumber);
+        console.log('3. final datas',newSeat);
         const updatedData = {
             ...passengerData,
             luggage,meal ,payPerView,
