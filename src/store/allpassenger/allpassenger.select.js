@@ -46,12 +46,24 @@ export const selectNextButtonState = createSelector(
     [selectAllPassenger], allPassengers=> allPassengers.nextDisplayButtonState
 )
 
-export const selectPNRPassengerInfo = createSelector(
+
+export const selectIsPNRFecthedHasAlreadyCheckedIn = createSelector(
+    [selectAllPassenger], AllPassenger=> AllPassenger.PassengerInfoBasedOnPNR?
+        !!AllPassenger.PassengerInfoBasedOnPNR.seatNo: null
+)
+export const selectSeatNoOfFetchedPassengerFromPNR = createSelector(
+    [selectAllPassenger], AllPassenger=> AllPassenger.PassengerInfoBasedOnPNR?
+        AllPassenger.PassengerInfoBasedOnPNR.seatNo: null
+)
+export const selectPassengerInfoOfFetchedPassengerFromPNR = createSelector(
+    [selectAllPassenger], AllPassenger=> AllPassenger.PassengerInfoBasedOnPNR
+)
+export const selectPNR = createSelector(
     [selectAllPassenger], AllPassenger=> AllPassenger.passengerPNR
 )
 
 export const selectFlightNoFromPNREnteredWhileWebCheckIn = createSelector(
-    [selectPNRPassengerInfo], pnr=>{
+    [selectPNR], pnr=>{
         if(pnr){
             return pnr.split('X')[0]
         }

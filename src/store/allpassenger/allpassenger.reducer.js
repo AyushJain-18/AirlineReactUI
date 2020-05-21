@@ -8,7 +8,7 @@ const ALL_PASSANGER_INITIAL_STATE={
     newSeatNumber: null,
     nextDisplayButtonState: false,
     passengerPNR: null,
-    pnrPassenger: null
+    PassengerInfoBasedOnPNR: null //pnrPassenger
 }
 
 const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
@@ -43,7 +43,7 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
                 isError:false,
                 selectedPassengerSeatNo: null,
                 newSeatNumber: null,
-                pnrPassenger: null,
+                PassengerInfoBasedOnPNR: null,
                 passengers:[]
             }
         case All_PASSANGER_TYPES.SET_SELECTED_PASSENGER_SEAT_NO:
@@ -74,13 +74,15 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
         case All_PASSANGER_TYPES.PNR_PASSENGER_INFO_FETCHING_SUCCESS:
                 return {
                     ...state,
-                    pnrPassenger: action.payload
+                    isFetching: false,
+                    isError:false,
+                    PassengerInfoBasedOnPNR: action.payload
                 }
         case All_PASSANGER_TYPES.PNR_PASSENGER_INFO_FETCHING_REMOVE:
             return {
                 ...state,
                 passengerPNR: null,
-                pnrPassenger: null
+                PassengerInfoBasedOnPNR: null
             }
         case All_PASSANGER_TYPES.ADD_PASSANGER_PNR_TO_REDUCER:
             return {

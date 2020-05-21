@@ -15,9 +15,17 @@ import SeatMapContainer  from '../../containers/seat-map-conatiner/seat-map.cont
 //selector
 import {
     selectFlightNoFromPNREnteredWhileWebCheckIn,
-    selectSeatNoOfSelectedPassenger} from '../../store/allpassenger/allpassenger.select'
+    selectSeatNoOfFetchedPassengerFromPNR,
+    selectUpdatedSeat,
+    selectPassengerInfoOfFetchedPassengerFromPNR
+} from '../../store/allpassenger/allpassenger.select'
 //acion
-import{clearSelectedPassengerSeatNo} from '../../store/allpassenger/allpassenger.action'
+import{
+  clearNewSeatSelectedByPassenger,
+  onNewSeatSelected
+  
+
+} from '../../store/allpassenger/allpassenger.action'
 /**
  * QontoConnector
  * An element to be placed between each step.
@@ -108,9 +116,10 @@ export const QontoConnector = withStyles({
       fontWeight: "bold"
     },
     buttonContainer: {
-      marginTop: '100px',
       display: 'flex',
-      justifyContent: 'space-evenly',
+      marginTop: '100px',
+      width: '264px',
+      justifyContent:' space-around'
     },
      finish: {
           display: 'flex',
@@ -124,8 +133,9 @@ export const QontoConnector = withStyles({
       fontSize: '26px',
     },
     instructions: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
       fontFamily: 'Open Sans Condensed',
       fontSize: '16px',
       fontWeight: "bold"
@@ -133,14 +143,19 @@ export const QontoConnector = withStyles({
   }));
   
  export  function getSteps() {
-    return ['Enter PNR', 'Seat Selection', 'Auxilary Service'];
+    return ['Enter PNR', 'Update seat', 'Auxilary Service'];
   }
   
-  const GetStepContentComponent=({step,flightNo,selectedSeat,removeAlreadySelectedPassenger})=> {
+  const GetStepContentComponent=({step,flightNo,seatNo,updatedSeatNo,
+          newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger})=> {
       // THIS WILL RENDER OUR COMPONENT AGAIN, SO WE WILL GET NEW FILGHT NO ENTERED BY USER
       useEffect(()=>{
-        removeAlreadySelectedPassenger();
+        removeAlreadySelectedSeat();
       },[flightNo])
+    const setPreviousSeatNumber=(seatNo)=>{
+      newSeatNumber(seatNo);
+      removeAlreadySelectedSeat()
+    }  
     const getStepComponent =(step)=>{
       switch (step) {
         case 0:
@@ -148,12 +163,25 @@ export const QontoConnector = withStyles({
         case 1:
             return(
                 <Fragment>
-                    <SeatMapContainer airlineNo={flightNo}/>
-                    {selectedSeat&& `Seat selected is ${selectedSeat}`}
+                    <SeatMapContainer airlineNo={flightNo} 
+                      style ={{widht: '90%'}}
+                    showNotAllowedPointer={true}/>
+                    { updatedSeatNo? 
+                      <div>
+                          Your new seat number is {updatedSeatNo}
+                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}
+                                style={{cursor: 'pointer'}}
+                          > &#10008; </span>
+                      </div>:`Your seat number is ${seatNo}`
+                    }
                 </Fragment>
             ) 
         case 2:
-          return <PassengerAuxilarysDescriptionComponent/>;
+          return <PassengerAuxilarysDescriptionComponent 
+                        passengerData={fetchedPassenger}
+                        width={'80%'}
+                        editable ={true}
+                        />;
         default:
           return  <div>Unknown step</div>;
       }
@@ -168,10 +196,13 @@ export const QontoConnector = withStyles({
 
   const mapStateToProps =(state)=>({
         flightNo: selectFlightNoFromPNREnteredWhileWebCheckIn(state),
-        selectedSeat: selectSeatNoOfSelectedPassenger(state)
+        seatNo: selectSeatNoOfFetchedPassengerFromPNR(state),
+        updatedSeatNo:  selectUpdatedSeat(state),
+        fetchedPassenger: selectPassengerInfoOfFetchedPassengerFromPNR(state)
   })
 
   const mapDispatchToProps =(dispatch)=>({
-      removeAlreadySelectedPassenger: ()=>dispatch(clearSelectedPassengerSeatNo())
+      removeAlreadySelectedSeat: ()=>dispatch(clearNewSeatSelectedByPassenger()),
+      newSeatNumber: (seatNo)=> dispatch(onNewSeatSelected(seatNo))
   })
   export default connect(mapStateToProps, mapDispatchToProps)(GetStepContentComponent);

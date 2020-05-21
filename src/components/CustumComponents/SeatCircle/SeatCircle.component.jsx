@@ -3,9 +3,10 @@ import React from 'react';
 import {CustumCircle} from './SeatCircle.styles'
 
 
-const SeatCircle =({color='red',children ,otherProps})=>{
+const SeatCircle =({color='red',children ,otherProps,isSeatOccupied})=>{
+   isSeatOccupied = isSeatOccupied? 'not-allowed':'pointer'
     
-return <CustumCircle {...otherProps} buttonColor= {`${color}`}>{children}</CustumCircle>
+return <CustumCircle {...otherProps} buttonColor= {`${color}`} pointerValue={`${isSeatOccupied}`}>{children}</CustumCircle>
 }
 
 export default  SeatCircle;

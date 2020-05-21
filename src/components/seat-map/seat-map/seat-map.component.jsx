@@ -9,7 +9,8 @@ import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
 import PassengerInfoWithSeatNumberComponent from '../../passenger-info/passenger-info-with-seat-number/passenger-info-with-seat-number.component';
 
 
-const SaetMapComponent = ({airlineNo,showPassenger,startFetchingAllPassengersList,passengers})=>{
+const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointer,startFetchingAllPassengersList,passengers})=>{
+    console.log('airlineNo',airlineNo)
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
        return  (passengers.length!==0 && passengers[0].PNR.split('X')[0]) === (airlineNo)}
@@ -31,9 +32,11 @@ const SaetMapComponent = ({airlineNo,showPassenger,startFetchingAllPassengersLis
                                         <div className='item-description'>Wheelchair<SeatCircle color='coral'/> </div>
                                         <div className='item-description'>Infant & wheelchair<SeatCircle color='darkgrey'/></div>
                                 </div>
-                                <SeatArrangement passengers={passengers} totalSeats={60}/>
+                                <SeatArrangement passengers={passengers} 
+                                                totalSeats={60} 
+                                                showNotAllowedPointer={showNotAllowedPointer}/>
                             </div>
-                            {showPassenger&&<PassengerInfoWithSeatNumberComponent editable ={true}/>} 
+                            {showPassenger&&<PassengerInfoWithSeatNumberComponent editable ={editable}/>} 
                         </div>
                 }
         </Fragment>

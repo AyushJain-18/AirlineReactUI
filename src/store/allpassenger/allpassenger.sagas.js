@@ -2,7 +2,13 @@ import {takeLatest, put,all,call} from 'redux-saga/effects';
 import All_PASSANGER_TYPES from './allpassenger.types';
 
 import {getRequest} from '../../utils/api.calls';
-import {fetchingAllPassengerFailure,fetchingAllPassengerSuccess} from './allpassenger.action'
+import {
+    fetchingAllPassengerFailure,
+    fetchingAllPassengerSuccess,
+    pnrPassengerInfoSuccess,
+    pnrPassengerInfoFailure,
+    changeStateOfDisplayNext
+} from './allpassenger.action'
 
 
 function* getAllPassengers({payload: airlineNo}){
@@ -20,10 +26,11 @@ function *getPassengerInfo({payload}){
         const flight = PNR.split('X')[0];
         const passenger =yield getRequest(`/${flight}?PNR=${PNR}`);
         const passengerInfo = passenger.data[0];
-         yield console.log(passengerInfo)
-        // yield put(fetchingPessangerDetailsSuccess(passengerInfo))
+         yield console.log(passengerInfo);
+         yield put(pnrPassengerInfoSuccess(passengerInfo))
+         yield put(changeStateOfDisplayNext(true))
     } catch(error){
-            // yield put(fetchingPessangerDetailsFailure())
+            yield put(pnrPassengerInfoFailure())
     }
 }
 

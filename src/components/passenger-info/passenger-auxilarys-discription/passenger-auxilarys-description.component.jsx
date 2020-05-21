@@ -4,11 +4,12 @@ import CustumButon from '../../CustumComponents/CustumButon/custumButton.compone
 import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.component';
 import {startPassengerInfoUpdate} from '../../../store/user/user.actions';
 import {selectSignUserType} from '../../../store/user/user.selector'
-import {selectUpdatedSeat} from '../../../store/allpassenger/allpassenger.select'
-import {clearNewSeatSelectedByPassenger} from '../../../store/allpassenger/allpassenger.action'
+import {selectUpdatedSeat,selectPNR} from '../../../store/allpassenger/allpassenger.select'
+import {changeStateOfDisplayNext} from '../../../store/allpassenger/allpassenger.action'
 import {connect} from 'react-redux';
 
-const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,logedInUserType,newSeatNumber})=>{
+const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
+                checkInPassengerPNR,logedInUserType,newSeatNumber, setNextButtonStateToFalse})=>{
 
     const airlineNumber= passengerData.airlineNumber;
     const [id, setid] = useState(passengerData.id);
@@ -28,6 +29,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,
 
     useEffect(()=>{
         console.log('component did mount')
+        setNextButtonStateToFalse()
         if(luggage === undefined) setluggae('');
         if(meal === undefined) setmeal('');
         if(payPerView === undefined)setPayPerView('');
@@ -61,7 +63,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,
 
         }
         console.log(updatedData)
-        saveChange(id,airlineNumber,updatedData,logedInUserType);
+        saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
     }
     return(
         <div className='passenger-auxilary-services-container' style={{width:`${width}`}}>
@@ -106,12 +108,15 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width, editable, saveChange,
 const mapStateToProps =state=>{
     return{
         logedInUserType : selectSignUserType(state),
-        newSeatNumber: selectUpdatedSeat(state)
+        newSeatNumber: selectUpdatedSeat(state),
+        checkInPassengerPNR: selectPNR(state)
     }
 }
 const mapDispatchToProps =(dispatch)=>{
     return{
-        saveChange: (id,airlineNumber,updatedData,logedInUserType)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData,logedInUserType))
+        setNextButtonStateToFalse:()=> dispatch(changeStateOfDisplayNext(false)) ,
+        saveChange: (id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR)=>
+        dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR))
     }
 }
 

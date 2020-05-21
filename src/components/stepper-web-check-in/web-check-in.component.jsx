@@ -59,7 +59,7 @@ import {selectNextButtonState} from '../../store/allpassenger/allpassenger.selec
         {activeStep === steps.length ? (
           <div className ={classes.finish}>
             <Typography className={classes.finishText}>SuccessFully Checked In</Typography>
-            <CustumButton style={{width: '100px'}} onClick={handleReset} inverted>NEW-PNR</CustumButton>
+            <CustumButton onClick={handleReset}>NEW-PNR</CustumButton>
           </div>
             ) : (
           <div className= {classes.instructions}>

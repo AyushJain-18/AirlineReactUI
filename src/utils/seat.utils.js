@@ -40,6 +40,9 @@ export const getUnOccupiedSeats =(seatNo, mappedPassengersToSeat)=>{
         }
         const allOccupiedSeats = Object.keys(mappedPassengersToSeat);
         let unOccupiedSeats = allSeats.filter(eachSeat=>!(allOccupiedSeats.includes(eachSeat)))
-        unOccupiedSeats.push(seatNo)
+        if(seatNo){
+            unOccupiedSeats.push(seatNo)
+        }
+        
         return unOccupiedSeats;
 }

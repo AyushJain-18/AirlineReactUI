@@ -7,11 +7,20 @@ import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
 
 import {connect} from 'react-redux'
 
-import {setSelectedPassengerSeatNo, clearNewSeatSelectedByPassenger} from '../../../store/allpassenger/allpassenger.action';
+import {
+    onNewSeatSelected,
+      setSelectedPassengerSeatNo,
+     clearNewSeatSelectedByPassenger} from '../../../store/allpassenger/allpassenger.action';
+ 
 
+import {
+        selectUnoccupiedSeat
+} from '../../../store/allpassenger/allpassenger.select'
 // Seat compoent contains total seats a flight have 
 
-const Seat = ({passengers,totalSeats,setPassengerSeatNoAction, clearNewSeatSelected})=>{
+const Seat = ({passengers,totalSeats, showNotAllowedPointer, 
+                setPassengerSeatNoAction, clearNewSeatSelected,
+                unOccupiedSeats, setNewSeatNumber})=>{
     const seatNumberArray = new Array(totalSeats).fill(1);
     const seatColumnNumber= ['A','B','C','D','E','F']
     let rowCounter = 0;
@@ -26,20 +35,37 @@ const Seat = ({passengers,totalSeats,setPassengerSeatNoAction, clearNewSeatSelec
             return (columnCounter%2===0 && columnCounter%3!==0 && columnCounter%4!==0 )
     }
     const setPassengerSeatNo =(seatNo)=>{
-        setPassengerSeatNoAction(seatNo)
-        clearNewSeatSelected()
+        console.log('seatNo',seatNo);
+        console.log('isOccupiedSeat',unOccupiedSeats);
+        if(showNotAllowedPointer){
+            if(!isOccupiedSeat(seatNo)){
+                console.log('seat new seat')
+                setNewSeatNumber(seatNo)
+            } 
+        } else{
+            setPassengerSeatNoAction(seatNo)
+            clearNewSeatSelected()
+        }
+    }
+    const isOccupiedSeat=(seatNo)=>{
+            return   !(unOccupiedSeats.includes(seatNo))
+
     }
     return(
         <Fragment >
-                {
+                { passengers &&
                     seatNumberArray.map((seat,index)=>{
                         columnCounter++;
                         updateRowAndColumnCounter(index)
                         let seatNuber = `${seatColumnNumber[columnCounter]}`+rowCounter;
                         let seactColor = getSeatColorForSeatNumber(seatNuber,passengers);
+                        let seatOccupied = isOccupiedSeat(seatNuber) && showNotAllowedPointer;
                         
-                    return  <div key ={index} className='seprator-container' onClick= {()=>setPassengerSeatNo(seatNuber)}> 
+                    return  <div key ={index} 
+                                className='seprator-container' 
+                                onClick= {()=>setPassengerSeatNo(seatNuber)}> 
                                 <SeatCircle key={index} 
+                                            isSeatOccupied ={seatOccupied}
                                             color={seactColor}>
                                             {seatNuber}
                                 </SeatCircle>
@@ -50,10 +76,14 @@ const Seat = ({passengers,totalSeats,setPassengerSeatNoAction, clearNewSeatSelec
         </Fragment>
     )
 }
+const mapStateToProps =(state)=>({
+    unOccupiedSeats: selectUnoccupiedSeat(false)(state)
+})
 const mapDispatchToProps =(dispatch)=>{
     return{
         setPassengerSeatNoAction : (seatNo)=>dispatch(setSelectedPassengerSeatNo(seatNo)),
         clearNewSeatSelected: ()=>dispatch(clearNewSeatSelectedByPassenger()),
+        setNewSeatNumber: (seatno)=> dispatch(onNewSeatSelected(seatno))
     }
 }
-export default connect(null,mapDispatchToProps)(Seat);
+export default connect(mapStateToProps,mapDispatchToProps)(Seat);

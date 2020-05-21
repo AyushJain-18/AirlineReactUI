@@ -8,6 +8,7 @@ export const CustumCircle = styled.div`
         background-color: ${({ buttonColor}) => `${buttonColor}`};
         display: flex;
         align-items: center;
+        cursor: ${({pointerValue})=>`${pointerValue}` };
         font-family:Open Sans Condensed;
         @media screen and (max-width: 800px){
                 border: 14px solid ${({ buttonColor}) => `${buttonColor}`};

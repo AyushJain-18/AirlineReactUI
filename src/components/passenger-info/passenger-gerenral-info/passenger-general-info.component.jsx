@@ -45,7 +45,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
             <div className= 'passenger-info-items'> <span>PNR</span>        <span>{PNR}</span> </div>
             <div className= 'passenger-info-items'> <span>SeatNo</span>      
                 <DisplayValue editable ={editable} name={'seat-no'+seatNo} id={'seat-no'+id}
-                    options={otherSeatOptions} handleChange={onSeatNumberChange}
+                    options={otherSeatOptions} handleChange={onSeatNumberChange} defaultValue={seatNo}
                 />
             </div>
             {/* <div className='passenger-info-button'>

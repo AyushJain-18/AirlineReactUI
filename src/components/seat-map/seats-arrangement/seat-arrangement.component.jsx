@@ -8,11 +8,15 @@ import Seat from '../seat/seat.component'
 
 
 
-const SeatArrangement =({passengers,totalSeats,setPassengerSeatNoAction})=>{
+const SeatArrangement =({passengers,totalSeats,showNotAllowedPointer,setPassengerSeatNoAction})=>{
     const passengerToSeat = mapPassengersToSeat(passengers)
     return(
         <div className='seat-map-arrangement'> 
-                <Seat passengers={passengerToSeat} totalSeats={totalSeats} setPassengerSeatNoAction={setPassengerSeatNoAction}/>
+                <Seat passengers={passengerToSeat}
+                      totalSeats={totalSeats} 
+                      showNotAllowedPointer ={showNotAllowedPointer}
+                      // setPassengerSeatNoAction={setPassengerSeatNoAction}
+                      />
         </div>
     )
 }
