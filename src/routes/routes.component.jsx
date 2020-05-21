@@ -21,7 +21,8 @@ class AllRoutesComponent extends React.Component{
         return(
             <div>
                 <Header/>
-                <div className= 'routes-div-container'>
+                <div >
+                    {/* className= 'routes-div-container' */}
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
                             <Route exact path= '/signIn' component={SignInContainer}/>

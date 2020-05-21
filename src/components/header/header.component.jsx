@@ -21,7 +21,8 @@ import {removeFetchedPassengers} from '../../store/allpassenger/allpassenger.act
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
+        marginBottom: theme.spacing(2)
     },
     menuButton: {
         marginLeft: theme.spacing(2),
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     },
     Appbar: {
         backgroundColor: '#282c34',
-        position: 'fixed',
+        // position: 'fixed',
         top: 0
     }
 }));
