@@ -152,6 +152,7 @@ export const QontoConnector = withStyles({
   const GetStepContentComponent=({step,flightNo,seatNo,updatedSeatNo,isLoading,
           newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger})=> {
       // THIS WILL RENDER OUR COMPONENT AGAIN, SO WE WILL GET NEW FILGHT NO ENTERED BY USER
+      console.log('fetchedPassenger', fetchedPassenger)
       useEffect(()=>{
         removeAlreadySelectedSeat();
       },[flightNo])
@@ -182,6 +183,7 @@ export const QontoConnector = withStyles({
         case 2:
           return <Fragment>
                    { !isLoading? <PassengerAuxilarysDescriptionComponent 
+                        key= {new Date().getMilliseconds()}
                         passengerData={fetchedPassenger}
                         width={'80%'}
                         editable ={true}
