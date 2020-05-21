@@ -99,7 +99,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
                  </div>
 
                 <div className= 'passenger-info-button'>
-                {editable && <CustumButon type= 'submit'>Save Changes</CustumButon>}
+                {editable && <CustumButon type= 'submit'>Confirm</CustumButon>}
                 </div>
             </form>
         </div>

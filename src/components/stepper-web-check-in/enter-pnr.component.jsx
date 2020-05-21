@@ -1,7 +1,9 @@
-import React ,{useState, useEffect}from 'react';
+import React ,{useState, Fragment ,useEffect}from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import FormInput from '../CustumComponents/form-input/form-input.component';
+import Spinner from '../CustumComponents/spinner/spinner.component';
+
 import { connect } from 'react-redux';
 import {
     changeStateOfDisplayNext,
@@ -9,7 +11,11 @@ import {
     pnrPassengerInfoStart
 } from '../../store/allpassenger/allpassenger.action'
 
-import{selectIsPNRFecthedHasAlreadyCheckedIn} from '../../store/allpassenger/allpassenger.select'
+import{
+    selectIsPNRFecthedHasAlreadyCheckedIn,
+    selectAllPassengerFetchngStatus
+} from '../../store/allpassenger/allpassenger.select'
+
 const useStyle = makeStyles(()=>{
     return{
         pnrContainer:{
@@ -29,7 +35,8 @@ const useStyle = makeStyles(()=>{
     }
 })
 
-const PNRInputCompoennt =({fetchPassengerInfoFromPNR,addPNRToStore,changeNextButtonState,isPassengerCheckIn})=>{
+const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
+            changeNextButtonState,isPassengerCheckIn})=>{
     console.log('isPassengerCheckIn',isPassengerCheckIn)
     const classes = useStyle()
     const [pnrValue, setpnrValue] = useState('');
@@ -61,6 +68,7 @@ const PNRInputCompoennt =({fetchPassengerInfoFromPNR,addPNRToStore,changeNextBut
     }
     return(
         <div className={classes.pnrContainer}>
+          { !isLoading? <Fragment>
                 <FormInput
                     handleChange={handelChange}
                     label={'Enter PNR'}
@@ -68,22 +76,25 @@ const PNRInputCompoennt =({fetchPassengerInfoFromPNR,addPNRToStore,changeNextBut
                     name='enter PNR'
                     id='pnr-1'
                 />
-                {
-                    displayPNRFormatError? <div className ={classes.errorMsg}>
-                        Pls check your PNR</div>: null
-                    
-                }
-                {
-                   isPassengerCheckIn? <div className ={classes.checkInMsg}>
-                       Passenger Already Check In</div>: null
-                        // <div>{()=>changeNextButtonState(true)}</div>
-                    
-                }
+                    {
+                        displayPNRFormatError? <div className ={classes.errorMsg}>
+                            Pls check your PNR</div>: null
+                        
+                    }
+                    {
+                    isPassengerCheckIn? <div className ={classes.checkInMsg}>
+                        Passenger Already Check In</div>: null
+                            // <div>{()=>changeNextButtonState(true)}</div>
+                        
+                    }
+                </Fragment>: <Spinner/>
+}
         </div>
     )
 }
 const mapStateToProps =(state)=>({
-    isPassengerCheckIn: selectIsPNRFecthedHasAlreadyCheckedIn(state)
+    isPassengerCheckIn: selectIsPNRFecthedHasAlreadyCheckedIn(state),
+    isLoading: selectAllPassengerFetchngStatus(state)
 })
 
 const mapDispatchToProps =(dispatch)=>{

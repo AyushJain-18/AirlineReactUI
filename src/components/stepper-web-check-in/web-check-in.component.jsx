@@ -18,8 +18,6 @@ import CustumButton from '../CustumComponents/CustumButon/custumButton.component
 import {selectNextButtonState} from '../../store/allpassenger/allpassenger.select';
 
 
-
-
  const  WebCheckInStepperComponent=({nextButtonState})=> {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);

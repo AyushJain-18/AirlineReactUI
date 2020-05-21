@@ -12,12 +12,14 @@ import {connect} from 'react-redux';
 import PNRInputCompoennt from './enter-pnr.component';
 import PassengerAuxilarysDescriptionComponent from '../passenger-info/passenger-auxilarys-discription/passenger-auxilarys-description.component';
 import SeatMapContainer  from '../../containers/seat-map-conatiner/seat-map.container'
+import Spinner from '../CustumComponents/spinner/spinner.component';
 //selector
 import {
     selectFlightNoFromPNREnteredWhileWebCheckIn,
     selectSeatNoOfFetchedPassengerFromPNR,
     selectUpdatedSeat,
-    selectPassengerInfoOfFetchedPassengerFromPNR
+    selectPassengerInfoOfFetchedPassengerFromPNR,
+    selectAllPassengerFetchngStatus
 } from '../../store/allpassenger/allpassenger.select'
 //acion
 import{
@@ -26,6 +28,7 @@ import{
   
 
 } from '../../store/allpassenger/allpassenger.action'
+
 /**
  * QontoConnector
  * An element to be placed between each step.
@@ -146,7 +149,7 @@ export const QontoConnector = withStyles({
     return ['Enter PNR', 'Update seat', 'Auxilary Service'];
   }
   
-  const GetStepContentComponent=({step,flightNo,seatNo,updatedSeatNo,
+  const GetStepContentComponent=({step,flightNo,seatNo,updatedSeatNo,isLoading,
           newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger})=> {
       // THIS WILL RENDER OUR COMPONENT AGAIN, SO WE WILL GET NEW FILGHT NO ENTERED BY USER
       useEffect(()=>{
@@ -177,11 +180,14 @@ export const QontoConnector = withStyles({
                 </Fragment>
             ) 
         case 2:
-          return <PassengerAuxilarysDescriptionComponent 
+          return <Fragment>
+                   { !isLoading? <PassengerAuxilarysDescriptionComponent 
                         passengerData={fetchedPassenger}
                         width={'80%'}
                         editable ={true}
-                        />;
+                        />: <Spinner/>}
+             </Fragment>;
+        
         default:
           return  <div>Unknown step</div>;
       }
@@ -198,7 +204,8 @@ export const QontoConnector = withStyles({
         flightNo: selectFlightNoFromPNREnteredWhileWebCheckIn(state),
         seatNo: selectSeatNoOfFetchedPassengerFromPNR(state),
         updatedSeatNo:  selectUpdatedSeat(state),
-        fetchedPassenger: selectPassengerInfoOfFetchedPassengerFromPNR(state)
+        fetchedPassenger: selectPassengerInfoOfFetchedPassengerFromPNR(state),
+        isLoading:  selectAllPassengerFetchngStatus(state)
   })
 
   const mapDispatchToProps =(dispatch)=>({
