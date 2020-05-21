@@ -37,7 +37,7 @@ const useStyle = makeStyles(()=>{
 
 const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
             changeNextButtonState,isPassengerCheckIn})=>{
-    console.log('isPassengerCheckIn',isPassengerCheckIn)
+   // console.log('isPassengerCheckIn',isPassengerCheckIn)
     const classes = useStyle()
     const [pnrValue, setpnrValue] = useState('');
     const [displayPNRFormatError, setdisplayPNRFormatError] = useState(false);
@@ -46,7 +46,7 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
       }, [])
     useEffect(() => {
         if(pnrValue.length>0 && !displayPNRFormatError){
-            console.log('event Fired')
+           // console.log('event Fired')
            //  changeNextButtonState(true)
            fetchPassengerInfoFromPNR(pnrValue)
            addPNRToStore(pnrValue)
@@ -57,7 +57,7 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
     const checkPNRPatter=(value)=>{
         const regexPattern= /PQ00([1-5])XY([0][1-9]|[1-2][0-9]|[3][0])$/; 
         let isEnterPNRmatched =  regexPattern.test(value);
-        console.log(isEnterPNRmatched)
+        //console.log(isEnterPNRmatched)
         setdisplayPNRFormatError(!isEnterPNRmatched)
     }
     const handelChange =(event)=>{

@@ -16,6 +16,6 @@ export const deleteRequest =(endpoint, idForDeleteItem )=>{
     return axios.delete(serverUrl+endpoint/idForDeleteItem)
 }
 export const updateRequest =(endpoint, payload)=>{
-    console.log(serverUrl+endpoint);
+   // console.log(serverUrl+endpoint);
     return axios.put(serverUrl+endpoint,{...payload})
 }

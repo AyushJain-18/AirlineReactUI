@@ -26,7 +26,7 @@ function *getPassengerInfo({payload}){
         const flight = PNR.split('X')[0];
         const passenger =yield getRequest(`/${flight}?PNR=${PNR}`);
         const passengerInfo = passenger.data[0];
-         yield console.log(passengerInfo);
+        // yield console.log(passengerInfo);
          yield put(pnrPassengerInfoSuccess(passengerInfo))
          yield put(changeStateOfDisplayNext(true))
     } catch(error){

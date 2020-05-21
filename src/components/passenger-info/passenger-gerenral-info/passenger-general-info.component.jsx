@@ -32,7 +32,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
              setseatNo(passengerData.seatNo)
              setPNR(passengerData.PNR)
              setcontactNumber(passengerData.contactNumber)
-             console.log('Passenger Data changes',seatNo)
+            // console.log('Passenger Data changes',seatNo)
     },[passengerData])
     return(
         <div className= 'passenger-general-info-container'>

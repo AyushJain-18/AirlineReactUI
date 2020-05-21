@@ -11,14 +11,14 @@ export function* getAllFlights(){
    yield put(flightFetchingSuccess(flights.data))
   }
   catch(error){
-    yield console.log(error.message)
+  //  yield console.log(error.message)
     yield put(flightFetchFailure())
   }
   
 }
 
 export function* flightSaga(){
-    yield console.log('SAGA IS WORKING FINE');
+   // yield console.log('SAGA IS WORKING FINE');
     yield takeLatest(FLIGHT_ACTION_TYPES.FETCH_FLIGHT_START, getAllFlights);
-    yield console.log('SAGA IS NOT WORKING FINE');
+   // yield console.log('SAGA IS NOT WORKING FINE');
 }

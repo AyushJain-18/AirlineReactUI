@@ -16,7 +16,7 @@ import {
 function * startUserUpdate({payload}){
     try{
         const{airlineNumber,id,updatedData,logedInUserType,checkInPassengerPNR} = payload;
-        yield console.log(airlineNumber,id,updatedData,logedInUserType)
+     //   yield console.log(airlineNumber,id,updatedData,logedInUserType)
         const updatedPassenger =yield updateRequest(`/${airlineNumber}/${id}`,updatedData);
         yield put(passengerInfoUpdateSuccess(updatedPassenger.data))
         if(logedInUserType==='In-flight'){

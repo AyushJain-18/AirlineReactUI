@@ -26,7 +26,7 @@ const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType,clear
             type,
             date} = FlightSummaryDetails;
       const{FlightContainer,FlightDetails,FlightName,FlightButton, FlightDetailsEachComponent} = styles;      
-            console.log('USER TYPE', userType)
+           // console.log('USER TYPE', userType)
         const routeToNextpage =()=>{
                 if(isUserSignIn){
                         if(userType!=='In-flight'){

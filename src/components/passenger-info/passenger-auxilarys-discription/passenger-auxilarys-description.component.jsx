@@ -19,7 +19,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
     const [infants, setinfants]        = useState(passengerData.infants)
     const [wheelChair, setwheelChair]  = useState(passengerData.wheelChair)
     const[newSeat, setnewSeat] = useState(passengerData.seatNo)
-    console.log(id, luggage,meal,payPerView,infants,wheelChair)
+    // console.log(id, luggage,meal,payPerView,infants,wheelChair)
 
     const lagguageOptions  =[{value:'N/A'}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];
     const mealOptions      =[{value:'N/A'}, {value:'Veg'}   ,  {value:'Non-Veg'}];
@@ -28,22 +28,22 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
     const wheelChairOptions=[{value: 'True'},{value: 'False'}];
 
     useEffect(()=>{
-        console.log('component did mount')
+       // console.log('component did mount')
         setNextButtonStateToFalse()
         if(luggage === undefined) setluggae('');
         if(meal === undefined) setmeal('');
         if(payPerView === undefined)setPayPerView('');
         if(infants=== undefined) setinfants(false);
         if(wheelChair === undefined) setwheelChair(false);
-        console.log(id, luggage,meal,payPerView,infants,wheelChair,newSeat)
+       // console.log(id, luggage,meal,payPerView,infants,wheelChair,newSeat)
     },[])
 
     useEffect(()=>{
         if(newSeatNumber){
-            console.log('1.newSeatNumber from action',newSeatNumber)
+           // console.log('1.newSeatNumber from action',newSeatNumber)
             setnewSeat(newSeatNumber);
         }
-        console.log('2.newSeatNumber from passenger and then update ',newSeat);
+       // console.log('2.newSeatNumber from passenger and then update ',newSeat);
     },[newSeatNumber])
 
 
@@ -53,7 +53,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
         let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
         let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
         
-        console.log('3. final datas',newSeat);
+       // console.log('3. final datas',newSeat);
         const updatedData = {
             ...passengerData,
             luggage,meal ,payPerView,
@@ -62,7 +62,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
             wheelChair:wheelChairValueToUpdate
 
         }
-        console.log(updatedData)
+       // console.log(updatedData)
         saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
     }
     return(

@@ -20,7 +20,7 @@ function * userSignIn({payload:{email,password}}){
             yield delay(2000)
             const endpoint = '/users?'+ `loginID=${email}&password=${password}`;
             const {data} = yield getRequest(endpoint);
-            yield console.log(data)
+           // yield console.log(data)
             if(data.length!==0){
                 yield put(userSignInSuccess(data[0]));
                 if(data[0].isPassenger){

@@ -35,11 +35,11 @@ const Seat = ({passengers,totalSeats, showNotAllowedPointer,
             return (columnCounter%2===0 && columnCounter%3!==0 && columnCounter%4!==0 )
     }
     const setPassengerSeatNo =(seatNo)=>{
-        console.log('seatNo',seatNo);
-        console.log('isOccupiedSeat',unOccupiedSeats);
+       // console.log('seatNo',seatNo);
+       // console.log('isOccupiedSeat',unOccupiedSeats);
         if(showNotAllowedPointer){
             if(!isOccupiedSeat(seatNo)){
-                console.log('seat new seat')
+               // console.log('seat new seat')
                 setNewSeatNumber(seatNo)
             } 
         } else{

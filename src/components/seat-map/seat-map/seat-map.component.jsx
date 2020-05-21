@@ -10,7 +10,7 @@ import PassengerInfoWithSeatNumberComponent from '../../passenger-info/passenger
 
 
 const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointer,startFetchingAllPassengersList,passengers})=>{
-    console.log('airlineNo',airlineNo)
+   // console.log('airlineNo',airlineNo)
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
        return  (passengers.length!==0 && passengers[0].PNR.split('X')[0]) === (airlineNo)}

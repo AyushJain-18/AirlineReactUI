@@ -16,7 +16,7 @@ import WebCheckInStepperComponent from '../../components/stepper-web-check-in/we
 class DashboardToogleBarComponent extends React.Component{
     
     render(){
-        console.log('props', this.props.location)
+        //console.log('props', this.props.location)
         const {passenger, userType} =this.props;
         let airlineNo ='';
         let showPassenger = true;

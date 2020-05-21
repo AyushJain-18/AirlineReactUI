@@ -23,7 +23,7 @@ export const selectFlightsObj =createSelector(
 )
 
 export const selectFlightForSelectedPassenger =(flightNo)=>{
-    console.log('flightNo Entered no', flightNo)
+   // console.log('flightNo Entered no', flightNo)
     return createSelector(
         [selectFlightsObj], flightObj=>flightObj[flightNo]
 )}
