@@ -180,14 +180,14 @@ export const QontoConnector = withStyles({
                     }
                 </Fragment>
             ) 
-        case 2:
+        case 2: 
+        //key= {new Date().getMilliseconds()}s
           return <Fragment>
-                   { !isLoading? <PassengerAuxilarysDescriptionComponent 
-                        key= {new Date().getMilliseconds()}
+                   { <PassengerAuxilarysDescriptionComponent 
                         passengerData={fetchedPassenger}
                         width={'80%'}
                         editable ={true}
-                        />: <Spinner/>}
+                        />}
              </Fragment>;
         
         default:

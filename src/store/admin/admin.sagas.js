@@ -57,7 +57,7 @@ export default function *adminSaga(){
         yield all(
             [
                 call(startFetchingAllPassengers),
-                call(startUpdatePassenger)
+               //  call(startUpdatePassenger)
             ]
         )
 }
