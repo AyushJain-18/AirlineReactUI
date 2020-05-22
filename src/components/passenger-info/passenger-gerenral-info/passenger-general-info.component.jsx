@@ -7,7 +7,7 @@ import CustumButon from '../../CustumComponents/CustumButon/custumButton.compone
 import {onNewSeatSelected} from '../../../store/allpassenger/allpassenger.action';
 import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.select';
 
- const PassengerGerenralInfo =({passengerData, editable, updateSeatNumberAction,unOccupiedSeats})=>{
+ const PassengerGerenralInfo =({passengerData, editable, width,updateSeatNumberAction,unOccupiedSeats})=>{
     const [id,setid] = useState(passengerData.id) 
     const [firstName, setfirstName]    = useState(passengerData.firstName);
     const [lastName, setlastName]      = useState(passengerData.lastName)
@@ -35,7 +35,7 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
             // console.log('Passenger Data changes',seatNo)
     },[passengerData])
     return(
-        <div className= 'passenger-general-info-container'>
+        <div className= 'passenger-general-info-container ' style={{width:`${width}`}}>
             <form>
             <div className= 'passenger-heading'>Passenger Info</div>
             <div className= 'passenger-info-items'> <span>FirstName</span>  <span>{firstName}</span> </div>

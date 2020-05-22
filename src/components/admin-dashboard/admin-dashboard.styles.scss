@@ -1,0 +1,60 @@
+.all-passenger-description-container{
+    padding: 5% 10%;
+    display: flex;
+    font-family: 'Open Sans Condensed';
+    flex-direction: column;
+    align-content:center ;
+    justify-content: center;
+    font-size: 16px;
+    @media screen and (max-width: 400px){
+        padding: 5% 0%;
+        font-size: 10px;
+        }
+    .alp-discription-title{
+            width: 90%;
+            padding: 2px 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid black;
+            .alp-heading{
+                    width: 15%;
+                    font-weight: bold;
+                    font-size: 20px;
+                    @media screen and (max-width: 400px){
+                        font-size: 12px;
+                    }
+            }
+        }
+}
+.alp-passenger-container{
+    display: flex;
+    flex-direction: column;
+    .alp-passenger-discription{
+        width: 90%;
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .pointer{
+            cursor: pointer;
+        }
+        .alp-discription{
+                width: 15%;
+                font-size: 18px;
+                @media screen and (max-width: 400px){
+                    font-size: 12px;
+                }
+        }
+    }
+    .alp-update{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        @media screen and (max-width: 700px){
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+        }
+    }
+}

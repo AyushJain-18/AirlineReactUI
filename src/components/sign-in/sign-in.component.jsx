@@ -10,9 +10,13 @@ import {connect} from 'react-redux';
 import { userSignInStart } from '../../store/user/user.actions';
 
 import {createStructuredSelector} from 'reselect';
-import {selectUserEnteredWrongCredentialStatue,selectUserData}  from '../../store/user/user.selector'
+import {
+    selectUserEnteredWrongCredentialStatue,
+    selectUserData,
+    selectSignUserType
+}  from '../../store/user/user.selector'
 
-const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userData})=>{
+const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userData, userType})=>{
 
     const [userCrendetial, setUserCredebtials]= useState({email: '', password: ''}); 
     const handleSubmit=(event)=>{
@@ -30,7 +34,7 @@ const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userDat
         { 
             isWrongCredentialEntered?
               <div className='wrongCredentials'>Incorrect user Id Or Password</div>
-              :userData?(userData.isPassenger?<Redirect to='/In-flight'/>:<Redirect to='/'/>)
+              :userData?(userType === 'crew'?<Redirect to='/'/>:<Redirect to={`${userType}`}/>)
                     : null 
         }
                 <form className = 'sign-in-form'onSubmit={handleSubmit}> 
@@ -65,7 +69,8 @@ const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userDat
 const mapStateToProps = createStructuredSelector(
     {
         isWrongCredentialEntered: selectUserEnteredWrongCredentialStatue,
-        userData: selectUserData
+        userData: selectUserData,
+        userType: selectSignUserType
     }
 )
 const mapDispatchToProps =(dispatch)=>({

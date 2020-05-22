@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import flightRecucer from './flight/flight.reducer'
 import userReducer from './user/user.reducer'
 import passengerReducer from './allpassenger/allpassenger.reducer';
+import adminReducer from './admin/admin.reducer';
 
 const presistConfig ={
     key: 'root',
@@ -15,7 +16,8 @@ const presistConfig ={
 const rootReducer =combineReducers({
     FetchedFlights: flightRecucer,
     user           : userReducer,
-    AllPassenger: passengerReducer
+    AllPassenger: passengerReducer,
+    Admin: adminReducer
 })
 
 //export default rootReducer;

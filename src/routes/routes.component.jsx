@@ -10,6 +10,7 @@ import {selectFlights} from '../store/flight/flight.selector';
 
 import SignInContainer from '../containers/sign-in-container/signIn-container'
 import DashboardToogleBarContainer from '../containers/DashBoard-ToogleBar-container/Dashboard-toogleBarContainer';
+import AdminDashBoardComponent from '../components/admin-dashboard/admin-dashboard.component';
 
 class AllRoutesComponent extends React.Component{
     
@@ -20,14 +21,14 @@ class AllRoutesComponent extends React.Component{
     render(){
         return(
             <div>
-                <Header/>
+                {/* <Header/> */}
                 <div >
                     {/* className= 'routes-div-container' */}
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
                             <Route exact path= '/signIn' component={SignInContainer}/>
                             <Route exact path ='/In-flight'component={DashboardToogleBarContainer} />
-                            <Route exact path ='/Admin'component={DashboardToogleBarContainer} />
+                            <Route exact path ='/Admin'component={AdminDashBoardComponent} />
                             <Route exact path ='/Crew'component={DashboardToogleBarContainer} />
                     </Switch>
                 </div>
