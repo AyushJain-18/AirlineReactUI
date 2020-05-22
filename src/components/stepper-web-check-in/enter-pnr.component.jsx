@@ -83,7 +83,7 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
                     }
                     {
                     isPassengerCheckIn? <div className ={classes.checkInMsg}>
-                        Passenger Already Check In</div>: null
+                        Passenger Already Check In click next to update seat</div>: null
                             // <div>{()=>changeNextButtonState(true)}</div>
                         
                     }
