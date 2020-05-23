@@ -24,18 +24,18 @@ export const failFetchingAdminPassengers =(allPassengers)=>{
 
 export const startUpdatePassenger =(modifiedData)=>{
     return{
-        type:ADMIN_TYPES.START_UPDATE,
+        type:ADMIN_TYPES.START_UPDATE_ADMIN,
         payload: modifiedData
     }
 }
 export const successUpdatePassenger =(updatedData)=>{
     return{
-        type:ADMIN_TYPES.SUCCESS_UPDATE,
+        type:ADMIN_TYPES.SUCCESS_UPDATE_ADMIN,
         payload: updatedData
     }
 }
 export const failUpdatePassenger =()=>{
     return{
-        type:ADMIN_TYPES.FAILURE_UPDATE,
+        type:ADMIN_TYPES.FAILURE_UPDATE_ADMIN,
     }
 }

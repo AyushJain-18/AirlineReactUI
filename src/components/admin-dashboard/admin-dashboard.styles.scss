@@ -5,11 +5,18 @@
     flex-direction: column;
     align-content:center ;
     justify-content: center;
-    font-size: 16px;
-    @media screen and (max-width: 400px){
+    font-size: 18px;
+    @media screen and (max-width: 500px){
         padding: 5% 0%;
-        font-size: 10px;
+        font-size: 14px;
         }
+    .alp-filter{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: inherit;
+        margin-bottom: 15px;
+    }
     .alp-discription-title{
             width: 90%;
             padding: 2px 15px;
@@ -21,12 +28,14 @@
                     width: 15%;
                     font-weight: bold;
                     font-size: 20px;
-                    @media screen and (max-width: 400px){
+                    @media screen and (max-width: 500px){
                         font-size: 12px;
                     }
             }
         }
 }
+
+// for each passenger details component
 .alp-passenger-container{
     display: flex;
     flex-direction: column;
@@ -42,7 +51,7 @@
         .alp-discription{
                 width: 15%;
                 font-size: 18px;
-                @media screen and (max-width: 400px){
+                @media screen and (max-width: 500px){
                     font-size: 12px;
                 }
         }
@@ -51,7 +60,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        @media screen and (max-width: 700px){
+        @media screen and (max-width: 550px){
             display: flex;
             flex-direction: column;
             align-content: center;

@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import {
     changeStateOfDisplayNext,
     addPassengerPNRToReducer,
-    pnrPassengerInfoStart
+    pnrPassengerInfoStart,
+    pnrPassengerInfoRemove
 } from '../../store/allpassenger/allpassenger.action'
 
 import{
@@ -35,7 +36,7 @@ const useStyle = makeStyles(()=>{
     }
 })
 
-const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
+const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,removeFetchedPassenger,
             changeNextButtonState,isPassengerCheckIn})=>{
    // console.log('isPassengerCheckIn',isPassengerCheckIn)
     const classes = useStyle()
@@ -43,6 +44,7 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
     const [displayPNRFormatError, setdisplayPNRFormatError] = useState(false);
     useEffect(() => {
         changeNextButtonState(false)
+        removeFetchedPassenger()
       }, [])
     useEffect(() => {
         if(pnrValue.length>0 && !displayPNRFormatError){
@@ -82,8 +84,8 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
                         
                     }
                     {
-                    isPassengerCheckIn? <div className ={classes.checkInMsg}>
-                        Passenger Already Check In click next to update seat</div>: null
+                    isPassengerCheckIn? <div>
+                        Passenger Already Check In, Click next to update seat</div>: null
                             // <div>{()=>changeNextButtonState(true)}</div>
                         
                     }
@@ -94,14 +96,16 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,
 }
 const mapStateToProps =(state)=>({
     isPassengerCheckIn: selectIsPNRFecthedHasAlreadyCheckedIn(state),
-    isLoading: selectAllPassengerFetchngStatus(state)
+    isLoading: selectAllPassengerFetchngStatus(state),
+    
 })
 
 const mapDispatchToProps =(dispatch)=>{
     return{
         changeNextButtonState: (value)=>dispatch(changeStateOfDisplayNext(value)),
         addPNRToStore: (PNR)=> dispatch(addPassengerPNRToReducer(PNR)),
-        fetchPassengerInfoFromPNR:(PNR)=>dispatch(pnrPassengerInfoStart(PNR))
+        fetchPassengerInfoFromPNR:(PNR)=>dispatch(pnrPassengerInfoStart(PNR)),
+        removeFetchedPassenger:()=>dispatch(pnrPassengerInfoRemove()) 
     }
    
 }

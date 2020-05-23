@@ -11,7 +11,8 @@ import {
 
 import {
         pnrPassengerInfoStart
-} from '../../allpassenger/allpassenger.action'
+} from '../../allpassenger/allpassenger.action';
+import { successUpdatePassenger,startFetchingAdminPassengers, startUpdatePassenger } from '../../admin/admin.action';
 
 function * startUserUpdate({payload}){
     try{
@@ -25,6 +26,10 @@ function * startUserUpdate({payload}){
         if(logedInUserType==='Crew'){
             yield put(fetchingAllPassengerStart(airlineNumber));
             yield put(pnrPassengerInfoStart(checkInPassengerPNR));
+        }
+        if(logedInUserType==='Admin'){
+            yield put(startFetchingAdminPassengers())
+            // yield put(successUpdatePassenger(updatedPassenger.data))
         }
            
             

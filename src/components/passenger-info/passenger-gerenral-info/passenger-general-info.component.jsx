@@ -7,7 +7,10 @@ import CustumButon from '../../CustumComponents/CustumButon/custumButton.compone
 import {onNewSeatSelected} from '../../../store/allpassenger/allpassenger.action';
 import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.select';
 
+// for ediatble component passed 1.seat, which will be fetched from passenger data
+// 2.allPassengersMappedToSeat
  const PassengerGerenralInfo =({passengerData, editable, width,updateSeatNumberAction,unOccupiedSeats})=>{
+    console.log('unOccupiedSeats',unOccupiedSeats);
     const [id,setid] = useState(passengerData.id) 
     const [firstName, setfirstName]    = useState(passengerData.firstName);
     const [lastName, setlastName]      = useState(passengerData.lastName)
@@ -57,7 +60,8 @@ import {selectUnoccupiedSeat} from '../../../store/allpassenger/allpassenger.sel
 }
 const mapStateToProps =(state, ownProps)=>{
     return{
-        unOccupiedSeats: selectUnoccupiedSeat(ownProps.passengerData.seatNo)(state)
+        unOccupiedSeats: selectUnoccupiedSeat(ownProps.passengerData.seatNo, 
+                        ownProps.unOccupiedSeats)(state)
     }
 }
 const mapDispatchToProps =(dispatch)=>{

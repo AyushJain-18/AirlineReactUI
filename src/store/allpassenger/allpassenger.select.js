@@ -36,10 +36,15 @@ export const selectMappedAllPassengerToSeat = createSelector(
     [selectAllPassengerData], AllPassenger=> mapPassengersToSeat(AllPassenger)
 )
 
-export const selectUnoccupiedSeat = (passengerSeatNo)=>{
-    return createSelector([selectMappedAllPassengerToSeat],
-         mappedPassengersToSeat=>  getUnOccupiedSeats(passengerSeatNo,mappedPassengersToSeat)
-    )
+export const selectUnoccupiedSeat = (passengerSeatNo, unOccupiedSeats)=>{
+   // console.log('unOccupiedSeats', unOccupiedSeats)
+    if(unOccupiedSeats){
+        return ()=> unOccupiedSeats
+    }else {
+        return createSelector([selectMappedAllPassengerToSeat],
+            mappedPassengersToSeat=>  getUnOccupiedSeats(passengerSeatNo,mappedPassengersToSeat)
+       )
+    }
 }
 
 export const selectNextButtonState = createSelector(

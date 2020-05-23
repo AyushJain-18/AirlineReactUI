@@ -29,7 +29,7 @@ const userReducer = (state = INTIAL_USER_STATE, action)=>{
                 userData: action.payload,
             }
         case USER_TYPES.USER_SIGNIN_FAILURE:
-        case USER_TYPES.PASSANGER_INFO_FETCHING_FAILURE:
+        case USER_TYPES.PASSANGER_INFO_FETCHING_FAILURE:   
             return {
                 ...state,
                 isDisplayUserSpinner: false,

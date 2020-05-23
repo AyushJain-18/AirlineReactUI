@@ -6,7 +6,7 @@ import { fetchingAllPassengerStart } from '../../../store/allpassenger/allpassen
 import { selectAllPassengerData } from '../../../store/allpassenger/allpassenger.select';
 import SeatArrangement from '../seats-arrangement/seat-arrangement.component';
 import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
-import PassengerInfoWithSeatNumberComponent from '../../passenger-info/passenger-info-with-seat-number/passenger-info-with-seat-number.component';
+import PassengerInfoWithSeatNumber from '../../passenger-info/passenger-info-with-seat-number/passenger-info-with-seat-number.component';
 
 
 const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointer,startFetchingAllPassengersList,passengers})=>{
@@ -36,7 +36,7 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointe
                                                 totalSeats={60} 
                                                 showNotAllowedPointer={showNotAllowedPointer}/>
                             </div>
-                            {showPassenger&&<PassengerInfoWithSeatNumberComponent editable ={editable}/>} 
+                            {showPassenger&&<PassengerInfoWithSeatNumber editable ={editable}/>} 
                         </div>
                 }
         </Fragment>

@@ -5,6 +5,7 @@ import {
     mapAllPassengersToPNR, // allpassengers Array
     mapAllPassengesToFligthNo, // allpassengers Array
 } from '../../utils/seat.utils'
+import { combineReducers } from 'redux';
 
 export const selectAdmin =state=> state.Admin;
 
@@ -18,7 +19,7 @@ export const selectUpdatedPassengerData =  createSelector([selectAdmin], admin=>
 
 export const selectPNRMappedPassenngers =  createSelector([selectAllPassengers], passengers=> mapAllPassengersToPNR(passengers));
 
-export const selectFlightNoMappedPassengers =  createSelector([selectAllPassengers], passengers=> mapAllPassengesToFligthNo(passengers));
+export const selectFlightNoMappedPassengers =  createSelector([selectAllPassengers], passengers=>passengers?mapAllPassengesToFligthNo(passengers):null);
 
 export const selectPassengerDataFromPNR = (PNR)=>{
     return createSelector([selectPNRMappedPassenngers], pnrMappedPassengersAray=>pnrMappedPassengersAray[PNR]);
@@ -31,3 +32,39 @@ export const selectEmptySeatsOfParticularFlight = (flightNo,passengerSeatNo)=>cr
             const emptySeatsOfParticularFlight = getUnOccupiedSeats(passengerSeatNo,seatMappedPassengers);
             return  emptySeatsOfParticularFlight
         })
+
+export const selectAllPassengersWithWheelChairs = createSelector([selectAllPassengers],
+      allPassengers=> {
+        const allWheelChairsPassengers =[]; 
+            allPassengers && allPassengers.forEach(passengers=> {
+                if(passengers.wheelChair){
+                    allWheelChairsPassengers.push(passengers)
+                } 
+            })
+        console.log('allWheelChairsPassengers', allWheelChairsPassengers)   
+        return allWheelChairsPassengers;
+    })
+
+export const selectAllPassengersWithInfants = createSelector([selectAllPassengers],
+        allPassengers=> {
+          const allPassengersWithInfants  =[]; 
+              allPassengers && allPassengers.forEach(passengers=> {
+                  if(passengers.infants){
+                    allPassengersWithInfants.push(passengers)
+                  } 
+              })
+          console.log('allPassengersWithInfants', allPassengersWithInfants)   
+          return allPassengersWithInfants;
+})
+
+export const selectAllPassengersWithPayPerView = createSelector([selectAllPassengers],
+    allPassengers=> {
+      const allPassengersWithPayPerView  =[]; 
+          allPassengers && allPassengers.forEach(passengers=> {
+              if(passengers.payPerView){
+                allPassengersWithPayPerView.push(passengers)
+              } 
+          })
+      console.log('allPassengersWithInfants', allPassengersWithPayPerView)   
+      return allPassengersWithPayPerView;
+})

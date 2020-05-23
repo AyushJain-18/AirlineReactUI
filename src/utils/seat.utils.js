@@ -47,7 +47,7 @@ export const getUnOccupiedSeats =(seatNo, mappedPassengersToSeat)=>{
         return unOccupiedSeats;
 }
 
-// allpassengers -> PNRmapped -> flightMapped -> seatMap -> getUnoccupiedSeats
+// allpassengers -> PNRmapped -> flightMapped -> seatMap -> getUnoccupiedSeats(seat no amd seatMapped Passengers)
 
 // take in array
 export const mapAllPassengersToPNR =(allPassengers)=>{
@@ -60,13 +60,14 @@ export const mapAllPassengersToPNR =(allPassengers)=>{
 }
 // take in array
 export const  mapAllPassengesToFligthNo =(allPassengers)=>{
-    return allPassengers.reduce((accumulator, eachPassenger)=>{
+    let flightMappedPassengers =  allPassengers.reduce((accumulator, eachPassenger)=>{
         return {
             ...accumulator,
             [eachPassenger.airlineNumber]: accumulator[eachPassenger.airlineNumber]?
                                                  accumulator[eachPassenger.airlineNumber].concat(eachPassenger): [eachPassenger]
         }
     },{})
+    return flightMappedPassengers;
 }
 
 // let data = [
