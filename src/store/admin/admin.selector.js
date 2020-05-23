@@ -15,7 +15,6 @@ export const selectErrorState = createSelector([selectAdmin], admin=>admin.isErr
 
 export const selectAllPassengers =  createSelector([selectAdmin], admin=>admin.allPassengers);
 
-export const selectUpdatedPassengerData =  createSelector([selectAdmin], admin=>admin.updatedData);
 
 export const selectPNRMappedPassenngers =  createSelector([selectAllPassengers], passengers=> mapAllPassengersToPNR(passengers));
 

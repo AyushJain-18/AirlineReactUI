@@ -8,7 +8,7 @@ import {
 
 } from './admin.action'
 
-import {getRequest, updateRequest} from '../../utils/api.calls';
+import {getRequest} from '../../utils/api.calls';
 
 function * getAllPassenges(){
   try {   
@@ -25,7 +25,6 @@ function * getAllPassenges(){
     flight4.data.forEach(passenger=>allPassengers.push(passenger))
     flight5.data.forEach(passenger=>allPassengers.push(passenger))
 
-    //console.log('All Passengers', allPassengers);
     yield put(successFetchingAdminPassengers(allPassengers))
     }
     catch(error){
@@ -33,31 +32,15 @@ function * getAllPassenges(){
     }
 }
 
-// function * updatePassenger({payload}){
-//     try{
-//         const {modifiedData} = payload;
-//         const {airlineNumber, id} = modifiedData;
-//         const updatedData = yield updateRequest(`/${airlineNumber}/${id}`, modifiedData);
-//         //console.log('Updated Data is', updatedData)
-//         yield put(successUpdatePassenger(updatedData))
-//     }catch(error){
-//         yield put(failUpdatePassenger())
-//     }
-// }
 
 function* startFetchingAllPassengers(){
     yield takeLatest(ADMIN_TYPES.START_FETCHING_ALL_PASSENGER_ADMIN, getAllPassenges)
 }
 
-//function * startUpdatePassenger(){
-//     yield takeLatest(ADMIN_TYPES.START_UPDATE_ADMIN, updatePassenger)
-// }
-
 export default function *adminSaga(){
         yield all(
             [
-                call(startFetchingAllPassengers),
-                //call(startUpdatePassenger)
+                call(startFetchingAllPassengers)
             ]
         )
 }

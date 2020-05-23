@@ -3,8 +3,8 @@ import './passenger-auxilarys-decription.styles.scss';
 import CustumButon from '../../CustumComponents/CustumButon/custumButton.component';
 import  DisplayValue  from '../../CustumComponents/custum-select/custumSelect.component';
 import {startPassengerInfoUpdate} from '../../../store/user/user.actions';
-import {selectSignUserType} from '../../../store/user/user.selector'
-import {selectUpdatedSeat,selectPNR} from '../../../store/allpassenger/allpassenger.select'
+import {selectSignUserType} from '../../../store/user/user.selector';
+import {selectUpdatedSeat,selectPNR} from '../../../store/allpassenger/allpassenger.select';
 import {changeStateOfDisplayNext} from '../../../store/allpassenger/allpassenger.action'
 import {connect} from 'react-redux';
 
@@ -53,7 +53,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
         let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
         let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
         
-       // console.log('3. final datas',newSeat);
+
         const updatedData = {
             ...passengerData,
             luggage,meal ,payPerView,
@@ -62,8 +62,8 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
             wheelChair:wheelChairValueToUpdate
 
         }
-       // console.log(updatedData)
-        saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
+       console.log(updatedData)
+       saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
     }
     return(
         <div className='passenger-auxilary-services-container' style={{width:`${width}`}}>

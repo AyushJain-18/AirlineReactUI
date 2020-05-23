@@ -7,9 +7,9 @@
     display: grid;
     grid-template-columns: 1fr;
     margin-bottom: 10px;
-    // @media screen and (max-width: 550px){
-    //     width: 70%;
-    // }
+    @media screen and (max-width: 550px){
+        font-size: 12px;
+    }
     .passenger-heading{
         font-weight: bold;
         background-color: darkgrey;
