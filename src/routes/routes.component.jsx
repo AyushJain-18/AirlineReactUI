@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './routes.styles.scss'
 import {Switch , Route, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
@@ -27,8 +27,8 @@ class AllRoutesComponent extends React.Component{
         const{signInUserType, allPassengers} = this.props;
         console.log('signInUserType', signInUserType)
         return(
-            <div>
-                <div >
+            <Fragment>
+                <div className='routes-div-container'>
                     <Switch > 
                             <Route exact path= '/' component={DashboardContainer}/>
                             <Route exact path= '/signIn' component={SignInContainer}/>
@@ -42,7 +42,7 @@ class AllRoutesComponent extends React.Component{
                             }
                     </Switch>
                 </div>
-            </div>
+            </Fragment>
         )
     }
 }
