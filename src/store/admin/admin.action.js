@@ -20,3 +20,23 @@ export const failFetchingAdminPassengers =(allPassengers)=>{
 }
 
 
+export const startDeletePassengers =(flightNo, id)=>{
+    return{
+        type:ADMIN_TYPES.START_DELETE_PASSENGER_ADMIN,
+        payload:{flightNo, id}
+    }
+}
+
+export const successDeletPassengers =()=>{
+    return{
+        type:ADMIN_TYPES.SUCCESS_DELETE_PASSENGER_ADMIN,
+    }
+}
+
+export const failDeletePassengers =()=>{
+    return{
+        type:ADMIN_TYPES.FAILURE_DELETE_PASSENGER_ADMIN,
+    }
+}
+
+

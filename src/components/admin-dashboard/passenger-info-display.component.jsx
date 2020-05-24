@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import PassengerGerenralInfoForAdmin  from '../passenger-info/passenger-info-for-admin/passenger-info-admin.component';
 
 import{
-    
+  startDeletePassengers  
 } from '../../store/admin/admin.action'
 import{
     selectEmptySeatsOfParticularFlight
@@ -17,8 +17,8 @@ import{
 
 
 
-const PassengerInfo =({data, sno, emptySeats})=>{
-    const{PNR, age, airlineNumber,firstName}= data;
+const PassengerInfo =({data, sno, emptySeats, onDeletePassenger})=>{
+    const{PNR, age, airlineNumber,firstName,id}= data;
     const[display, setdisplay]= useState(false);
     let width ='90%'
     
@@ -39,7 +39,8 @@ const PassengerInfo =({data, sno, emptySeats})=>{
                         <div className= 'alp-discription'>{airlineNumber}</div>
                         <div className= 'alp-discription'>{firstName}</div>
                         <div className= 'alp-discription'>
-                            <FontAwesomeIcon icon ={faTrashAlt} className='pointer'/>
+                            <FontAwesomeIcon icon ={faTrashAlt} className='pointer' 
+                                onClick={()=>onDeletePassenger(airlineNumber,id)}/>
                         </div>
                         <div className= 'alp-discription'>
                             { display && <span className='pointer' onClick={()=>setdisplay(false)} >&#10008;</span> }
@@ -54,7 +55,11 @@ const PassengerInfo =({data, sno, emptySeats})=>{
   </Fragment>
   )
 }
+
 const mapStateToProps = (state, ownProps)=>({
     emptySeats: selectEmptySeatsOfParticularFlight(ownProps.data.airlineNumber, ownProps.data.seatNo)(state)
 })
-export default connect(mapStateToProps)(PassengerInfo);
+const mapDispatchToProps = dispatch =>({
+    onDeletePassenger: (flightNo, id)=>dispatch(startDeletePassengers(flightNo, id))
+})
+export default connect(mapStateToProps,mapDispatchToProps)(PassengerInfo);

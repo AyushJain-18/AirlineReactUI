@@ -3,12 +3,12 @@ import ADMIN_TYPES from './adminTypes';
 import {
     successFetchingAdminPassengers,
     failFetchingAdminPassengers,
-    successUpdatePassenger,
-    failUpdatePassenger
+    failDeletePassengers,
+    startFetchingAdminPassengers
 
 } from './admin.action'
 
-import {getRequest} from '../../utils/api.calls';
+import {getRequest, deleteRequest} from '../../utils/api.calls';
 
 function * getAllPassenges(){
   try {   
@@ -32,15 +32,31 @@ function * getAllPassenges(){
     }
 }
 
+function * deletePassenger({payload}){
+    try{
+        const {flightNo, id}= payload;
+        console.log('flightNo',flightNo,id)
+        yield deleteRequest(`/${flightNo}`, id)
+        yield put(startFetchingAdminPassengers());
+     } catch(error){
+         yield put(failDeletePassengers)
+     }
+
+}
+
 
 function* startFetchingAllPassengers(){
     yield takeLatest(ADMIN_TYPES.START_FETCHING_ALL_PASSENGER_ADMIN, getAllPassenges)
+}
+function* startDeletingPassengers(){
+    yield takeLatest(ADMIN_TYPES.START_DELETE_PASSENGER_ADMIN, deletePassenger)
 }
 
 export default function *adminSaga(){
         yield all(
             [
-                call(startFetchingAllPassengers)
+                call(startFetchingAllPassengers),
+                call(startDeletingPassengers)
             ]
         )
 }
