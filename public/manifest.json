@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Airline App",
+  "name": "Check Your Flight Status",
   "icons": [
     {
       "src": "favicon.ico",
@@ -9,12 +9,12 @@
     },
     {
       "src": "favicon.ico",
-      "type": "image/png",
+      "type": "image/x-icon",
       "sizes": "192x192"
     },
     {
       "src": "favicon.ico",
-      "type": "image/png",
+      "type": "image/x-icon",
       "sizes": "512x512"
     }
   ],
