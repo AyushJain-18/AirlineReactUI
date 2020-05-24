@@ -3,6 +3,7 @@ import './admin-dashboard.styles.scss';
 
 import {connect} from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import {Link} from 'react-router-dom'
 
 import Spinner from '../CustumComponents/spinner/spinner.component' ;
 import ErrorComponent from '../CustumComponents/ErrorComponent/errorComponent' ;
@@ -51,7 +52,8 @@ import{
             { isLoading? <Spinner/>: isError? <ErrorComponent/>:
                 <div className='all-passenger-description-container'>
                   <div className='alp-filter'>
-                  <div>Total Passengers&nbsp;:&nbsp;&nbsp;{ allPassengers && allPassengers.length} </div> 
+                      <div>Total Passengers&nbsp;:&nbsp;&nbsp;{ allPassengers && allPassengers.length} </div> 
+                      <Link to= '/Admin/addPassengers'>Add Passengers </Link>    
                       <div>
                         <span> Filter By &nbsp;: &nbsp;&nbsp; </span>  
                         <DisplayValue name='passenger-filter' id='passenger-filter'editable = {true} 
@@ -64,7 +66,9 @@ import{
                         <div className= 'alp-heading'>Age</div>
                         <div className= 'alp-heading'>Flight No</div>
                         <div className= 'alp-heading'>Name</div>
+                        <div className= 'alp-heading'>Delete</div>
                         <div className= 'alp-heading'>Update</div>
+                        
                     </div>
                         {allPassengers && allPassengers.map((passenger, index)=>
                            <PassengerInfo key={index} data={passenger} sno={index}/>            

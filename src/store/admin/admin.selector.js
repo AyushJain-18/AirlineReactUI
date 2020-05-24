@@ -26,10 +26,10 @@ export const selectPassengerDataFromPNR = (PNR)=>{
 
 export const selectEmptySeatsOfParticularFlight = (flightNo,passengerSeatNo)=>createSelector([selectFlightNoMappedPassengers], 
         flightNoMappedPassengersAray=>{
-            const allPassengersOfSelectedFlightNo = flightNoMappedPassengersAray[flightNo]
-            const seatMappedPassengers = mapPassengersToSeat(allPassengersOfSelectedFlightNo);
-            const emptySeatsOfParticularFlight = getUnOccupiedSeats(passengerSeatNo,seatMappedPassengers);
-            return  emptySeatsOfParticularFlight
+                const allPassengersOfSelectedFlightNo = flightNoMappedPassengersAray[flightNo]
+                const seatMappedPassengers = mapPassengersToSeat(allPassengersOfSelectedFlightNo);
+                const emptySeatsOfParticularFlight = getUnOccupiedSeats(passengerSeatNo,seatMappedPassengers);
+                return  emptySeatsOfParticularFlight
         })
 
 export const selectAllPassengersWithWheelChairs = createSelector([selectAllPassengers],
@@ -66,4 +66,24 @@ export const selectAllPassengersWithPayPerView = createSelector([selectAllPassen
           })
       console.log('allPassengersWithInfants', allPassengersWithPayPerView)   
       return allPassengersWithPayPerView;
+})
+
+
+export const selectEmptyPNRForParticularFlight =(flightNo)=> createSelector([selectFlightNoMappedPassengers],
+    flightNoMappedPassengers=> {
+      const occupiedPNRs= []
+        flightNoMappedPassengers[flightNo].forEach(passengers=>{
+            occupiedPNRs.push(passengers.PNR) 
+        })
+        let occupiedPnrNumber =occupiedPNRs.map(PNR=> PNR.split('Y')[1]);
+        let maxNumber= 0;
+        occupiedPnrNumber.forEach(number=>{
+            maxNumber =  Math.max(maxNumber,number)
+        })
+        if(maxNumber>59){
+            return 'Flight Full'
+        }
+        let newPNR = `${flightNo}XY${maxNumber+1}`
+        return newPNR;
+             
 })

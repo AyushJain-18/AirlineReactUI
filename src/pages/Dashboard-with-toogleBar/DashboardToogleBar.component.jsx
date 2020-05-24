@@ -10,6 +10,7 @@ import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.conta
 import AuxilaryServicesComponent from '../../components/auxilary-service/auxilary-service-display/auxlilary-service.component';
 import { withRouter,Redirect } from 'react-router-dom';
 import WebCheckInStepperComponent from '../../components/stepper-web-check-in/web-check-in.component';
+import AdminDashBoardComponent from '../../components/admin-dashboard/admin-dashboard.component';
 
 
 
@@ -52,7 +53,7 @@ class DashboardToogleBarComponent extends React.Component{
                 }
                  
                 {
-                    userType==='Admin'
+                    userType==='Admin' && <Fragment><AdminDashBoardComponent/></Fragment>
                 }
             </Fragment>
         )

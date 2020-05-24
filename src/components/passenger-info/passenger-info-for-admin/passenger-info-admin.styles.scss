@@ -1,0 +1,89 @@
+$sub-color: grey;
+$main-color: black;
+
+@mixin shrinkLabel {
+  top: -14px;
+  font-size: 12px;
+  color: $main-color;
+}
+
+.admin-passenger-general-info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 5px;
+    .admin-passenger-heading{
+            font-weight: bold;
+            background-color: darkgrey;
+    }
+    .admin-passenger-info-button{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .admin-info-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 8px;
+        @media screen and (max-width: 1000px){
+            grid-template-columns: repeat(2,1fr);
+        }
+        
+        // .admin-general-info-container{
+
+            .admin-passenger-info-items{
+                padding: 10px 30px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                @media screen and (max-width: 700px){
+                    padding: 10px 10px;
+                }
+                .pa-input{
+                    position: relative;
+                    margin: 0px 20px;
+                    //width: 90%;
+                    width: 100px;
+                    @media screen and (max-width: 700px){
+                        width: 70px;
+                    }
+                    @media screen and (max-width: 400px){
+                        width: 50px;
+                    }
+                  
+                      .pa-form-input {
+                          background: none;
+                          background-color: white;
+                          color: $sub-color;
+                          display: block;
+                          width: 100px;
+                          border: none;
+                          border-radius: 0;
+                          border-bottom: 1px solid $sub-color;
+                          font-family: 'Open Sans Condensed';
+                          font-size: 18px;
+                          @media screen and (max-width: 700px){
+                            width: 70px;
+                            font-size: 12px;
+                        }
+                        @media screen and (max-width: 400px){
+                            width: 50px;
+                        }
+                      
+                  
+                          &:focus {
+                          outline: none;
+                          }
+                      }
+                  }
+            }
+        }    
+    }
+// }
+
+
+
+
+    
