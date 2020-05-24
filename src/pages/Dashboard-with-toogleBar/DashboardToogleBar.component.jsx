@@ -38,6 +38,9 @@ class DashboardToogleBarComponent extends React.Component{
                     keyArray={[`info${airlineNo}`,`seat${airlineNo}`, ,`aux${airlineNo}`]}
                     />
                 }
+                 {!passenger&& userType==='In-flight'&&
+                  <div> ADMIN HAD REMOVED YOUR ACCOUNT</div>
+                }
 
                 {
                     userType==='Crew'&& 
