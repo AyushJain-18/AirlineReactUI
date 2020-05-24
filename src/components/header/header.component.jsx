@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     },
     Appbar: {
         backgroundColor: '#282c34',
-            position: 'fixed',
+            // position: 'fixed',
             top: 0
     }
 }));
