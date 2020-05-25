@@ -27,7 +27,7 @@ function App({signInUserType, allPassengers}) {
   return (
     <div className="App">
         <ErrorBoundary>
-            <Suspense fallback = {<Spinner  />}>
+            <Suspense style ={{height: '100vw'}}fallback = {<Spinner  />}>
                 <HeaderComponent/>
                 <div className='routes-div-container'>
                     <Switch > 
@@ -40,7 +40,7 @@ function App({signInUserType, allPassengers}) {
                             }
                             {
                               signInUserType&& allPassengers&& signInUserType==='Admin'?
-                              <Route exact path ='/Admin/addPassengers' component={AddNewPassenger} />:<Redirect to ='/Admin'/>
+                              <Route exact path ='/Admin/addPassengers' component={AddNewPassenger} />:<Redirect to ='/'/>
                           
                             }
                     </Switch>
