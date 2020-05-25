@@ -20,8 +20,10 @@ import AddNewPassenger from '../components/admin-dashboard/add-new-passenger.com
 class AllRoutesComponent extends React.Component{
     
     componentWillMount(){
-        const{startFetchingFlights} = this.props;
+        const{startFetchingFlights,flights} = this.props;
+        if(!flights){
             startFetchingFlights();
+            } 
          }
     render(){
         const{signInUserType, allPassengers} = this.props;

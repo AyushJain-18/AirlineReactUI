@@ -1,8 +1,8 @@
 import FLIGHT_ACTION_TYPES from "./flight.types";
 import { startFlightFetching,flightFetchFailure,flightFetchStatus,flightFetchingSuccess } from "./flight.actions";
-
+import {STATIC_FLIGHT_DATA} from './flight.util'
 const FLIGHT_FETCHED_INITIAL_STATE = {
-    flight :[],
+    flight : STATIC_FLIGHT_DATA,
     isFligthFething: false,
     isFlightFetchedError: false
 }

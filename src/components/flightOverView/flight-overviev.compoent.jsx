@@ -61,7 +61,7 @@ const FilghtOverview = ({FlightSummaryDetails,styles,isUserSignIn,userType,clear
                         <FlightDetailsEachComponent><span>Arrivial Time: </span>  <span>{landingTime}</span></FlightDetailsEachComponent>
                         <FlightButton> {isUserSignIn?  null
                                         :
-                                        <Link to='/signin' onClick= {clearUserError}>Sign In to Continue</Link>
+                                        <Link to='/signin' style={{fontWeight: "bolder", fontSize:"18px"}} onClick= {clearUserError}>Sign In to Continue</Link>
                                 }
                         </FlightButton>
                 </FlightDetails>
