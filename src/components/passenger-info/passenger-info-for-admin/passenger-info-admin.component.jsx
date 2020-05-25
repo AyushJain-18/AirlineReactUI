@@ -91,8 +91,8 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
             infants:infantValueToUpdate,
             wheelChair:wheelChairValueToUpdate
         }
-       console.log(updatedData)
-       // saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
+       // console.log(updatedData)
+       saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
     }
        
         return(

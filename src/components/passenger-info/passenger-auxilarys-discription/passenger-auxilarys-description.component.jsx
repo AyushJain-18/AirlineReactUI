@@ -62,7 +62,7 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
             wheelChair:wheelChairValueToUpdate
 
         }
-       console.log(updatedData)
+      //  console.log(updatedData)
        saveChange(id,airlineNumber,updatedData,logedInUserType, checkInPassengerPNR);
     }
     return(

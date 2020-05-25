@@ -40,7 +40,7 @@ export const selectAllPassengersWithWheelChairs = createSelector([selectAllPasse
                     allWheelChairsPassengers.push(passengers)
                 } 
             })
-        console.log('allWheelChairsPassengers', allWheelChairsPassengers)   
+        // console.log('allWheelChairsPassengers', allWheelChairsPassengers)   
         return allWheelChairsPassengers;
     })
 
@@ -52,7 +52,7 @@ export const selectAllPassengersWithInfants = createSelector([selectAllPassenger
                     allPassengersWithInfants.push(passengers)
                   } 
               })
-          console.log('allPassengersWithInfants', allPassengersWithInfants)   
+          // console.log('allPassengersWithInfants', allPassengersWithInfants)   
           return allPassengersWithInfants;
 })
 
@@ -64,7 +64,7 @@ export const selectAllPassengersWithPayPerView = createSelector([selectAllPassen
                 allPassengersWithPayPerView.push(passengers)
               } 
           })
-      console.log('allPassengersWithInfants', allPassengersWithPayPerView)   
+      // console.log('allPassengersWithInfants', allPassengersWithPayPerView)   
       return allPassengersWithPayPerView;
 })
 

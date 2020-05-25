@@ -35,7 +35,7 @@ function * getAllPassenges(){
 function * deletePassenger({payload}){
     try{
         const {flightNo, id}= payload;
-        console.log('flightNo',flightNo,id)
+       // console.log('flightNo',flightNo,id)
         yield deleteRequest(`/${flightNo}`, id)
         yield put(startFetchingAdminPassengers());
      } catch(error){

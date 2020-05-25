@@ -25,7 +25,7 @@ class AllRoutesComponent extends React.Component{
          }
     render(){
         const{signInUserType, allPassengers} = this.props;
-        console.log('signInUserType', signInUserType)
+        // console.log('signInUserType', signInUserType)
         return(
             <Fragment>
                 <div className='routes-div-container'>
