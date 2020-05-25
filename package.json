@@ -30,8 +30,9 @@
     "styled-components": "^5.1.0"
   },
   "scripts": {
-    "start-Server": "cd../Airline-server && npm start",
-    "start": "react-scripts start",
+    "server": "cd../Airline-server && npm start",
+    "launch-app": "serve -s build",
+    "start": "react-scripts startss",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
