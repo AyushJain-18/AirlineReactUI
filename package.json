@@ -32,7 +32,7 @@
   "scripts": {
     "server": "cd../Airline-server && npm start",
     "launch-app": "serve -s build",
-    "start": "react-scripts startss",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

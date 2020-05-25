@@ -1,12 +1,14 @@
-import React from'react';
+import React, { Fragment } from'react';
 
 import './spinner.styles.scss';
 
 const Spinner = ()=>{
     return(
-        <div className ='spinner-container' >
+        <Fragment>
+        <div className ='spinnercontainer'>
                             <div className = 'spinnerOverlay'/>
         </div>
+        </Fragment>
     )
 }
 

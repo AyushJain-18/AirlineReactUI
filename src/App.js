@@ -27,7 +27,7 @@ function App({signInUserType, allPassengers}) {
   return (
     <div className="App">
         <ErrorBoundary>
-            <Suspense style ={{height: '100vw'}}fallback = {<Spinner  />}>
+            <Suspense fallback = {<Spinner/>}>
                 <HeaderComponent/>
                 <div className='routes-div-container'>
                     <Switch > 
