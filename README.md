@@ -3,6 +3,7 @@
 
 In the project directory, you can run:
 open terminal inside airline folder and then enter following commands
+note: For light house report test application in Incognito mode i had attached my lighthouse report for refference
 
 ### credentials 
     we have 3 kinds  different users for our application and there credentials are (case sensitive)
@@ -13,7 +14,7 @@ open terminal inside airline folder and then enter following commands
 ### npm i 
 to install all the dependencies
 
-### `npm server`
+### `npm run server`
 on 1st terminal window 
 this command will run json server on port no 3000,<br />
 make sure port 3000 is empty if not then application will give error
@@ -26,7 +27,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-### `npm run launch-app`
+### `npm run app`
 this will launch application on port 5000
 
 

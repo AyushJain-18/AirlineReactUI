@@ -3,11 +3,12 @@ import styled from 'styled-components';
 export const FlightContainer =styled.div`
         width: 80%;
         height: 90%;
-        border: 1px solid rgb(211, 211, 211);
+        box-shadow: 5px 10px 18px #888888;
         display: flex;
         flex-direction: column;
         align-content:space-around ;
         margin: 0 7% 5% 5%;
+        padding-bottom: 2vw;
         font-family: 'Open Sans Condensed';
         &:hover{
             transform: scale(1.1);
@@ -26,7 +27,7 @@ export const FlightName = styled.div`
         justify-content: center;
         background-color: #c0bdbd;
         border-bottom: 1px solid #aca9a9;
-        font-size: 20px;
+        font-size: 22px;
 `
 
 export const FlightDetails = styled.div`
@@ -34,11 +35,14 @@ export const FlightDetails = styled.div`
          grid-template-columns: repeat(3,1fr);
          place-content: center center;
          row-gap: 8px;
+         font-size: 20px;
          @media screen and (max-width: 800px){
             grid-template-columns: repeat(2,1fr);
+            font-size: 16px;
          }
          @media screen and (max-width: 400px){
             grid-template-columns: repeat(1,1fr);
+            font-size: 12px;
          }
 `
 

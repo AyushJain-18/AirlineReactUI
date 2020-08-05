@@ -30,14 +30,14 @@ const CustumSelect =({name, id, options , defaultValue, handleChange})=>{
             )
         }
   
-const DisplayValue = ({name, id, options , editable, defaultValue, handleChange})=>(
-       
-    editable?
-            <CustumSelect  name={name} id={id} options={options}
-            defaultValue={defaultValue} handleChange={handleChange} key={id}/>
-            :
-            (defaultValue? defaultValue: 'N/A')
-)    
+const DisplayValue = ({name, id, options , editable, defaultValue, handleChange})=>{
+        return (  
+        editable?
+                <CustumSelect  name={name} id={id} options={options}
+                defaultValue={defaultValue} handleChange={handleChange} key={id}/>
+                :
+                (defaultValue? defaultValue: 'N/A')
+)}    
 
 
 export default DisplayValue;

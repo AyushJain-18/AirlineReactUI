@@ -1,15 +1,17 @@
-import {takeLatest, put,all,call} from 'redux-saga/effects';
+import {takeLatest, put,all,call, takeEvery} from 'redux-saga/effects';
 import ADMIN_TYPES from './adminTypes';
 import {
     successFetchingAdminPassengers,
     failFetchingAdminPassengers,
     failDeletePassengers,
-    startFetchingAdminPassengers
+    startFetchingAdminPassengers,
+    failADDPassengers
 
 } from './admin.action'
 
-import {getRequest, deleteRequest} from '../../utils/api.calls';
+import {getRequest, deleteRequest,postRequest} from '../../utils/api.calls';
 
+// get all the passengers
 function * getAllPassenges(){
   try {   
     const allPassengers = [];
@@ -31,7 +33,7 @@ function * getAllPassenges(){
         yield put(failFetchingAdminPassengers)
     }
 }
-
+// delete a passenger
 function * deletePassenger({payload}){
     try{
         const {flightNo, id}= payload;
@@ -44,6 +46,18 @@ function * deletePassenger({payload}){
 
 }
 
+// add a new passenger
+
+function * addNewPassenger(data){
+  let passengerData = data.payload.passengersDetail;
+  let flightNumber = passengerData.airlineNumber;
+  try{
+    yield postRequest(`/${flightNumber}`,passengerData);
+    yield put(startFetchingAdminPassengers());
+  }catch(error){
+      yield put(failADDPassengers);
+  }
+}
 
 function* startFetchingAllPassengers(){
     yield takeLatest(ADMIN_TYPES.START_FETCHING_ALL_PASSENGER_ADMIN, getAllPassenges)
@@ -51,12 +65,16 @@ function* startFetchingAllPassengers(){
 function* startDeletingPassengers(){
     yield takeLatest(ADMIN_TYPES.START_DELETE_PASSENGER_ADMIN, deletePassenger)
 }
+function * startAddingPassenger(){
+    yield takeLatest(ADMIN_TYPES.ADD_PASSENGER_START, addNewPassenger)
+}
 
 export default function *adminSaga(){
         yield all(
             [
                 call(startFetchingAllPassengers),
-                call(startDeletingPassengers)
+                call(startDeletingPassengers),
+                call(startAddingPassenger)
             ]
         )
 }

@@ -1,7 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap'); */
 .App {
   text-align: center;
-  font-family: 'Open Sans Condensed'
+  font-family: 'Open Sans Condensed' !important ;
 }
 /* .routes-div-container{
   height: 90vw;

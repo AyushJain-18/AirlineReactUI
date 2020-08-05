@@ -1,0 +1,119 @@
+@mixin heading {
+    font-family: 'Open Sans Condensed' !important;
+    font-size: 20px;
+    font-weight: 800;
+    color: dodgerblue;
+    margin-bottom: 2vw;
+    @media screen and (max-width: 700px) {
+        font-size: 14px;
+    }
+}
+
+@mixin text {
+    display: flex;
+    font-family: 'Open Sans Condensed' !important;
+    font-size: 16px;
+    margin-bottom: 2vw;
+    @media screen and (max-width: 600px) {
+        font-size: 12px;
+    }
+}
+
+.ancSummary{
+   font-family: 'Open Sans Condensed' !important;
+   font-size: 24px;
+   font-weight: bolder;
+   margin-left: 1vw;
+}
+.ancDetailsContainer{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: space-between;
+
+    .ancDetails1{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 10vw;
+        height: fit-content;
+    
+        .ancHeading{
+            @include heading();
+            
+        }
+        .ancText{
+            @include text()
+        }
+    
+    }
+}
+
+
+.ancDetails2{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 50%;
+
+    .ancHeading{
+        @include heading();
+        @media screen and (max-width: 520px) {
+            margin-bottom: 8vw;
+        }
+    }
+    .ancText{
+        @include text()
+    }
+}
+
+.ancButton{
+    font-family: 'Open Sans Condensed' !important;
+    font-size: 20px;
+    font-weight: bolder;
+    margin-right: 2vw ;
+    @media screen and (max-width: 700px) {
+        font-size: 14px;
+    }
+}
+.chipStyleContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    @media screen and (max-width: 700px) {
+        margin-bottom: 10px;
+        // flex-direction: column;
+    }
+    .chipStyle{
+        font-family: 'Open Sans Condensed' !important;
+        margin-right: 5px;
+        @media screen and (max-width: 700px) {
+            font-size: 12px;
+            margin-bottom: 10px;
+            // .MuiChip-label{
+            //     padding-left: 6px;
+            //     padding-right: 6px;
+            // }
+            // .MuiChip-deleteIcon{
+            //     display: none
+            // }
+        }
+    }
+}
+
+.addSymbol{
+    font-weight: bolder;
+    font-size: 24px;
+    font-family: 'Open Sans Condensed';
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.cantEdit{
+    font-family: 'Open Sans Condensed'; 
+    font-size: 20px;
+    display: flex;
+    margin: 1vw;
+}

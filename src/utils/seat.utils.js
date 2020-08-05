@@ -70,6 +70,20 @@ export const  mapAllPassengesToFligthNo =(allPassengers)=>{
     return flightMappedPassengers;
 }
 
+export const  getSelectedAncillaryServices =(passengerDetails)=>{
+    let ancillaryServices = [];
+    // eslint-disable-next-line no-unused-expressions
+    passengerDetails && passengerDetails.payPerView? ancillaryServices.push( `Pay-Per-View: ${passengerDetails.payPerView}`): '';
+    // eslint-disable-next-line no-unused-expressions
+    passengerDetails && passengerDetails.meal? ancillaryServices.push(`Meal: ${passengerDetails.meal}`): '';
+      // eslint-disable-next-line no-unused-expressions
+      passengerDetails && passengerDetails.luggage? ancillaryServices.push(`Luggage: ${passengerDetails.luggage}`): '';
+
+        // eslint-disable-next-line no-unused-expressions
+        passengerDetails&& passengerDetails.inFlightShopping? ancillaryServices.push(`In-Flight-Shopping: ${passengerDetails.inFlightShopping}`): '';
+    return ancillaryServices;
+}
+
 // let data = [
 //     {
 //       "airlineNumber": "PQ001",

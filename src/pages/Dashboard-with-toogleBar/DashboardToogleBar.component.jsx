@@ -10,9 +10,7 @@ import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.conta
 import AuxilaryServicesComponent from '../../components/auxilary-service/auxilary-service-display/auxlilary-service.component';
 import { withRouter,Redirect } from 'react-router-dom';
 import WebCheckInStepperComponent from '../../components/stepper-web-check-in/web-check-in.component';
-import AdminDashBoardComponent from '../../components/admin-dashboard/admin-dashboard.component';
-
-
+import DisplayPassengersList from '../../components/admin-dashboard/passenger-details/displayPassengerList.component';
 
 class DashboardToogleBarComponent extends React.Component{
     
@@ -26,6 +24,7 @@ class DashboardToogleBarComponent extends React.Component{
         }
         if(userType!=='In-flight'){
             airlineNo = this.props.flightNo;
+            console.log('airlineNo',airlineNo)
         }
         return(
             <Fragment>
@@ -38,16 +37,15 @@ class DashboardToogleBarComponent extends React.Component{
                     keyArray={[`info${airlineNo}`,`seat${airlineNo}`, ,`aux${airlineNo}`]}
                     />
                 }
-                 {!passenger&& userType==='In-flight'&&
-                  <div> ADMIN HAD REMOVED YOUR ACCOUNT</div>
-                }
+                {!passenger&& userType==='In-flight'&&<div> ADMIN HAD REMOVED YOUR ACCOUNT</div>}
 
                 {
                     userType==='Crew'&& 
                     <Fragment>
                         {!airlineNo?<Redirect to='/'/>:
-                        <ToggleTab key ={airlineNo} componentsArray={[FlightDetailsComponent,SeatMapContainer,WebCheckInStepperComponent]}
-                        labelArray={['Flight Info','Seat Map','Web-Check-In']}
+                        <ToggleTab key ={airlineNo} 
+                        componentsArray={[DisplayPassengersList,SeatMapContainer,WebCheckInStepperComponent]}
+                        labelArray={['Passenger List','Seat Map','Web-Check-In']}
                         propsArray={[{airlineNo},{airlineNo,showPassenger }]} // editable:{showPassenger}
                         keyArray={[`info${airlineNo}`,`seat${airlineNo}`, `webcheckin${airlineNo}`]}
                         />
@@ -55,9 +53,8 @@ class DashboardToogleBarComponent extends React.Component{
                      </Fragment>
                 }
                  
-                {
-                    userType==='Admin' && <Fragment><AdminDashBoardComponent/></Fragment>
-                }
+            { userType==='Admin'&&<Fragment>{airlineNo ? <DisplayPassengersList  airlineNo={airlineNo}/>:<Redirect to = '/' />}</Fragment>}
+                
             </Fragment>
         )
     }

@@ -19,7 +19,7 @@ export const failFetchingAdminPassengers =(allPassengers)=>{
     }
 }
 
-
+// Admin delete passenger functionality
 export const startDeletePassengers =(flightNo, id)=>{
     return{
         type:ADMIN_TYPES.START_DELETE_PASSENGER_ADMIN,
@@ -36,6 +36,27 @@ export const successDeletPassengers =()=>{
 export const failDeletePassengers =()=>{
     return{
         type:ADMIN_TYPES.FAILURE_DELETE_PASSENGER_ADMIN,
+    }
+}
+
+// ADMIN Add passenger functionality
+
+export const startAddPassengers =(passengersDetail)=>{
+    return{
+        type:ADMIN_TYPES.ADD_PASSENGER_START,
+        payload:{passengersDetail}
+    }
+}
+
+export const successADDPassengers =()=>{
+    return{
+        type:ADMIN_TYPES.ADD_PASSENGER_SUCCESS,
+    }
+}
+
+export const failADDPassengers =()=>{
+    return{
+        type:ADMIN_TYPES.ADD_PASSENGER_FAILURE
     }
 }
 
