@@ -11,6 +11,12 @@ import {startPassengerInfoUpdate} from '../../../store/user/user.actions';
 import {startAddPassengers} from '../../../store/admin/admin.action';
 
 import {selectSignUserType} from '../../../store/user/user.selector';
+import {
+    selectAllActiveAncillaryService,
+    selectLagguageAllowedValue,
+    selectMealAllowedValue,
+    selectPayPerViewAllowedValue
+} from '../../../store/ancillaryServices/ancillaryService.selectors';
 import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpassenger.select';
 
 
@@ -18,7 +24,8 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
 
 
  const PassengerGerenralInfoForAdmin =({isAdd,passengerData,unOccupiedSeats,
-    logedInUserType, checkInPassengerPNR, updatePassengerDetails,addPassenger})=>{
+    logedInUserType, checkInPassengerPNR, updatePassengerDetails,addPassenger,
+    payPerViewDropDown, lagguageDropDown, mealDropDown, activeAncillaryServices})=>{
 
     const airlineNumber= passengerData.airlineNumber;
     const [disableButton, setdisableButton] = useState(false)
@@ -35,36 +42,38 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
     const [luggage, setluggae]         = useState(passengerData.luggage);
     const [meal, setmeal]              = useState(passengerData.meal)
     const [payPerView, setPayPerView]  = useState(passengerData.payPerView)
+    const [inFlightShopping, setinFlightShopping]  = useState(passengerData.inFlightShopping)
     const [infants, setinfants]        = useState(passengerData.infants)
     const [wheelChair, setwheelChair]  = useState(passengerData.wheelChair)
     const [seatNo, setseatNo]          = useState(passengerData.seatNo)
     const[newSeat, setnewSeat] = useState(passengerData.seatNo)
 
     
-    const lagguageOptions  =[{value:'N/A'}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];
-    const mealOptions      =[{value:'N/A'}, {value:'Veg'}   ,  {value:'Non-Veg'}];
-    const PayPerViewOptions=[{value:'N/A'}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
-    const infantsOptions   =[{value: 'True'},{value: 'False'}];
-    const wheelChairOptions=[{value: 'True'},{value: 'False'}];
+    let lagguageOptions  =lagguageDropDown.map(eachValue=>({value: eachValue})); 
+    lagguageOptions.unshift({value:'N/A'})
+    //{value:'N/A'}, {value: '15kg'},{value: "25kg"},{value: "40kg"}];  
+        
+    let mealOptions    =mealDropDown.map(eachValue=>({value: eachValue}));  
+    mealOptions.unshift({value:'N/A'})
+    //[{value:'N/A'}, {value:'Veg'}   ,  {value:'Non-Veg'}];
+    
+    let payPerViewOptions=payPerViewDropDown.map(eachValue=>({value: eachValue})); 
+    payPerViewOptions.unshift({value:'N/A'})  
+    //[{value:'N/A'}, {value:'Hollywood'},{value:'Bollywood'}, {value: 'Tollywood'}];
+
+    let inFlightShoppingOption = [{value: 'True'},{value: 'False'}]; 
+    let infantsOptions   =[{value: 'True'},{value: 'False'}];
+    let wheelChairOptions=[{value: 'True'},{value: 'False'}];
     let otherSeatOptions= unOccupiedSeats.reduce((acc, eachUnOccupiedSeats)=>([ ...acc,{'value': eachUnOccupiedSeats}]),[]);
     if(isAdd){ otherSeatOptions.push({'value': 'N/A'})}
     otherSeatOptions.reverse();
         
-    // const isNotEmpty = value => new String(value).length<15;
-    // const isEmptyAddress = value => !!value;
-
+    const {isInFlightShoppingActive,isPayPerViewActive,isLuggageActive,isMealActive} =activeAncillaryServices;
+  
     const checkDisableButtonStatus=()=>{
         firstName && lastName&& contactNumber && newSeat &&dob &&  //age
          passport && address?setdisableButton(false): setdisableButton(true)
     }
-    // const onChangeAge =(event)=>{ 
-    //     let value = event.target.value;
-    //     let stringValue = new String(value);
-    //     if(stringValue.length>=0 && stringValue.length<=3){
-    //         value = new Number(stringValue)
-    //         setage(event.target.value)
-    //     }
-    // }
    
     useEffect(()=>{
              setfirstName(passengerData.firstName);
@@ -78,12 +87,14 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
              if(passengerData.payPerView === undefined)     setPayPerView('');
              if(passengerData.infants=== undefined)         setinfants(false);
              if(passengerData.wheelChair === undefined)     setwheelChair(false)
+             if(passengerData.inFlightShopping === undefined)setinFlightShopping(false)
     },[passengerData])
 
     useEffect(()=>{checkDisableButtonStatus()},[firstName, lastName, age, newSeat, contactNumber,address,passport,dob])
 
     const onConfirm =(event)=>{
         event.preventDefault();
+        let inflightShoppingValueToUpdate =JSON.parse(inFlightShopping.toString().toLowerCase());
         let infantValueToUpdate =JSON.parse(infants.toString().toLowerCase());
         let wheelChairValueToUpdate = JSON.parse(wheelChair.toString().toLowerCase());
         let MEAL = meal === 'N/A'?'': meal;
@@ -95,6 +106,7 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
             luggage:Luggage,
             meal:MEAL,
             payPerView:PayPerView,
+            inFlightShopping:inflightShoppingValueToUpdate,
             seatNo:newSeat,
             infants:infantValueToUpdate,
             wheelChair:wheelChairValueToUpdate,
@@ -134,20 +146,23 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
                                     </div>
                             {/* </div>
                             <div className='admin-general-info-container'> */}
-                               
-                                
-                                <div className= 'admin-passenger-info-items'> <span>Luggage</span><DisplayValue key={id} editable={true} 
+                              
+                              { isLuggageActive && <div className= 'admin-passenger-info-items'> <span>Luggage</span><DisplayValue key={id} editable={true} 
                                 name='Luggage' id={'Luggage'+id} options={lagguageOptions} defaultValue={luggage} handleChange={setluggae}/> 
-                                </div>
+                                </div>}
                             
-                                <div className= 'admin-passenger-info-items'>  <span>Meal</span>  <DisplayValue editable={true} name='Meal' id='meal' 
+                              {isMealActive && <div className= 'admin-passenger-info-items'>  <span>Meal</span>  <DisplayValue editable={true} name='Meal' id='meal' 
                                 options={mealOptions}
                                         defaultValue={meal} handleChange={setmeal}/> 
-                                </div>
+                                </div>}
 
-                                <div className= 'admin-passenger-info-items'> <span>PayPerView</span> <DisplayValue editable={true} name='PayPerView' 
-                                    id='PayPerView' options={PayPerViewOptions} defaultValue={payPerView} handleChange={setPayPerView}/> 
-                                </div>
+                            { isPayPerViewActive && <div className= 'admin-passenger-info-items'> <span>PayPerView</span> <DisplayValue editable={true} name='PayPerView' 
+                                    id='PayPerView' options={payPerViewOptions} defaultValue={payPerView} handleChange={setPayPerView}/> 
+                                </div>}
+                                
+                               {isInFlightShoppingActive && <div className= 'admin-passenger-info-items'> <span>In Flight Shopping</span> <DisplayValue editable={true} name='PayPerView' 
+                                    id='inFlightShopping' options={inFlightShoppingOption} defaultValue={inFlightShopping?'True':'False'} handleChange={setinFlightShopping}/> 
+                                </div>}
 
                                 <div className= 'admin-passenger-info-items'>  <span>With Infants</span><DisplayValue editable={true} name='Infants' 
                                 id='Infants' options={infantsOptions} defaultValue={infants?'True':'False'} handleChange={setinfants}/> 
@@ -174,7 +189,11 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
         unOccupiedSeats: selectUnoccupiedSeat(ownProps.passengerData.seatNo, 
                         ownProps.unOccupiedSeats)(state),
         logedInUserType : selectSignUserType(state),
-        checkInPassengerPNR: selectPNR(state)
+        checkInPassengerPNR: selectPNR(state),
+        activeAncillaryServices : selectAllActiveAncillaryService(ownProps.passengerData.airlineNumber)(state),
+        lagguageDropDown: selectLagguageAllowedValue(ownProps.passengerData.airlineNumber)(state),
+        mealDropDown:     selectMealAllowedValue(ownProps.passengerData.airlineNumber)(state),
+        payPerViewDropDown: selectPayPerViewAllowedValue(ownProps.passengerData.airlineNumber)(state)
     }
 }
 const mapDispatchToProps =(dispatch)=>{

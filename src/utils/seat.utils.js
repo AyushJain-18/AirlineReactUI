@@ -80,7 +80,8 @@ export const  getSelectedAncillaryServices =(passengerDetails)=>{
       passengerDetails && passengerDetails.luggage? ancillaryServices.push(`Luggage: ${passengerDetails.luggage}`): '';
 
         // eslint-disable-next-line no-unused-expressions
-        passengerDetails&& passengerDetails.inFlightShopping? ancillaryServices.push(`In-Flight-Shopping: ${passengerDetails.inFlightShopping}`): '';
+        passengerDetails&& passengerDetails.inFlightShopping? 
+        ancillaryServices.push(`In-Flight-Shopping: Yes`):ancillaryServices.push(`In-Flight-Shopping: No`);
     return ancillaryServices;
 }
 

@@ -17,7 +17,7 @@ import{
 } from '../../../store/admin/admin.selector'
 
 import{
-    selectActiveAncillaryServicesForParticularFlight
+    selectFilghtData
 } from '../../../store/ancillaryServices/ancillaryService.selectors';
 
 import{
@@ -25,7 +25,7 @@ import{
 } from '../../../store/ancillaryServices/ancillaryService.util'
 
 const AncillaryServices = props=> {
-    let displayAncillaryServices= getActiveAncillaryService(props.ancillaryServices,props.activeAncillaryServicePerFlight)
+    let displayAncillaryServices= getActiveAncillaryService(props.ancillaryServices,props.userFlightData)
     return(
         <div style={{margin: '2vw'}}>{ displayAncillaryServices.map((eachAncSer,index)=>{ let eachAncSerArray = eachAncSer && eachAncSer.split(':');
             return (
@@ -39,10 +39,11 @@ const AncillaryServices = props=> {
     )    
 }
 
-const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenger, activeAncillaryServices})=>{
+const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenger, userFlightData})=>{
     const{ seatNo, airlineNumber,firstName,id,passport,PNR}= data;
     const[display, setdisplay]= useState(false);
     const[displayAncSer, setdisplayAncSer]= useState(false);
+    const activeAncillaryService = getActiveAncillaryService(ancillaryServices,userFlightData)
     // console.log('ancillaryServices',activeAncillaryServices);    
     return(
         <Fragment>
@@ -51,13 +52,14 @@ const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenge
                         <div className= 'alp-discription'>{sno +1}</div>
                         <div className= 'alp-discription'>{firstName}</div>
                         <div className= 'alp-discription'>{seatNo}</div>
-                        <div className= 'alp-discription'> {ancillaryServices.length === 0? 
-                                <div>No Ancillary Selected</div>:
-                                 <FontAwesomeIcon icon ={displayAncSer?faTimes:faBars} 
+                        <div className= 'alp-discription'>
+                        { activeAncillaryService.length === 0? <div>No Ancillary Service Provided</div>:    
+                        ancillaryServices.length === 0?  <div>No Ancillary Selected</div>:
+                                        <FontAwesomeIcon icon ={displayAncSer?faTimes:faBars} 
                                                     onClick ={()=> displayAncSer? setdisplayAncSer(false):setdisplayAncSer(true)}
                                                     style={{cursor: 'pointer'}}
-                                                    />}
-                        </div>                           
+                                                    />}   
+                        </div>                    
                         <div className= 'alp-discription'>
                             <FontAwesomeIcon icon ={faTrashAlt} className='pointer' 
                                 onClick={()=>onDeletePassenger(airlineNumber,id)}/>
@@ -77,7 +79,7 @@ const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenge
     {displayAncSer && 
         <div style ={{boxShadow:'10px 10px 10px darkgrey', background: 'aliceblue', margin: '1vw 5vw ', width:'90%'}}>
         <AncillaryServices key ={data.PNR}ancillaryServices={ancillaryServices} pnr={data.PNR}
-                           activeAncillaryServicePerFlight ={activeAncillaryServices[0].ancillaryServices} />
+                           userFlightData ={userFlightData} />
         </div>
     }                          
     {display && 
@@ -93,7 +95,7 @@ const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenge
 const mapStateToProps = (state, ownProps)=>({
     emptySeats: selectEmptySeatsOfParticularFlight(ownProps.data.airlineNumber, ownProps.data.seatNo)(state),
     ancillaryServices : selectAncillaryServicesOfPassengers(ownProps.data.PNR)(state),
-    activeAncillaryServices : selectActiveAncillaryServicesForParticularFlight(ownProps.data.airlineNumber)(state)
+    userFlightData : selectFilghtData(ownProps.data.airlineNumber)(state)
 })
 const mapDispatchToProps = dispatch =>({
     onDeletePassenger: (flightNo, id)=>dispatch(startDeletePassengers(flightNo, id))
