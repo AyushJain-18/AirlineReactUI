@@ -31,7 +31,7 @@ const AddNewPassenger =()=>{
                     <Link style={{paddingRight: '4px', fontWeight: "bolder", cursor: "pointer",color:'cornflowerblue'}} 
                         to = '/'>Dashboard</Link>
                     <Link style={{paddingRight: '4px', fontWeight: "bolder", cursor: "pointer",color:'cornflowerblue'}} 
-                        to = '/admin/manage'>Manage Passengers</Link>
+                        to = '/admin/manage'>Manage Services</Link>
                     <div style={{marginBottom: '10px'}}> <span> Select Flight &nbsp;: &nbsp;&nbsp; </span>  
                         <DisplayValue name='Fligt-Selection' id='Flight-Selection'editable = {true} 
                         defaultValue={defaultValeuForFlightSelector} options ={filterDisplayOptions}
