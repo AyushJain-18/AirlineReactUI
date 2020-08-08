@@ -14,7 +14,7 @@ import ManageAncillaryServices from '../manageAuxilaryService/ManageAncillary/ma
                         <ToggleTab
                             componentsArray={[ManageAncillaryServices,DisplayPassengersList]}
                             propsArray = {[{},{}]}
-                            labelArray ={[ 'Manage Ancillary Service','Manage Passenger']}
+                            labelArray ={[ 'Manage Ancillary Service','Manage All Passenger']}
                             keyArray={['Manage Ancillary Service','Manage Passenger']} 
                         />
                     </div>

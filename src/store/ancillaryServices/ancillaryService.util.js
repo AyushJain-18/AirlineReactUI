@@ -10,7 +10,7 @@ export const getActiveAncillaryService =(passengersAncillaryService , userFlight
                     if( eachAncSerArray[0]==='In-Flight-Shopping'||selectedValues[eachActiveAncillaryService[0]].includes(eachAncSerArray[1].trim())){
                         displayAncillaryService.push(eachAncSer);
                     } else{
-                        let ancSerData = `${eachAncSerArray[0]}:${eachAncSerArray[1]} have been removed`;
+                        let ancSerData = `${eachAncSerArray[0]}:${eachAncSerArray[1]} removed by admin,  Please select other option`;
                         displayAncillaryService.push(ancSerData);
                     }
                     
