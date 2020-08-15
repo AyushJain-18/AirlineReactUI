@@ -140,9 +140,9 @@ import { selectSignUserType } from '../../../store/user/user.selector';
                         <div className= 'alp-heading'>S.No</div>
                         <div className= 'alp-heading'>Name</div>
                         <div className= 'alp-heading'>SeatNo</div>
-                        <div className= 'alp-heading'>Ancillary Services</div>
-                        <div className= 'alp-heading'>Delete</div>
-                        <div className= 'alp-heading'>Update</div>
+{userType === 'Admin'&& <div className= 'alp-heading'>Ancillary Services</div>}
+{userType === 'Admin'&& <div className= 'alp-heading'>Delete</div>}
+                        <div className= 'alp-heading'> {userType === 'Admin'? 'Update': 'Update New Seat No' }</div>
                         
                     </div>
                         {displayPassengers && displayPassengers.map((passenger, index)=>{

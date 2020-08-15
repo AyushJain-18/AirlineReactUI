@@ -8,6 +8,7 @@ const ALL_PASSANGER_INITIAL_STATE={
     newSeatNumber: null,
     nextDisplayButtonState: false,
     passengerPNR: null,
+    seatUpdateMessage: null,
     PassengerInfoBasedOnPNR: null //pnrPassenger
 }
 
@@ -89,6 +90,21 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
                 ...state,
                 passengerPNR: action.payload
             }
+        case All_PASSANGER_TYPES.SEAT_UPDATE_START_FOR_CREW_LOGED_IN: 
+            return{
+                ...state,
+                seatUpdateMessage: 'Loading...'
+            }    
+        case All_PASSANGER_TYPES.SEAT_UPDATE_SUCCESS_FOR_CREW_LOGED_IN: 
+        return{
+            ...state,
+            seatUpdateMessage: 'Success'
+        }
+        case All_PASSANGER_TYPES.SEAT_UPDATE_FAILURE_FOR_CREW_LOGED_IN: 
+        return{
+            ...state,
+            seatUpdateMessage: 'Failed'
+        }
         default:
             return state
     }

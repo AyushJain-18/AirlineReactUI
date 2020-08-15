@@ -45,7 +45,7 @@ class DashboardToogleBarComponent extends React.Component{
                         {!airlineNo?<Redirect to='/'/>:
                         <ToggleTab key ={airlineNo} 
                         componentsArray={[DisplayPassengersList,SeatMapContainer,WebCheckInStepperComponent]}
-                        labelArray={['Passenger List','Seat Map','Web-Check-In']}
+                        labelArray={['Passenger List','Undo Check in','Web-Check-In']}
                         propsArray={[{airlineNo},{airlineNo,showPassenger }]} // editable:{showPassenger}
                         keyArray={[`info${airlineNo}`,`seat${airlineNo}`, `webcheckin${airlineNo}`]}
                         />

@@ -2,7 +2,7 @@ import {createSelector} from 'reselect';
 import {
     mapPassengersToSeat,
     getUnOccupiedSeats
-} from '../../utils/seat.utils'
+} from '../../utils/seat.utils' 
 
 export const selectAllPassenger =state=>state.AllPassenger;
 
@@ -14,6 +14,11 @@ export const selectAllPassengerFetchngStatus = createSelector(
 export const selectAllPassengerErrorStatus = createSelector(
 
     [selectAllPassenger], AllPassenger=>AllPassenger.isError
+)
+
+export const selectAllPassengerSeatUpdateMessage = createSelector(
+
+    [selectAllPassenger], AllPassenger=>AllPassenger.seatUpdateMessage
 )
 
 export const selectAllPassengerData = createSelector(

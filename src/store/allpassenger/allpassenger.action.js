@@ -85,3 +85,22 @@ export const addPassengerPNRToReducer =(PNR)=>{
         payload: PNR
     }
 }
+
+
+
+export const seatUpdateForCrewLoggedInStart =()=>{
+    return{
+        type:ALL_PASSANGER_TYPES.SEAT_UPDATE_START_FOR_CREW_LOGED_IN,
+    }
+}
+
+export const seatUpdateForCrewLoggedInSuccess =()=>{
+    return{
+        type:ALL_PASSANGER_TYPES.SEAT_UPDATE_SUCCESS_FOR_CREW_LOGED_IN,
+    }
+}
+export const seatUpdateForCrewLoggedInFailed =()=>{
+    return{
+        type:ALL_PASSANGER_TYPES.SEAT_UPDATE_FAILURE_FOR_CREW_LOGED_IN,
+    }
+}

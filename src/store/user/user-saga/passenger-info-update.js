@@ -10,14 +10,19 @@ import {
 } from '../user.actions'
 
 import {
-        pnrPassengerInfoStart
+        pnrPassengerInfoStart, 
+        seatUpdateForCrewLoggedInFailed,
+        seatUpdateForCrewLoggedInSuccess,
+        seatUpdateForCrewLoggedInStart
 } from '../../allpassenger/allpassenger.action';
 import { successUpdatePassenger,startFetchingAdminPassengers, startUpdatePassenger } from '../../admin/admin.action';
 
 function * startUserUpdate({payload}){
     try{
         const{airlineNumber,id,updatedData,logedInUserType,checkInPassengerPNR} = payload;
-     //   yield console.log(airlineNumber,id,updatedData,logedInUserType)
+        if(logedInUserType==='Crew'){
+            yield put(seatUpdateForCrewLoggedInStart());
+        }
         const updatedPassenger =yield updateRequest(`/${airlineNumber}/${id}`,updatedData);
         yield put(passengerInfoUpdateSuccess(updatedPassenger.data))
         if(logedInUserType==='In-flight'){
@@ -25,7 +30,8 @@ function * startUserUpdate({payload}){
         }
         if(logedInUserType==='Crew'){
             yield put(fetchingAllPassengerStart(airlineNumber));
-            yield put(pnrPassengerInfoStart(checkInPassengerPNR));
+            yield put(pnrPassengerInfoStart(checkInPassengerPNR)); 
+            yield put(seatUpdateForCrewLoggedInSuccess());
         }
         if(logedInUserType==='Admin'){
             yield put(startFetchingAdminPassengers())
@@ -35,7 +41,8 @@ function * startUserUpdate({payload}){
             
        
     } catch(error){
-        yield put(passengerInfoUpdateFailure())
+        yield put(seatUpdateForCrewLoggedInFailed());
+        yield put(passengerInfoUpdateFailure());
     }
 
     
