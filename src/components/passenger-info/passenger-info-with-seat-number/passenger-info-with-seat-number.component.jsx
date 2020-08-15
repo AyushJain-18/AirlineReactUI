@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {mapPassengersToSeat} from '../../../utils/seat.utils';
 import {
     selectSeatNoOfSelectedPassenger,
-    selectAllPassengerData,
     selectMappedAllPassengerToSeat
 } from '../../../store/allpassenger/allpassenger.select'
 import PassengerAuxilaryServiceInfo from '../passenger-auxilarys-discription/passenger-auxilarys-description.component';

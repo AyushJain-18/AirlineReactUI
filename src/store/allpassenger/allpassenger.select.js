@@ -27,7 +27,7 @@ export const selectAllPassengerData = createSelector(
 )
 export const selectSeatNoOfSelectedPassenger = createSelector(
 
-    [selectAllPassenger], AllPassenger=> AllPassenger.selectedPassengerSeatNo
+    [selectAllPassenger], AllPassenger=> AllPassenger? AllPassenger.selectedPassengerSeatNo : null
 )
 export const selectUpdatedSeat = createSelector(
 
@@ -38,7 +38,7 @@ export const selectUpdatedSeat = createSelector(
 
 export const selectMappedAllPassengerToSeat = createSelector(
 
-    [selectAllPassengerData], AllPassenger=> mapPassengersToSeat(AllPassenger)
+    [selectAllPassengerData], AllPassenger=>AllPassenger?  mapPassengersToSeat(AllPassenger): null
 )
 
 export const selectUnoccupiedSeat = (passengerSeatNo, unOccupiedSeats)=>{

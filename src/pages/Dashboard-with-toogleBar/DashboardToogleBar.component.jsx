@@ -34,7 +34,7 @@ class DashboardToogleBarComponent extends React.Component{
                     componentsArray={[FlightDetailsComponent,SeatMapContainer,AuxilaryServicesComponent]}
                     labelArray={['Flight Info','Seat-Map','Auxilary-Service']}
                     propsArray={[{airlineNo},{airlineNo},{passenger}]} 
-                    keyArray={[`info${airlineNo}`,`seat${airlineNo}`, ,`aux${airlineNo}`]}
+                    keyArray={[`info${airlineNo}`,`seat${airlineNo}`,`aux${airlineNo}`]}
                     />
                 }
                 {!passenger&& userType==='In-flight'&&<div> ADMIN HAD REMOVED YOUR ACCOUNT</div>}

@@ -2,19 +2,33 @@ import './seat-map.styles.scss';
 import React,{useEffect, Fragment} from 'react';
 
 import {connect} from 'react-redux';
+// selector
+import { selectAllPassengerData,
+     selectSeatNoOfSelectedPassenger, selectMappedAllPassengerToSeat } 
+     from '../../../store/allpassenger/allpassenger.select';
+// actions 
 import { fetchingAllPassengerStart } from '../../../store/allpassenger/allpassenger.action';
-import { selectAllPassengerData } from '../../../store/allpassenger/allpassenger.select';
+import {startPassengerInfoUpdate} from   '../../../store/user/user.actions';
+// components
 import SeatArrangement from '../seats-arrangement/seat-arrangement.component';
 import SeatCircle from '../../CustumComponents/SeatCircle/SeatCircle.component';
 import PassengerInfoWithSeatNumber from '../../passenger-info/passenger-info-with-seat-number/passenger-info-with-seat-number.component';
+import CustumButton from '../../CustumComponents/CustumButon/custumButton.component';
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 
-const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointer,startFetchingAllPassengersList,passengers})=>{
-   // console.log('airlineNo',airlineNo)
+const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointer,startFetchingAllPassengersList,
+    passengers,selectedPassengerSeatNo, mappedPassengerDataToSeats,startUndoCheckin})=>{
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
        return  (passengers.length!==0 && passengers[0].PNR.split('X')[0]) === (airlineNo)}
     const widthOfSeatLayout =showPassenger? '60%':'';
+    let selectedPassenger= mappedPassengerDataToSeats[selectedPassengerSeatNo];
+    const onUndoCheckIn = ()=>{
+        const {id,airlineNumber,PNR} = selectedPassenger;
+        const updatedData = {...selectedPassenger, seatNo: ''}
+        startUndoCheckin(id,airlineNumber,updatedData, 'Crew',PNR)
+    }
         useEffect(() => {
             if(!flightNoChanged()){
                 startFetchingAllPassengersList(airlineNo);
@@ -23,6 +37,7 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointe
     return(
          <Fragment>
                         { isPassengerFetched()&& <div className='seat-map-container'>
+                            {/* Seat-Map here  */}
                             <div className="seat-map-layout-container" style={{width:`${widthOfSeatLayout}`}}>
                                 <div>Flight No-{airlineNo}</div>
                                 <div className="seat-map-layout-discription">
@@ -36,7 +51,13 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointe
                                                 totalSeats={60} 
                                                 showNotAllowedPointer={showNotAllowedPointer}/>
                             </div>
-                            {showPassenger&&<PassengerInfoWithSeatNumber editable ={editable}/>} 
+                            {/* Passenger details with undo-check-in option here option  */}
+                            {showPassenger && <div>  
+                                <div className= 'undo-button'>
+                                {selectedPassengerSeatNo? selectedPassenger?<CustumButton onClick={onUndoCheckIn} >  Undo Check-in </CustumButton>:null: <h3> 'Select Seat-no to Undo Check-in' </h3>}
+                                </div>
+                             <PassengerInfoWithSeatNumber editable ={editable}/> 
+                            </div>} 
                         </div>
                 }
         </Fragment>
@@ -44,14 +65,17 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointe
 }
 const mapStateToProps = (state)=>{
     return{
-        passengers: selectAllPassengerData(state)
+        passengers: selectAllPassengerData(state),
+        selectedPassengerSeatNo: selectSeatNoOfSelectedPassenger(state),
+        mappedPassengerDataToSeats: selectMappedAllPassengerToSeat(state)
     }
 }
 
 
 const mapDispatchToProps=(dispatch)=>{
     return{
-        startFetchingAllPassengersList: (airlineNumber)=>dispatch(fetchingAllPassengerStart(airlineNumber))
+        startFetchingAllPassengersList: (airlineNumber)=>dispatch(fetchingAllPassengerStart(airlineNumber)),
+        startUndoCheckin : (id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR))
     }
 }
 
