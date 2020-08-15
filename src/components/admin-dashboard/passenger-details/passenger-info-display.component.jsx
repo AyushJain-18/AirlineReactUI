@@ -48,18 +48,35 @@ const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenge
     const[isSeatNoUpdated, setisSeatNoUpdated]= useState(false);
     const[newSeat, setnewSeat] = useState('');
     const[isUpdateButtonClicked, setUpdateButtonClicked] = useState(false);
-    useEffect(()=>{if(newSeat!==''){setUpdateButtonClicked(false); setisSeatNoUpdated(true)}}, [newSeat]);
 
     const activeAncillaryService = getActiveAncillaryService(ancillaryServices,userFlightData);
     let otherSeatOptions= emptySeats.reduce((acc, eachUnOccupiedSeats)=>([ ...acc,{'value': eachUnOccupiedSeats}]),[]);
+    if(!!!seatNo){
+        otherSeatOptions.push({'value':'N/A'});    
+    }
     otherSeatOptions.reverse();
+
+
+    useEffect(
+        ()=>{
+            if(newSeat!==''){
+                setUpdateButtonClicked(false);
+                 setisSeatNoUpdated(true);
+                };
+            if(newSeat==='N/A'){
+                setisSeatNoUpdated(false);
+            }
+            }, [newSeat]);
+
 
     const updateSeat =()=>{
         if(isSeatNoUpdated){
             setUpdateButtonClicked(true);
             updatePassengerSeatNo(id,airlineNumber,{...data,seatNo:newSeat},userType,PNR)
         }
+
     }
+
 
     // console.log('ancillaryServices',activeAncillaryServices);    
     return(
