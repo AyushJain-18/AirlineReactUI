@@ -65,7 +65,7 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
     let infantsOptions   =[{value: 'True'},{value: 'False'}];
     let wheelChairOptions=[{value: 'True'},{value: 'False'}];
     let otherSeatOptions= unOccupiedSeats.reduce((acc, eachUnOccupiedSeats)=>([ ...acc,{'value': eachUnOccupiedSeats}]),[]);
-    if(isAdd || seatNo === ''){ otherSeatOptions.push({'value': 'N/A'})}
+    if(isAdd || seatNo === ''|| seatNo === undefined){ otherSeatOptions.push({'value': 'N/A'})}
     otherSeatOptions.reverse();
         
     const {isInFlightShoppingActive,isPayPerViewActive,isLuggageActive,isMealActive} =activeAncillaryServices;
@@ -100,7 +100,7 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
         let MEAL = meal === 'N/A'?'': meal;
         let Luggage = luggage === 'N/A'?'': luggage;
         let PayPerView = payPerView === 'N/A'?'': payPerView;
-        let newSeatNumber= newSeat === 'N/A'? '': newSeat
+        let newSeatNumber= newSeat === 'N/A'|| newSeat === undefined? '': newSeat
         const data = {
             ...passengerData,
             firstName, lastName,age,contactNumber,address,passport,dob,
