@@ -18,13 +18,16 @@ export const mapPassengersToSeat =(passengers)=>{
 * blanchedalmond/ light red -  occupied
 * light gray-                  unoccupied
 */
-export const getSeatColorForSeatNumber =(seatNumber, mappedPassengersToSeat)=>{
+export const getSeatColorForSeatNumber =(seatNumber, mappedPassengersToSeat,displaySpecialMeal)=>{
    const passenger = mappedPassengersToSeat[seatNumber];
-   let seatColor = 'blanchedalmond'
-    if(passenger){
-    seatColor= passenger.infants?(passenger.wheelChair? 'darkgrey':'cornflowerblue'):
-                                (passenger.wheelChair? 'coral':'gainsboro') 
-         }
+   let seatColor = 'blanchedalmond';
+   if(displaySpecialMeal && passenger){
+    seatColor= passenger.meal === 'Special Meal'? 'IndianRed': 'gainsboro';
+   } 
+   else if(passenger){
+        seatColor= passenger.infants?(passenger.wheelChair? 'darkgrey':'cornflowerblue'):(passenger.wheelChair? 'coral':'gainsboro'); 
+    }
+
          return seatColor;
 }
 

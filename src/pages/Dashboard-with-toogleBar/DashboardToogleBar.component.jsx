@@ -32,10 +32,10 @@ class DashboardToogleBarComponent extends React.Component{
                 {/* 1.In-fkight dashboard */}
                 {userType==='Crew' &&  crewView ==='IN-FLIGHT' &&
                   <ToggleTab 
-                    componentsArray={[FlightDetailsComponent,SeatMapContainer,AuxilaryServicesComponent]}
+                    componentsArray={[FlightDetailsComponent,SeatMapContainer]}
                     labelArray={['Flight Info','Seat-Map','Auxilary-Service']}
-                    propsArray={[{airlineNo},{airlineNo},{passenger}]} 
-                    keyArray={[`info${airlineNo}`,`seat${airlineNo}`,`aux${airlineNo}`]}
+                    propsArray={[{airlineNo},{airlineNo,showPassenger,editable: true, displaySpecialMeal:true}]} 
+                    keyArray={[`info${airlineNo}`,`seat${airlineNo}`]}
                     />
                 }
                 {/* {!passenger&& userType==='In-flight'&&<div> ADMIN HAD REMOVED YOUR ACCOUNT</div>} */}
@@ -46,7 +46,7 @@ class DashboardToogleBarComponent extends React.Component{
                         <ToggleTab key ={airlineNo} 
                         componentsArray={[DisplayPassengersList,SeatMapContainer,WebCheckInStepperComponent]}
                         labelArray={['Passenger List','Undo Check in','Web-Check-In']}
-                        propsArray={[{airlineNo},{airlineNo,showPassenger,editable: true }]} // editable:{showPassenger}
+                        propsArray={[{airlineNo},{airlineNo,showPassenger,editable: true, undoButton: true }]} // editable:{showPassenger}
                         keyArray={[`info${airlineNo}`,`seat${airlineNo}`, `webcheckin${airlineNo}`]}
                         />
                          }

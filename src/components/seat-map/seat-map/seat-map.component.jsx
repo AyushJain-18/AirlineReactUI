@@ -17,7 +17,7 @@ import CustumButton from '../../CustumComponents/CustumButon/custumButton.compon
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 
-const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn ,showNewSeatSelectedColor,
+const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn ,showNewSeatSelectedColor,undoButton, displaySpecialMeal,
     startFetchingAllPassengersList, passengers,selectedPassengerSeatNo, mappedPassengerDataToSeats,startUndoCheckin})=>{
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
@@ -43,18 +43,24 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn ,showN
                                 <div className="seat-map-layout-discription">
                                         <div className='item-description'> Occupied<SeatCircle color='gainsboro'/></div>
                                         <div className='item-description'>Unoccupied <SeatCircle color='blanchedalmond'/> </div>
-                                        <div className='item-description'>Infant<SeatCircle color='cornflowerblue'/> </div>
-                                        <div className='item-description'>Wheelchair<SeatCircle color='coral'/> </div>
-                                        <div className='item-description'>Infant & wheelchair<SeatCircle color='darkgrey'/></div>
+                                        { !displaySpecialMeal &&<>
+                                                <div className='item-description'>Infant<SeatCircle color='cornflowerblue'/> </div>
+                                                <div className='item-description'>Wheelchair<SeatCircle color='coral'/> </div>
+                                                <div className='item-description'>Infant & wheelchair<SeatCircle color='darkgrey'/></div>
+                                          </>
+                                        }
                                         {isWebCheckIn && <div className='item-description'>Selected New Seat<SeatCircle color='lightcoral'/></div>  }
+                                        {displaySpecialMeal &&<div className='item-description'>Special Meal<SeatCircle color='indianred'/></div>}
                                 </div>
-                                <SeatArrangement passengers={passengers} totalSeats={60}  isWebCheckIn={isWebCheckIn} />
+
+                                      
+                                <SeatArrangement passengers={passengers} totalSeats={60}  isWebCheckIn={isWebCheckIn} displaySpecialMeal={displaySpecialMeal} />
                             </div>
                             {/* Passenger details with undo-check-in option here option  */}
                             {showPassenger && <div>  
-                                <div className= 'undo-button'>
+                                {undoButton && <div className= 'undo-button'>
                                 {selectedPassengerSeatNo? selectedPassenger?<CustumButton onClick={onUndoCheckIn} >  Undo Check-in </CustumButton>:null: <h3> 'Select Seat-no to Undo Check-in' </h3>}
-                                </div>
+                                </div>}
                              <PassengerInfoWithSeatNumber editable ={editable}/> 
                             </div>} 
                         </div>

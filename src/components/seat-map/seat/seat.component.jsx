@@ -18,7 +18,7 @@ import {
 } from '../../../store/allpassenger/allpassenger.select'
 // Seat compoent contains total seats a flight have 
 
-const Seat = ({passengers,totalSeats, isWebCheckIn, 
+const Seat = ({passengers,totalSeats, isWebCheckIn, displaySpecialMeal,
                 setPassengerSeatNoAction, clearNewSeatSelected,newSeat,
                 unOccupiedSeats, setNewSeatNumber})=>{
     const [seatSelected, setSeatSelectedStatus] = useState(false);                
@@ -58,7 +58,7 @@ const Seat = ({passengers,totalSeats, isWebCheckIn,
                         columnCounter++;
                         updateRowAndColumnCounter(index)
                         let seatNuber = `${seatColumnNumber[columnCounter]}`+rowCounter;
-                        let seactColor = getSeatColorForSeatNumber(seatNuber,passengers);
+                        let seactColor = getSeatColorForSeatNumber(seatNuber,passengers,displaySpecialMeal);
                         let seatOccupied = isOccupiedSeat(seatNuber) && isWebCheckIn;
                         
                     return  <div key ={seatNuber} 
