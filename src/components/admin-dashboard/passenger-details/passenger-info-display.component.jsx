@@ -85,7 +85,7 @@ const PassengerInfo =({data, sno, emptySeats, ancillaryServices,onDeletePassenge
                     <div className='alp-passenger-discription'>
                         <div className= 'alp-discription'>{sno +1}</div>
                         <div className= 'alp-discription'>{firstName}</div>
-                        {userType === 'Admin' && <div className= 'alp-discription'>{seatNo}</div>}
+                        {userType === 'Admin' && <div className= 'alp-discription'>{seatNo? seatNo: 'N/A'}</div>}
                         {userType === 'Admin' && <div className= 'alp-discription'>
                         { activeAncillaryService.length === 0? <div>No Ancillary Service Provided</div>:    
                         ancillaryServices.length === 0?  <div>No Ancillary Selected</div>:

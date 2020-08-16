@@ -65,14 +65,14 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
     let infantsOptions   =[{value: 'True'},{value: 'False'}];
     let wheelChairOptions=[{value: 'True'},{value: 'False'}];
     let otherSeatOptions= unOccupiedSeats.reduce((acc, eachUnOccupiedSeats)=>([ ...acc,{'value': eachUnOccupiedSeats}]),[]);
-    if(isAdd){ otherSeatOptions.push({'value': 'N/A'})}
+    if(isAdd || seatNo === ''){ otherSeatOptions.push({'value': 'N/A'})}
     otherSeatOptions.reverse();
         
     const {isInFlightShoppingActive,isPayPerViewActive,isLuggageActive,isMealActive} =activeAncillaryServices;
   
     const checkDisableButtonStatus=()=>{
-        firstName && lastName&& contactNumber && newSeat &&dob &&  //age
-         passport && address?setdisableButton(false): setdisableButton(true)
+        firstName && lastName&& contactNumber  &&dob && passport && address //&& newSeat // removing seat no from mandatory component
+        ?setdisableButton(false): setdisableButton(true)
     }
    
     useEffect(()=>{
@@ -100,6 +100,7 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
         let MEAL = meal === 'N/A'?'': meal;
         let Luggage = luggage === 'N/A'?'': luggage;
         let PayPerView = payPerView === 'N/A'?'': payPerView;
+        let newSeatNumber= newSeat === 'N/A'? '': newSeat
         const data = {
             ...passengerData,
             firstName, lastName,age,contactNumber,address,passport,dob,
@@ -107,7 +108,7 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
             meal:MEAL,
             payPerView:PayPerView,
             inFlightShopping:inflightShoppingValueToUpdate,
-            seatNo:newSeat,
+            seatNo:newSeatNumber,
             infants:infantValueToUpdate,
             wheelChair:wheelChairValueToUpdate,
         }
