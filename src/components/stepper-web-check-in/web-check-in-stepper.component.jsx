@@ -158,6 +158,7 @@ export const QontoConnector = withStyles({
       useEffect(()=>{
         removeAlreadySelectedSeat();
       },[flightNo])
+
     const setPreviousSeatNumber=(seatNo)=>{
       newSeatNumber(seatNo);
       removeAlreadySelectedSeat()
@@ -169,15 +170,13 @@ export const QontoConnector = withStyles({
         case 1:
             return(
                 <Fragment>
-                    <SeatMapContainer airlineNo={flightNo} 
-                      style ={{widht: '90%'}}
-                    showNotAllowedPointer={true}/>
+                    <SeatMapContainer airlineNo={flightNo} style ={{widht: '100%'}} isWebCheckIn={true} />
                     { updatedSeatNo? 
                       <div>
                           Your new seat number is {updatedSeatNo}
-                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}
-                                style={{cursor: 'pointer'}}
-                          > &#10008; </span>
+                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer'}}>
+                             &#10008;
+                           </span>
                       </div>:`Your seat number is ${seatNo}`
                     }
                 </Fragment>
@@ -198,9 +197,9 @@ export const QontoConnector = withStyles({
       }
     }
     return(
-      <Fragment key={step}>
+      <div key={step} style={{width: '100%'}}>
       { getStepComponent(step)}
-      </Fragment>
+      </div>
     )
    
   }

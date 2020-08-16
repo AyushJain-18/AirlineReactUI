@@ -17,8 +17,8 @@ import CustumButton from '../../CustumComponents/CustumButon/custumButton.compon
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 
-const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointer,startFetchingAllPassengersList,
-    passengers,selectedPassengerSeatNo, mappedPassengerDataToSeats,startUndoCheckin})=>{
+const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn,showNewSeatSelectedColor,
+    startFetchingAllPassengersList, passengers,selectedPassengerSeatNo, mappedPassengerDataToSeats,startUndoCheckin})=>{
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
        return  (passengers.length!==0 && passengers[0].PNR.split('X')[0]) === (airlineNo)}
@@ -46,10 +46,9 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable,showNotAllowedPointe
                                         <div className='item-description'>Infant<SeatCircle color='cornflowerblue'/> </div>
                                         <div className='item-description'>Wheelchair<SeatCircle color='coral'/> </div>
                                         <div className='item-description'>Infant & wheelchair<SeatCircle color='darkgrey'/></div>
+                                        {isWebCheckIn && <div className='item-description'>Selected New Seat<SeatCircle color='lightcoral'/></div>  }
                                 </div>
-                                <SeatArrangement passengers={passengers} 
-                                                totalSeats={60} 
-                                                showNotAllowedPointer={showNotAllowedPointer}/>
+                                <SeatArrangement passengers={passengers} totalSeats={60}  isWebCheckIn={isWebCheckIn} />
                             </div>
                             {/* Passenger details with undo-check-in option here option  */}
                             {showPassenger && <div>  

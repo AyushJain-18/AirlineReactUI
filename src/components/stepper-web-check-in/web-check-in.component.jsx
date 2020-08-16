@@ -61,7 +61,7 @@ import {selectNextButtonState} from '../../store/allpassenger/allpassenger.selec
           </div>
             ) : (
           <div className= {classes.instructions}>
-                <GetStepContentComponent step ={activeStep}/>
+                <GetStepContentComponent step ={activeStep} style={{width: '100%'}}/>
                 <div className={classes.buttonContainer}>
                     <CustumButton  onClick={handleBack} disabled={activeStep === 0}>
                         Back

@@ -1,4 +1,4 @@
-import React , {Fragment}from 'react';
+import React , {Fragment, useState}from 'react';
 import './seat.styles.scss'
 
 import {getSeatColorForSeatNumber} from '../../../utils/seat.utils';
@@ -14,13 +14,14 @@ import {
  
 
 import {
-        selectUnoccupiedSeat
+        selectUnoccupiedSeat,selectUpdatedSeat
 } from '../../../store/allpassenger/allpassenger.select'
 // Seat compoent contains total seats a flight have 
 
-const Seat = ({passengers,totalSeats, showNotAllowedPointer, 
-                setPassengerSeatNoAction, clearNewSeatSelected,
+const Seat = ({passengers,totalSeats, isWebCheckIn, 
+                setPassengerSeatNoAction, clearNewSeatSelected,newSeat,
                 unOccupiedSeats, setNewSeatNumber})=>{
+    const [seatSelected, setSeatSelectedStatus] = useState(false);                
     const seatNumberArray = new Array(totalSeats).fill(1);
     const seatColumnNumber= ['A','B','C','D','E','F']
     let rowCounter = 0;
@@ -34,12 +35,14 @@ const Seat = ({passengers,totalSeats, showNotAllowedPointer,
     const isColumnCounterIs2=()=>{
             return (columnCounter%2===0 && columnCounter%3!==0 && columnCounter%4!==0 )
     }
+    const isOccupiedSeat=(seatNo)=>{
+        return !(unOccupiedSeats.includes(seatNo))
+
+    }
     const setPassengerSeatNo =(seatNo)=>{
-       // console.log('seatNo',seatNo);
-       // console.log('isOccupiedSeat',unOccupiedSeats);
-        if(showNotAllowedPointer){
+        if(isWebCheckIn){
             if(!isOccupiedSeat(seatNo)){
-               // console.log('seat new seat')
+                setSeatSelectedStatus(true); // this we have to change seat color
                 setNewSeatNumber(seatNo)
             } 
         } else{
@@ -47,10 +50,7 @@ const Seat = ({passengers,totalSeats, showNotAllowedPointer,
             clearNewSeatSelected()
         }
     }
-    const isOccupiedSeat=(seatNo)=>{
-            return   !(unOccupiedSeats.includes(seatNo))
-
-    }
+ 
     return(
         <Fragment >
                 { passengers &&
@@ -59,14 +59,15 @@ const Seat = ({passengers,totalSeats, showNotAllowedPointer,
                         updateRowAndColumnCounter(index)
                         let seatNuber = `${seatColumnNumber[columnCounter]}`+rowCounter;
                         let seactColor = getSeatColorForSeatNumber(seatNuber,passengers);
-                        let seatOccupied = isOccupiedSeat(seatNuber) && showNotAllowedPointer;
+                        let seatOccupied = isOccupiedSeat(seatNuber) && isWebCheckIn;
                         
-                    return  <div key ={index} 
+                    return  <div key ={seatNuber} 
                                 className='seprator-container' 
                                 onClick= {()=>setPassengerSeatNo(seatNuber)}> 
-                                <SeatCircle key={index} 
+                                <SeatCircle key={seatNuber} 
                                             isSeatOccupied ={seatOccupied}
-                                            color={seactColor}>
+                                            color= {seatSelected && seatNuber ===newSeat ?
+                                                        'lightCoral':seactColor}>
                                             {seatNuber}
                                 </SeatCircle>
                                 {isColumnCounterIs2()? <div className='seprator'>||</div>:null}
@@ -77,7 +78,8 @@ const Seat = ({passengers,totalSeats, showNotAllowedPointer,
     )
 }
 const mapStateToProps =(state)=>({
-    unOccupiedSeats: selectUnoccupiedSeat(false)(state)
+    unOccupiedSeats: selectUnoccupiedSeat(false)(state),
+    newSeat: selectUpdatedSeat(state) 
 })
 const mapDispatchToProps =(dispatch)=>{
     return{
