@@ -16,9 +16,11 @@ import GetStepContentComponent ,{
 }from './web-check-in-stepper.component';
 import CustumButton from '../CustumComponents/CustumButon/custumButton.component';
 import {selectNextButtonState} from '../../store/allpassenger/allpassenger.select';
+import{changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.action'
 
 
- const  WebCheckInStepperComponent=({nextButtonState})=> {
+
+ const  WebCheckInStepperComponent=({nextButtonState,changeNextButtonState})=> {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -31,6 +33,9 @@ import {selectNextButtonState} from '../../store/allpassenger/allpassenger.selec
 
   const handleBack = () => {
       if(activeStep>0){
+        if(activeStep === 2){
+          changeNextButtonState(true);
+        }
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
       }
   };
@@ -80,6 +85,9 @@ const mapStateToProps =(state)=>{
   return{
     nextButtonState: selectNextButtonState(state)
   }
-} 
+}
+const mapDispatchToProps =(dispatch)=>({
+      changeNextButtonState: (value)=>(dispatch(changeStateOfDisplayNext(value))) 
+}) 
 
-export default connect(mapStateToProps)(WebCheckInStepperComponent);
+export default connect(mapStateToProps,mapDispatchToProps)(WebCheckInStepperComponent);

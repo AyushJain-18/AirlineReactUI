@@ -44,8 +44,8 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: "98vw",
-    marginLeft: '5px'
+    width: "95vw",
+    marginLeft: '20px'
 
   },
 }));
