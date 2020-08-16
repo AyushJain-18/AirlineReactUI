@@ -80,3 +80,7 @@ export const selectFlightNoFromPNREnteredWhileWebCheckIn = createSelector(
         
     } 
 )
+
+export const selectCrewView = createSelector(
+    [selectAllPassenger], AllPassenger=>AllPassenger.crewView
+)

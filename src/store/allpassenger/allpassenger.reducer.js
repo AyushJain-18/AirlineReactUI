@@ -9,7 +9,8 @@ const ALL_PASSANGER_INITIAL_STATE={
     nextDisplayButtonState: false,
     passengerPNR: null,
     seatUpdateMessage: null,
-    PassengerInfoBasedOnPNR: null //pnrPassenger
+    PassengerInfoBasedOnPNR: null, //pnrPassenger
+    crewView: "CREW"
 }
 
 const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
@@ -105,6 +106,11 @@ const passengerReducer = (state=ALL_PASSANGER_INITIAL_STATE,action)=>{
             ...state,
             seatUpdateMessage: 'Failed'
         }
+        case All_PASSANGER_TYPES.SET_CREW_VIEW:
+            return{
+                    ...state,
+                    crewView: action.payload
+                }   
         default:
             return state
     }

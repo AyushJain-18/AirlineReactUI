@@ -53,6 +53,13 @@ export const changeStateOfDisplayNext =(value)=>{
     }
 }
 
+export const setCrewView =(view)=>{
+    return{
+        type: ALL_PASSANGER_TYPES.SET_CREW_VIEW,
+        payload: view
+    }
+} 
+
 
 export const pnrPassengerInfoStart =PNR=>{
     return{

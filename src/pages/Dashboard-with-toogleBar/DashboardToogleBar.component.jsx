@@ -4,6 +4,7 @@ import ToggleTab from '../../components/CustumComponents/Toggle-tab/ToggleTab.co
 
 import {connect} from 'react-redux';
 import {selectPassenger,selectSignUserType,selectFlightNo} from '../../store/user/user.selector';
+import {selectCrewView} from '../../store/allpassenger/allpassenger.select';
 
 import FlightDetailsComponent from '../flight-deatils/flight-details.component'
 import SeatMapContainer from '../../containers/seat-map-conatiner/seat-map.container';
@@ -16,7 +17,7 @@ class DashboardToogleBarComponent extends React.Component{
     
     render(){
         //console.log('props', this.props.location)
-        const {passenger, userType} =this.props;
+        const {passenger, userType,crewView} =this.props;
         let airlineNo ='';
         let showPassenger = true;
         if(passenger){
@@ -29,7 +30,7 @@ class DashboardToogleBarComponent extends React.Component{
         return(
             <Fragment>
                 {/* 1.In-fkight dashboard */}
-                {passenger&& userType==='In-flight'&&
+                {userType==='Crew' &&  crewView ==='IN-FLIGHT' &&
                   <ToggleTab 
                     componentsArray={[FlightDetailsComponent,SeatMapContainer,AuxilaryServicesComponent]}
                     labelArray={['Flight Info','Seat-Map','Auxilary-Service']}
@@ -37,10 +38,9 @@ class DashboardToogleBarComponent extends React.Component{
                     keyArray={[`info${airlineNo}`,`seat${airlineNo}`,`aux${airlineNo}`]}
                     />
                 }
-                {!passenger&& userType==='In-flight'&&<div> ADMIN HAD REMOVED YOUR ACCOUNT</div>}
+                {/* {!passenger&& userType==='In-flight'&&<div> ADMIN HAD REMOVED YOUR ACCOUNT</div>} */}
 
-                {
-                    userType==='Crew'&& 
+                {userType==='Crew'&&  crewView ==='CREW' &&
                     <Fragment>
                         {!airlineNo?<Redirect to='/'/>:
                         <ToggleTab key ={airlineNo} 
@@ -63,7 +63,8 @@ const mapStateToprops = (state)=>{
     return{
         passenger: selectPassenger(state),
         userType: selectSignUserType(state),
-        flightNo: selectFlightNo(state)
+        flightNo: selectFlightNo(state),
+        crewView: selectCrewView(state)
     }
 }
 
