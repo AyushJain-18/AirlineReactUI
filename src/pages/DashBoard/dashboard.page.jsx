@@ -9,6 +9,7 @@ import Switch from '@material-ui/core/Switch';
 import {FlightContainer,FlightDetails,FlightName,FlightButton,FlightDetailsEachComponent} from './flight-over.styles';
 
 import {setCrewView} from '../../store/allpassenger/allpassenger.action';
+import {selectCrewView} from '../../store/allpassenger/allpassenger.select';
 import {selectFlights} from '../../store/flight/flight.selector';
 import { selectPassenger, selectSignUserType } from '../../store/user/user.selector';
 
@@ -16,7 +17,7 @@ class Dashboard extends React.Component {
     constructor(props){
         super(props)
         this.state ={
-            toogleButton: 'CREW'
+            toogleButton: props.crewView
         }
     }
     onChangeToogleButton=() =>{
@@ -54,7 +55,8 @@ const mapStateToProps = (state,ownProp)=>{
     return{
         flights:   selectFlights(state),
         passenger: selectPassenger(state),
-        signInUserType: selectSignUserType(state)
+        signInUserType: selectSignUserType(state),
+        crewView: selectCrewView(state)
     }
 }
 const mapDispatchToProp = dispatch =>{
