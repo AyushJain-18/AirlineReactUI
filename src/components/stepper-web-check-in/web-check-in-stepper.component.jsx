@@ -13,6 +13,8 @@ import PNRInputCompoennt from './enter-pnr.component';
 import PassengerAuxilarysDescriptionComponent from '../passenger-info/passenger-auxilarys-discription/passenger-auxilarys-description.component';
 import SeatMapContainer  from '../../containers/seat-map-conatiner/seat-map.container'
 import Spinner from '../CustumComponents/spinner/spinner.component';
+import CustumButton from '../CustumComponents/CustumButon/custumButton.component';
+
 //selector
 import {
     selectFlightNoFromPNREnteredWhileWebCheckIn,
@@ -25,10 +27,12 @@ import {
 import{
   clearNewSeatSelectedByPassenger,
   onNewSeatSelected
-  
-
 } from '../../store/allpassenger/allpassenger.action'
-import { selectisError } from '../../store/user/user.selector';
+
+import {
+  startPassengerInfoUpdate
+} from '../../store/user/user.actions'
+
 
 
 /**
@@ -122,7 +126,7 @@ export const QontoConnector = withStyles({
     },
     buttonContainer: {
       display: 'flex',
-      marginTop: '100px',
+      margin: '100px 0px',
       width: '264px',
       justifyContent:' space-around'
     },
@@ -145,6 +149,15 @@ export const QontoConnector = withStyles({
       fontSize: '16px',
       fontWeight: "bold"
     },
+    seatStatus:{
+      fontSize: "20px",
+      color: "lightcoral"
+    },
+    centerButtonContainer: {
+      display: 'flex',
+      flexDirection: "row",
+      justifyContent: 'center'
+    }
   }));
   
  export  function getSteps() {
@@ -152,7 +165,8 @@ export const QontoConnector = withStyles({
   }
   
   const GetStepContentComponent=({step,flightNo,seatNo,updatedSeatNo,isLoading,
-          newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger})=> {
+          newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger,updateSeat})=> {
+            const classes= useStyles()
       // THIS WILL RENDER OUR COMPONENT AGAIN, SO WE WILL GET NEW FILGHT NO ENTERED BY USER
       // console.log('fetchedPassenger', fetchedPassenger)
       useEffect(()=>{
@@ -163,6 +177,11 @@ export const QontoConnector = withStyles({
       newSeatNumber(seatNo);
       removeAlreadySelectedSeat()
     }  
+    const onUpdateSeat =()=>{
+      const {id,airlineNumber,PNR} = fetchedPassenger;
+      const updatedData = {...fetchedPassenger, seatNo:updatedSeatNo}
+      updateSeat(id,airlineNumber,updatedData,'Crew',PNR)
+    }
     const getStepComponent =(step)=>{
       switch (step) {
         case 0:
@@ -170,27 +189,30 @@ export const QontoConnector = withStyles({
         case 1:
             return(
                 <Fragment>
-                    <SeatMapContainer airlineNo={flightNo} style ={{widht: '100%'}} isWebCheckIn={true} />
                     { updatedSeatNo? 
-                      <div>
-                          Your new seat number is {updatedSeatNo}
-                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer'}}>
-                             &#10008;
-                           </span>
-                      </div>:`Your seat number is ${seatNo}`
+                      <div className= {classes.seatStatus}> Your new seat number is {updatedSeatNo}
+                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer', color: 'red'}}> &#10008;</span>
+                      </div>:
+                      <div className= {classes.seatStatus}> Your seat number is {seatNo}</div>
                     }
+                    <SeatMapContainer airlineNo={flightNo} style ={{widht: '100%'}} isWebCheckIn={true} />
+                   { updatedSeatNo && <div className ={classes.centerButtonContainer}>
+                      <CustumButton onClick ={onUpdateSeat}> Update Seat </CustumButton>
+                    </div>}
                 </Fragment>
             ) 
         case 2: 
         //key= {new Date().getMilliseconds()}s
-          return <Fragment>
-               {isLoading && <Spinner/>}
+          return(
+               <div className ={classes.centerButtonContainer}>
+                 {isLoading && <Spinner/>}
                      <PassengerAuxilarysDescriptionComponent 
                         passengerData={fetchedPassenger}
                         width={'80%'}
                         editable ={true}
                         />
-             </Fragment>;
+                </div>
+                )
         
         default:
           return  <div>Unknown step</div>;
@@ -214,6 +236,7 @@ export const QontoConnector = withStyles({
 
   const mapDispatchToProps =(dispatch)=>({
       removeAlreadySelectedSeat: ()=>dispatch(clearNewSeatSelectedByPassenger()),
-      newSeatNumber: (seatNo)=> dispatch(onNewSeatSelected(seatNo))
+      newSeatNumber: (seatNo)=> dispatch(onNewSeatSelected(seatNo)),
+      updateSeat: (id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR))
   })
   export default connect(mapStateToProps, mapDispatchToProps)(GetStepContentComponent);

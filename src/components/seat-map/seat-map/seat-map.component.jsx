@@ -17,7 +17,7 @@ import CustumButton from '../../CustumComponents/CustumButon/custumButton.compon
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons';
 
 
-const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn,showNewSeatSelectedColor,
+const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn ,showNewSeatSelectedColor,
     startFetchingAllPassengersList, passengers,selectedPassengerSeatNo, mappedPassengerDataToSeats,startUndoCheckin})=>{
     const  isPassengerFetched=()=>(passengers.length!==0);
     const  flightNoChanged=()=>{
@@ -36,7 +36,7 @@ const SaetMapComponent = ({airlineNo,showPassenger,editable, isWebCheckIn,showNe
         })
     return(
          <Fragment>
-                        { isPassengerFetched()&& <div className='seat-map-container'>
+                        { isPassengerFetched()&& <div className='seat-map-container' style ={{width: isWebCheckIn?"100%": "90%"}}>
                             {/* Seat-Map here  */}
                             <div className="seat-map-layout-container" style={{width:`${widthOfSeatLayout}`}}>
                                 <div>Flight No-{airlineNo}</div>
