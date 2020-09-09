@@ -71,8 +71,8 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
     const {isInFlightShoppingActive,isPayPerViewActive,isLuggageActive,isMealActive} =activeAncillaryServices;
   
     const checkDisableButtonStatus=()=>{
-        firstName && lastName&& contactNumber  &&dob && passport && address //&& newSeat // removing seat no from mandatory component
-        ?setdisableButton(false): setdisableButton(true)
+         //&&dob && passport && address //&& newSeat // removing seat no from mandatory component
+         firstName && lastName&& contactNumber ?setdisableButton(false): setdisableButton(true)
     }
    
     useEffect(()=>{
@@ -90,7 +90,7 @@ import {selectUnoccupiedSeat,selectPNR} from '../../../store/allpassenger/allpas
              if(passengerData.inFlightShopping === undefined)setinFlightShopping(false)
     },[passengerData])
 
-    useEffect(()=>{checkDisableButtonStatus()},[firstName, lastName, age, newSeat, contactNumber,address,passport,dob])
+    useEffect(()=>{checkDisableButtonStatus()},[firstName, lastName, age, newSeat, contactNumber])
 
     const onConfirm =(event)=>{
         event.preventDefault();

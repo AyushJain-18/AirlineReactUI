@@ -14,6 +14,7 @@ import {
 
 import{
     selectIsPNRFecthedHasAlreadyCheckedIn,
+    selectPassengerInfoOfFetchedPassengerFromPNR,
     selectAllPassengerFetchngStatus
 } from '../../store/allpassenger/allpassenger.select'
 
@@ -37,7 +38,7 @@ const useStyle = makeStyles(()=>{
 })
 
 const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,removeFetchedPassenger,
-            changeNextButtonState,isPassengerCheckIn})=>{
+            changeNextButtonState,isPassengerCheckIn,passengerData})=>{
    // console.log('isPassengerCheckIn',isPassengerCheckIn)
     const classes = useStyle()
     const [pnrValue, setpnrValue] = useState('');
@@ -57,7 +58,7 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,r
         } 
       }, [pnrValue,displayPNRFormatError])
     const checkPNRPatter=(value)=>{
-        const regexPattern= /PQ00([1-5])XY([0][1-9]|[1-2][0-9]|[3][0])$/; 
+        const regexPattern= /PQ00([1-5])XY([0][1-9]|[1-5][0-9]|[6][0])$/; 
         let isEnterPNRmatched =  regexPattern.test(value);
         //console.log(isEnterPNRmatched)
         setdisplayPNRFormatError(!isEnterPNRmatched)
@@ -78,16 +79,17 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,r
                     name='enter PNR'
                     id='pnr-1'
                 />
-                    {
-                        displayPNRFormatError? <div className ={classes.errorMsg}>
+                    {displayPNRFormatError&& pnrValue? <div className ={classes.errorMsg}>
                             Pls check your PNR</div>: null
-                        
                     }
-                    {
-                    isPassengerCheckIn? <div>
-                        Passenger Already Check In, Click next to update seat</div>: null
-                            // <div>{()=>changeNextButtonState(true)}</div>
-                        
+                    {!!!passengerData && pnrValue? <div className ={classes.errorMsg}>
+                        No Passenger Found </div>: null
+                    }
+                    {!displayPNRFormatError && isPassengerCheckIn? <div>
+                        Passenger Already Check In, Click next to update seat</div>: null    
+                    }
+                    {!displayPNRFormatError && !isPassengerCheckIn && !!passengerData? <div>
+                        Passenge is not Checked In, please click next to select seat</div>: null    
                     }
                 </Fragment>: <Spinner/>
 }
@@ -96,6 +98,7 @@ const PNRInputCompoennt =({ fetchPassengerInfoFromPNR, isLoading,addPNRToStore,r
 }
 const mapStateToProps =(state)=>({
     isPassengerCheckIn: selectIsPNRFecthedHasAlreadyCheckedIn(state),
+    passengerData:selectPassengerInfoOfFetchedPassengerFromPNR(state),
     isLoading: selectAllPassengerFetchngStatus(state),
     
 })

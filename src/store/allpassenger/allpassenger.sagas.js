@@ -28,7 +28,9 @@ function *getPassengerInfo({payload}){
         const passengerInfo = passenger.data[0];
         // yield console.log(passengerInfo);
          yield put(pnrPassengerInfoSuccess(passengerInfo))
-         yield put(changeStateOfDisplayNext(true))
+         if(passengerInfo){
+            yield put(changeStateOfDisplayNext(true))
+         }
     } catch(error){
             yield put(pnrPassengerInfoFailure())
     }

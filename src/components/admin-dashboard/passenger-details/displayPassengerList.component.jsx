@@ -69,19 +69,15 @@ import { selectSignUserType } from '../../../store/user/user.selector';
            }
         },[flightNoBasedPassengers, airlineNo,totalPassengers]);
     
-    const filterDisplayOptionsForParticularFlight = [
-            {value:'All'},{value: 'Checked IN'},{value: 'Not Checked IN'}, {value: 'With-Infants'},
-            {value: 'With-Wheelchair'},{value: 'without passport'}
-            ,{value: 'without Address'},{value: 'without DOB'}  
-        ];
-        //{value: 'With-PayPerView'},{value: 'with Meals'},{value: 'without Meals'},
+    const filterDisplayOptionsForParticularFlight = userType === 'Admin' ?
+     [{value:'All'},{value: 'without passport'},{value: 'without Address'},{value: 'without DOB'}]
+     :[{value:'All'},{value: 'Checked IN'},{value: 'Not Checked IN'}, {value: 'With-Infants'},{value: 'With-Wheelchair'}];
         
     const filterDisplayOptions = [    
-        {value:'All'},{value:'Flight-PQ001'},{value:'Flight-PQ002'},{value:'Flight-PQ003'},{value:'Flight-PQ004'},
-        {value:'Flight-PQ005'},{value: 'With-Infants'},{value: 'With-Wheelchair'}
-        ,{value: 'Checked IN'},{value: 'Not Checked IN'},{value: 'without passport'}
-        ,{value: 'without Address'},{value: 'without DOB'}];
-// ,{value: 'with Meals'},{value: 'With-PayPerView'}
+        {value:'All'},{value: 'without passport'},{value: 'without Address'},{value: 'without DOB'},
+        {value:'Flight-PQ001'},{value:'Flight-PQ002'},{value:'Flight-PQ003'},{value:'Flight-PQ004'},
+        {value:'Flight-PQ005'},];
+
     const changeFilterForParticularFlight =(value)=>{
         if(value === 'All'){setdisplayPassengers(flightNoBasedPassengers)};
         if(value ==='With-Wheelchair'){setdisplayPassengers(allWheelChairPassengers)};

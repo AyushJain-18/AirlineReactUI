@@ -32,10 +32,11 @@
   "scripts": {
     "server": "cd../Airline-server && npm start",
     "app": "serve -s build",
-    "start": "set PORT=3006 &&  react-scripts start",
+    "start": "npm run build && npm run app",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "react": "react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,5 +52,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
+    "enzyme-to-json": "^3.5.0"
   }
 }

@@ -66,6 +66,8 @@ const PassengerAuxilaryServiceInfo= ({passengerData,width,editable, saveChange,
         if(newSeatNumber){
            // console.log('1.newSeatNumber from action',newSeatNumber)
             setnewSeat(newSeatNumber);
+        }else{
+            setnewSeat(passengerData.seatNo);
         }
        // console.log('2.newSeatNumber from passenger and then update ',newSeat);
     },[newSeatNumber])

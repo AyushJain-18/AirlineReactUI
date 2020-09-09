@@ -14,6 +14,7 @@ import PassengerAuxilarysDescriptionComponent from '../passenger-info/passenger-
 import SeatMapContainer  from '../../containers/seat-map-conatiner/seat-map.container'
 import Spinner from '../CustumComponents/spinner/spinner.component';
 import CustumButton from '../CustumComponents/CustumButon/custumButton.component';
+import{changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.action';
 
 //selector
 import {
@@ -32,6 +33,8 @@ import{
 import {
   startPassengerInfoUpdate
 } from '../../store/user/user.actions'
+import { useState } from 'react';
+import { StepContent } from '@material-ui/core';
 
 
 
@@ -157,6 +160,11 @@ export const QontoConnector = withStyles({
       display: 'flex',
       flexDirection: "row",
       justifyContent: 'center'
+    },
+    AuxilaryContainer: {
+      display: 'flex',
+      flexDirection: "column",
+      justifyContent: 'center'
     }
   }));
   
@@ -165,13 +173,22 @@ export const QontoConnector = withStyles({
   }
   
   const GetStepContentComponent=({step,flightNo,seatNo,updatedSeatNo,isLoading,
-          newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger,updateSeat})=> {
+          newSeatNumber,removeAlreadySelectedSeat, fetchedPassenger,updateSeat,changeNextButtonState})=> {
             const classes= useStyles()
-      // THIS WILL RENDER OUR COMPONENT AGAIN, SO WE WILL GET NEW FILGHT NO ENTERED BY USER
-      // console.log('fetchedPassenger', fetchedPassenger)
+      const[stepNo, setStepNo]  = useState(0)
       useEffect(()=>{
         removeAlreadySelectedSeat();
       },[flightNo])
+
+      useEffect(()=>{
+        if(stepNo === 1){
+          if(!!seatNo || !!updatedSeatNo ){ // when anyone of them have value 
+            changeNextButtonState(true) // display next button
+          }else{
+            changeNextButtonState(false)  // when both are empty then dont display next button
+          }
+        }
+      }, [seatNo,updatedSeatNo,stepNo])
 
     const setPreviousSeatNumber=(seatNo)=>{
       newSeatNumber(seatNo);
@@ -183,34 +200,52 @@ export const QontoConnector = withStyles({
       updateSeat(id,airlineNumber,updatedData,'Crew',PNR)
     }
     const getStepComponent =(step)=>{
+       //PQ001XY20
       switch (step) {
         case 0:
+          if(stepNo !==0){
+            setStepNo(step);
+          }
           return <PNRInputCompoennt/>
         case 1:
+          if(stepNo !==1){
+            setStepNo(step);
+          }
             return(
                 <Fragment>
                     { updatedSeatNo? 
                       <div className= {classes.seatStatus}> Your new seat number is {updatedSeatNo}
-                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer', color: 'red'}}> &#10008;</span>
+                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer', color: 'black'}}> &#10008;</span>
                       </div>:
-                      <div className= {classes.seatStatus}> Your seat number is {seatNo}</div>
+                      <div className= {classes.seatStatus}> {seatNo? `Your seat number is ${seatNo}`: 'Please slect a seat'} </div>
                     }
                     <SeatMapContainer airlineNo={flightNo} style ={{widht: '100%'}} isWebCheckIn={true} />
                    { updatedSeatNo && <div className ={classes.centerButtonContainer}>
-                      <CustumButton onClick ={onUpdateSeat}> Update Seat </CustumButton>
+                      <CustumButton onClick ={onUpdateSeat}> Update Seat here </CustumButton>
                     </div>}
                 </Fragment>
             ) 
         case 2: 
+        if(stepNo !==2){
+          setStepNo(step);
+        }
         //key= {new Date().getMilliseconds()}s
           return(
-               <div className ={classes.centerButtonContainer}>
+               <div className ={classes.AuxilaryContainer}>
                  {isLoading && <Spinner/>}
-                     <PassengerAuxilarysDescriptionComponent 
+                 { updatedSeatNo? 
+                      <div className= {classes.seatStatus} style={{marginBottom: '20px'}}> Your new seat number is {updatedSeatNo}
+                          <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer', color: 'black'}}> &#10008;</span>
+                      </div>:
+                      <div className= {classes.seatStatus} style={{marginBottom: '20px'}}> {seatNo? `Your seat number is ${seatNo}`: 'Please slect a seat'} </div>
+                    }
+                    <div className={classes.centerButtonContainer}>
+                    <PassengerAuxilarysDescriptionComponent 
                         passengerData={fetchedPassenger}
                         width={'80%'}
                         editable ={true}
                         />
+                    </div>
                 </div>
                 )
         
@@ -236,6 +271,7 @@ export const QontoConnector = withStyles({
 
   const mapDispatchToProps =(dispatch)=>({
       removeAlreadySelectedSeat: ()=>dispatch(clearNewSeatSelectedByPassenger()),
+      changeNextButtonState: (value)=>(dispatch(changeStateOfDisplayNext(value))),
       newSeatNumber: (seatNo)=> dispatch(onNewSeatSelected(seatNo)),
       updateSeat: (id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR)=>dispatch(startPassengerInfoUpdate(id,airlineNumber,updatedData,logedInUserType,checkInPassengerPNR))
   })
