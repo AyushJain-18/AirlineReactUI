@@ -34,7 +34,7 @@ const  SignInComponent =({userSignInStartAction,isWrongCredentialEntered,userDat
         { 
             isWrongCredentialEntered?
               <div className='wrongCredentials'>Incorrect user Id Or Password</div>
-              :userData?(userType === 'crew'?<Redirect to='/'/>:<Redirect to={`${userType}`}/>)
+              :userData?(userType === 'Crew'?<Redirect to='/'/>:<Redirect to={`${userType}`}/>)
                     : null 
         }
                 <form className = 'sign-in-form'onSubmit={handleSubmit}> 
