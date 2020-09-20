@@ -1,7 +1,7 @@
 import axios from 'axios';
 
- //const serverUrl ='http://localhost:3000';
-const serverUrl =  'https://my-airline-server-12.herokuapp.com';
+const serverUrl ='http://localhost:3000';
+//const serverUrl =  'https://my-airline-server-12.herokuapp.com';
 
 
 export const getRequest =(endpoint)=>{
