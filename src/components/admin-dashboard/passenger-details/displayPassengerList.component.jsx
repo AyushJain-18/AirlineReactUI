@@ -9,6 +9,7 @@ import Spinner from '../../CustumComponents/spinner/spinner.component' ;
 import ErrorComponent from '../../CustumComponents/ErrorComponent/errorComponent' ;
 import PassengerInfo from './passenger-info-display.component';
 import DisplayValue from '../../CustumComponents/custum-select/custumSelect.component';
+import { selectAllPassengerSeatUpdateMessage } from '../../../store/allpassenger/allpassenger.select';
 
 
 import{
@@ -55,12 +56,14 @@ import { selectSignUserType } from '../../../store/user/user.selector';
     allPassengersWithoutAddress,allPassengersWithoutDOB,allPassengersWithoutPassport,
     totalPassengers,totalCheckedInPassengers,totalPassengersWithInfants,totalNotCheckedInPassengers,
     totalWheelChairPassengers,totalPassengersWithMeals,totalPassengersWithPayPerView,
-    totalPassengersWithoutAddress,totalPassengersWithoutDOB,totalPassengersWithoutPassport
+    totalPassengersWithoutAddress,totalPassengersWithoutDOB,totalPassengersWithoutPassport,updateMsg
     })=>{
     
     const[displayPassengers , setdisplayPassengers] = useState();
 
+
     useEffect(()=>{startFetchingAllPassengers()},[]);
+    useEffect(()=>{if(updateMsg === 'Success'){startFetchingAllPassengers()}},[updateMsg]);
     useEffect(()=>{ 
             if(airlineNo){
                 setdisplayPassengers(flightNoBasedPassengers)
@@ -157,6 +160,7 @@ const mapStateToProps =(state, propsFromParrentComponent)=>(
         isLoading: selectLoadingState(state),
         userType: selectSignUserType(state),
         isError: selectErrorState(state),
+        updateMsg: selectAllPassengerSeatUpdateMessage(state),
         flightMappedPassengers: selectFlightNoMappedPassengers(state),
         totalPassengers: selectAllPassengers(state),
         totalWheelChairPassengers:selectAllPassengersWithWheelChairs(state),

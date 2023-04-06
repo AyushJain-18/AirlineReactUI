@@ -237,14 +237,14 @@ export const QontoConnector = withStyles({
                       <div className= {classes.seatStatus} style={{marginBottom: '20px'}}> Your new seat number is {updatedSeatNo}
                           <span onClick ={()=>setPreviousSeatNumber(seatNo)}style={{cursor: 'pointer', color: 'black'}}> &#10008;</span>
                       </div>:
-                      <div className= {classes.seatStatus} style={{marginBottom: '20px'}}> {seatNo? `Your seat number is ${seatNo}`: 'Please slect a seat'} </div>
+                      <div className= {classes.seatStatus} style={{marginBottom: '20px'}}> {seatNo? `Your seat number is ${seatNo}`: 'NO seat Selected, Please press back button and slect a new seat'} </div>
                     }
                     <div className={classes.centerButtonContainer}>
-                    <PassengerAuxilarysDescriptionComponent 
+                   { (updatedSeatNo || seatNo) &&  <PassengerAuxilarysDescriptionComponent 
                         passengerData={fetchedPassenger}
                         width={'80%'}
                         editable ={true}
-                        />
+                        />}
                     </div>
                 </div>
                 )
