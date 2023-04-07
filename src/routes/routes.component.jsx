@@ -1,6 +1,6 @@
-import React, {Fragment,lazy,Suspense} from 'react';
+import React, {lazy,Suspense} from 'react';
 import './routes.styles.scss'
-import {Switch , Route, Redirect, Link} from 'react-router-dom'
+import {Switch , Route, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 //import  DashboardContainer from '../containers/dashboard-container/dashboardContainer';
@@ -26,57 +26,56 @@ const DashboardToogleBarContainer = lazy(()=>import('../containers/DashBoard-Too
 const AddNewPassenger = lazy(()=>import('../components/admin-dashboard/addPassenger/add-new-passenger.component'));
 const AdminToolbar = lazy(()=> import('../components/admin-dashboard/adminToolbar/admin-toolbar.component'))
 class AllRoutesComponent extends React.Component{
-    
-    componentWillMount(){
-        const{startFetchingFlights,startFetchingAncillaryService,flights} = this.props;
-        // if(!flights){
-            startFetchingFlights();
-            startFetchingAncillaryService();
-            // } 
-         }
-    render(){
-        const{signInUserType, allPassengers} = this.props;
+  UNSAFE_componentWillMount(){
+    const{startFetchingFlights,startFetchingAncillaryService} = this.props;
+    // if(!flights){
+    startFetchingFlights();
+    startFetchingAncillaryService();
+    // } 
+  }
+  render(){
+    const{signInUserType, allPassengers} = this.props;
       
-        return(
-            <ErrorBoundary>
-                <Suspense fallback = {<Spinner/>}>
-                    <HeaderComponent/>
-                    <div className='routes-div-container'>
-                            <Switch > 
-                                    <Route exact path= '/' component={DashboardContainer}/>
-                                    <Route exact path= '/signIn' component={SignInContainer}/>
-                                    {signInUserType? 
-                                        <Route exact path ={`/${signInUserType}`}component={DashboardToogleBarContainer} />:<Redirect to ='/'/>
-                                    }
-                                    {signInUserType&& allPassengers&& signInUserType==='Admin'?
-                                        <Route exact path ='/admin/addpassengers' component={AddNewPassenger} />
-                                        :<Redirect to ={`/${signInUserType}`}/>
+    return(
+      <ErrorBoundary>
+        <Suspense fallback = {<Spinner/>}>
+          <HeaderComponent/>
+          <div className='routes-div-container'>
+            <Switch > 
+              <Route exact path= '/' component={DashboardContainer}/>
+              <Route exact path= '/signIn' component={SignInContainer}/>
+              {signInUserType? 
+                <Route exact path ={`/${signInUserType}`}component={DashboardToogleBarContainer} />:<Redirect to ='/'/>
+              }
+              {signInUserType&& allPassengers&& signInUserType==='Admin'?
+                <Route exact path ='/admin/addpassengers' component={AddNewPassenger} />
+                :<Redirect to ={`/${signInUserType}`}/>
                                     
-                                    }
-                                     {signInUserType&& signInUserType==='Admin'?
-                                        <Route exact path ='/admin/manage' component={AdminToolbar} />:<Redirect to ={`/${signInUserType}`}/>
+              }
+              {signInUserType&& signInUserType==='Admin'?
+                <Route exact path ='/admin/manage' component={AdminToolbar} />:<Redirect to ={`/${signInUserType}`}/>
                                     
-                                    }
+              }
                                     
-                            </Switch>
-                    </div>
-            </Suspense>
-        </ErrorBoundary>
-        )
-    }
+            </Switch>
+          </div>
+        </Suspense>
+      </ErrorBoundary>
+    )
+  }
 }
 
 const mapStateToProps =(state)=>{
-    return{
-        flights: selectFlights(state),
-        signInUserType: selectSignUserType(state),
-        allPassengers: selectAllPassengers(state)
-    }
+  return{
+    flights: selectFlights(state),
+    signInUserType: selectSignUserType(state),
+    allPassengers: selectAllPassengers(state)
+  }
 }
 const mapDispatchToProps =(dispatch)=>{
-    return{
-        startFetchingFlights: ()=>dispatch(startFlightFetching()),
-        startFetchingAncillaryService: ()=> dispatch(fetchAllAncillaryServiceDataStart())
-    }
+  return{
+    startFetchingFlights: ()=>dispatch(startFlightFetching()),
+    startFetchingAncillaryService: ()=> dispatch(fetchAllAncillaryServiceDataStart())
+  }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(AllRoutesComponent); 

@@ -103,6 +103,7 @@ function registerValidSW(swUrl, config) {
       };
     })
     .catch(error => {
+      console.log('Error', error);
       // // cons.error('Error during service worker registration:', error);
     });
 }

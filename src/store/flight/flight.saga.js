@@ -7,8 +7,8 @@ export function* getAllFlights(){
   try{
     yield delay(2000);
     //  throw new Error()
-   const flights = yield getRequest('/flight');
-   yield put(flightFetchingSuccess(flights.data))
+    const flights = yield getRequest('/flight');
+    yield put(flightFetchingSuccess(flights.data))
   }
   catch(error){
   //  yield console.log(error.message)
@@ -18,7 +18,7 @@ export function* getAllFlights(){
 }
 
 export function* flightSaga(){
-   // yield console.log('SAGA IS WORKING FINE');
-    yield takeLatest(FLIGHT_ACTION_TYPES.FETCH_FLIGHT_START, getAllFlights);
-   // yield console.log('SAGA IS NOT WORKING FINE');
+  // yield console.log('SAGA IS WORKING FINE');
+  yield takeLatest(FLIGHT_ACTION_TYPES.FETCH_FLIGHT_START, getAllFlights);
+  // yield console.log('SAGA IS NOT WORKING FINE');
 }

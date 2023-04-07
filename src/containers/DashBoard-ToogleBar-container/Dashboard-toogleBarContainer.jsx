@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import DashboardToogleBarComponent from '../../pages/Dashboard-with-toogleBar/DashboardToogleBar.component';
 import ErrorContainer from '../errorContainer/error-container';
@@ -9,15 +10,15 @@ import {compose} from 'redux'
 import{selectDisplaySpinnerStatus,selectisError} from '../../store/user/user.selector';
 
 const mapStateToProps =(state)=>(
-    {
-        isLoading: selectDisplaySpinnerStatus(state),
-        isError: selectisError(state)
-    }
+  {
+    isLoading: selectDisplaySpinnerStatus(state),
+    isError: selectisError(state)
+  }
 )
 const DashboardToogleBarContainer = compose(
-connect(mapStateToProps),
-WithSpinnerContainer,
-ErrorContainer
+  connect(mapStateToProps),
+  WithSpinnerContainer,
+  ErrorContainer
 )(DashboardToogleBarComponent);
 
 export default DashboardToogleBarContainer;

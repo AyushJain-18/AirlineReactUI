@@ -4,10 +4,10 @@ import {userLogOutSuccess} from '../user.actions';
 import USER_TYPES from '../user.types';
 
 function* signOut(){
-        yield put(userLogOutSuccess())   
- }
+  yield put(userLogOutSuccess())   
+}
 
 
 export default function* userLogOutSaga(){
-    yield takeLatest(USER_TYPES .USER_LOGOUT_START, signOut) 
+  yield takeLatest(USER_TYPES .USER_LOGOUT_START, signOut) 
 }

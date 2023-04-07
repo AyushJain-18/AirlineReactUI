@@ -7,19 +7,19 @@ import ManageAncillaryServices from '../manageAuxilaryService/ManageAncillary/ma
 
 
 
- class AdminToolbar extends React.Component {
-         render(){
-            return(
-                    <div style= {{marginBottom: "1vw"}}>
-                        <ToggleTab
-                            componentsArray={[ManageAncillaryServices,DisplayPassengersList]}
-                            propsArray = {[{},{}]}
-                            labelArray ={[ 'Manage Ancillary Service','Manage All Passenger']}
-                            keyArray={['Manage Ancillary Service','Manage Passenger']} 
-                        />
-                    </div>
-            )
-        }
- }
+class AdminToolbar extends React.Component {
+  render(){
+    return(
+      <div style= {{marginBottom: "1vw"}}>
+        <ToggleTab
+          componentsArray={[ManageAncillaryServices,DisplayPassengersList]}
+          propsArray = {[{},{}]}
+          labelArray ={[ 'Manage Ancillary Service','Manage All Passenger']}
+          keyArray={['Manage Ancillary Service','Manage Passenger']} 
+        />
+      </div>
+    )
+  }
+}
 
- export default AdminToolbar
+export default AdminToolbar

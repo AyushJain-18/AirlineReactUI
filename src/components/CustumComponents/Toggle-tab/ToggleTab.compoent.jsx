@@ -1,5 +1,5 @@
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -7,8 +7,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { isWidthDown } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -22,7 +20,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-          <Typography component={'span'}>{children}</Typography>
+        <Typography component={'span'}>{children}</Typography>
       )}
     </div>
   );
@@ -68,26 +66,26 @@ const ToggleTab=({componentsArray, labelArray,propsArray,keyArray})=> {
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="fullWidth"
-            aria-label="full width tabs example"
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+          aria-label="full width tabs example"
         >
-            {componentsArray.map((eachItem,index)=>
-                <Tab label={`${labelArray[index]}`} key={index} {...a11yProps(index)}/>)}
+          {componentsArray.map((eachItem,index)=>
+            <Tab label={`${labelArray[index]}`} key={index} {...a11yProps(index)}/>)}
         </Tabs>
       </AppBar>
-          <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={value}
-            onChangeIndex={handleChangeIndex}
-          >
-          {componentsArray.map((EachItem, index)=>
-              <TabPanel key={index} value={value} index={index} dir={theme.direction}>
-                  <EachItem key ={keyArray[index]} {...propsArray[index]}/>
-              </TabPanel>)}
+      <SwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        {componentsArray.map((EachItem, index)=>
+          <TabPanel key={index} value={value} index={index} dir={theme.direction}>
+            <EachItem key ={keyArray[index]} {...propsArray[index]}/>
+          </TabPanel>)}
       </SwipeableViews>
     </div>
   );

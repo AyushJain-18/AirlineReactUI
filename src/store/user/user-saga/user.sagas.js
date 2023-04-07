@@ -6,11 +6,11 @@ import passengerSaga from './user-passenger-sagas';
 import passengerInfoUpdateSaga from './passenger-info-update'
 
 export default function* userSagas(){
-    yield all([
-        call(userSignInSaga),
-        call(userLogOutSaga),
-        call(passengerSaga),
-        call(passengerInfoUpdateSaga)
+  yield all([
+    call(userSignInSaga),
+    call(userLogOutSaga),
+    call(passengerSaga),
+    call(passengerInfoUpdateSaga)
         
-    ])
- }
+  ])
+}

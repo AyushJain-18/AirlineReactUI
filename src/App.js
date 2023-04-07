@@ -5,20 +5,12 @@ import './App.css';
 import AllRoutesComponent from './routes/routes.component'
 
 
-function App({signInUserType, allPassengers}) {
+function App() {
   return (
     <div className="App">
-          <AllRoutesComponent/>
+      <AllRoutesComponent/>
     </div>
   );
 }
 
 export default App
-
-
-
-
-
-
-
-

@@ -11,17 +11,17 @@ import AncilliaryReducer from './ancillaryServices/ancillaryService.reducers';
 
 
 const presistConfig ={
-    key: 'root',
-    storage,
-    whitelist: ['user', 'FetchedFlights']
+  key: 'root',
+  storage,
+  whitelist: ['user', 'FetchedFlights']
 }
 
 const rootReducer =combineReducers({
-    FetchedFlights: flightRecucer,
-    user           : userReducer,
-    AllPassenger: passengerReducer,
-    Admin: adminReducer,
-    AncillaryService: AncilliaryReducer
+  FetchedFlights: flightRecucer,
+  user           : userReducer,
+  AllPassenger: passengerReducer,
+  Admin: adminReducer,
+  AncillaryService: AncilliaryReducer
 })
 
 //export default rootReducer;

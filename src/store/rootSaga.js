@@ -8,13 +8,13 @@ import ancillarySaga from './ancillaryServices/ancillaryService.saga';
 
 
 export default function* rootSaga(){
-    yield all(
-        [
-            call(flightSaga),
-            call(userSagas),
-            call(allPassengerSaga),
-            call(adminSaga),
-            call(ancillarySaga)
-        ]
-    )
+  yield all(
+    [
+      call(flightSaga),
+      call(userSagas),
+      call(allPassengerSaga),
+      call(adminSaga),
+      call(ancillarySaga)
+    ]
+  )
 }

@@ -1,7 +1,9 @@
+
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 
 import {connect} from 'react-redux'
-import {createStructuredSelector} from 'reselect';
+//import {createStructuredSelector} from 'reselect';
 import {compose} from 'redux'
 
 
@@ -10,24 +12,24 @@ import WithSpinnerContainer from '../with-spinner-container/with-spinner.contain
 import ErrorContainer from '../errorContainer/error-container'
 
 import { selectFlightFecthedStatus,
-         selectFlightFetchedErrorStatus}
-    from '../../store/flight/flight.selector';
+  selectFlightFetchedErrorStatus}
+  from '../../store/flight/flight.selector';
 
 
 
 
 
 const mapStateToProps = state=>(
-    {
-        isLoading: selectFlightFecthedStatus(state),
-        isError: selectFlightFetchedErrorStatus(state)
-    }
-    )
+  {
+    isLoading: selectFlightFecthedStatus(state),
+    isError: selectFlightFetchedErrorStatus(state)
+  }
+)
 
 const DashBoardContainer = compose(
-    connect(mapStateToProps),
-    WithSpinnerContainer,
-    ErrorContainer
+  connect(mapStateToProps),
+  WithSpinnerContainer,
+  ErrorContainer
 )(Dashboard);
 
 

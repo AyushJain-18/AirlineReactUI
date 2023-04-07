@@ -20,106 +20,107 @@ import {removeFetchedPassengers} from '../../store/allpassenger/allpassenger.act
 // import HeaderStyles from './Header.module.scss';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        marginBottom: theme.spacing(2)
-    },
-    menuButton: {
-        marginLeft: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    logoIcon: {
-        fontSize: 2.2 + 'rem',
-        cursor: 'pointer'
-    },
-    Appbar: {
-        backgroundColor: '#282c34',
-            // position: 'fixed',
-            top: 0
-    }
+  root: {
+    flexGrow: 1,
+    marginBottom: theme.spacing(2)
+  },
+  menuButton: {
+    marginLeft: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  logoIcon: {
+    fontSize: 2.2 + 'rem',
+    cursor: 'pointer'
+  },
+  Appbar: {
+    backgroundColor: '#282c34',
+    // position: 'fixed',
+    top: 0
+  }
 }));
 
 const Header = ({history,passengerDetails,isUserSingIn,logOut, removePassengers,clearUserError}) => {
-    const classes = useStyles();
-    const imageURL = AccountCircle;
-    const [anchorEl, setanchorEl]= useState(null);
+  const classes = useStyles();
+  // const imageURL = AccountCircle;
+  const [anchorEl, setanchorEl]= useState(null);
 
-    const redirectToHomePage = () => {
-        history.push('/');
-    };
-    const redirectToSignInPage = () => {
-        history.push('/signIn');
-        clearUserError();
-    };
-    const setCurrentAnchorPosition = event => {
-        event.persist();
-        setanchorEl(event.currentTarget);
-    };
+  const redirectToHomePage = () => {
+    history.push('/');
+  };
+  const redirectToSignInPage = () => {
+    history.push('/signIn');
+    clearUserError();
+  };
+  const setCurrentAnchorPosition = event => {
+    event.persist();
+    setanchorEl(event.currentTarget);
+  };
 
-    const resetAnchorPositionToNull = () => {
-        setanchorEl(null)
-    }
-    const signOut =()=>{
-        resetAnchorPositionToNull();
-        logOut();
-        removePassengers();
-        redirectToHomePage();
-    }
+  const resetAnchorPositionToNull = () => {
+    setanchorEl(null)
+  }
+  const signOut =()=>{
+    resetAnchorPositionToNull();
+    logOut();
+    removePassengers();
+    redirectToHomePage();
+  }
 
-    return (
-        <header className={classes.root}>
-            <AppBar position="static" className={classes.Appbar}>
-                <Toolbar>
-                    <div onClick={redirectToHomePage} className ={classes.logoIcon}>
-                        <Logo/>
-                    </div>
-                    <IconButton onClick={redirectToHomePage}
-                      role="menu" edge="start"
-                      className={classes.menuButton}
-                      color="inherit" aria-label="menu">
+  return (
+    <header className={classes.root}>
+      <AppBar position="static" className={classes.Appbar}>
+        <Toolbar>
+          <div aria-hidden onClick={redirectToHomePage} className ={classes.logoIcon}>
+            <Logo/>
+          </div>
+          <IconButton onClick={redirectToHomePage}
+            role="menu" edge="start"
+            className={classes.menuButton}
+            color="inherit" aria-label="menu">
                          AIRWAYS
-                    </IconButton>
-                    <div variant="h6" className={classes.title}></div>
-                    {isUserSingIn?<Fragment>
-                        {passengerDetails? (<img src={passengerDetails.Image}
-                                                onClick={setCurrentAnchorPosition}
-                                                className='logoImg' 
-                                                alt="user-profile-pic"></img>):(
-                                            <AccountCircle role="button"  
-                                                    className='logoIcon' 
-                                                    onClick={setCurrentAnchorPosition}>
-                                            </AccountCircle>
-                                                )}
-                                <Menu id="simple-menu" 
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    open={Boolean(anchorEl)}
-                                    onClose={resetAnchorPositionToNull}>
-                                        <MenuItem onClick={signOut}>Logout</MenuItem>
-                                </Menu>
-                    </Fragment>:
-                    <AccountCircle role="button" className='logoIcon' onClick={redirectToSignInPage}/>}
-                    </Toolbar>
-            </AppBar>
-        </header>
-    );
+          </IconButton>
+          <div className={classes.title}></div>
+          {isUserSingIn?<Fragment>
+            {passengerDetails? (<img src={passengerDetails.Image}
+              aria-hidden
+              onClick={setCurrentAnchorPosition}
+              className='logoImg' 
+              alt="user-profile-pic"></img>):(
+              <AccountCircle role="button"  
+                className='logoIcon' 
+                onClick={setCurrentAnchorPosition}>
+              </AccountCircle>
+            )}
+            <Menu id="simple-menu" 
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={resetAnchorPositionToNull}>
+              <MenuItem onClick={signOut}>Logout</MenuItem>
+            </Menu>
+          </Fragment>:
+            <AccountCircle role="button" className='logoIcon' onClick={redirectToSignInPage}/>}
+        </Toolbar>
+      </AppBar>
+    </header>
+  );
 }
 
 
 const mapStateToProps =(state)=>{
-    return{
-        isUserSingIn: selectUserSignInStatus(state),
-        passengerDetails: selectPassenger(state)
-        }
+  return{
+    isUserSingIn: selectUserSignInStatus(state),
+    passengerDetails: selectPassenger(state)
+  }
 }
 const mapDispatchToProps = (dispatch)=>{
-        return{
-            logOut: ()=>dispatch(userLogOutStart()),
-            removePassengers: ()=> dispatch(removeFetchedPassengers()),
-            clearUserError: ()=>dispatch(clearUserError())
-        }
+  return{
+    logOut: ()=>dispatch(userLogOutStart()),
+    removePassengers: ()=> dispatch(removeFetchedPassengers()),
+    clearUserError: ()=>dispatch(clearUserError())
+  }
 }
   
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

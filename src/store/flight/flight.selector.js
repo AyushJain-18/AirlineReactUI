@@ -8,25 +8,25 @@ export const selectFlight = (store)=> store.FetchedFlights;
 
 
 export const selectFlightFecthedStatus = createSelector(
-    [selectFlight], FetchedFlights=>FetchedFlights.isFligthFething
+  [selectFlight], FetchedFlights=>FetchedFlights.isFligthFething
 );
 
 export const selectFlightFetchedErrorStatus = createSelector(
-    [selectFlight], FetchedFlights=>FetchedFlights.isFlightFetchedError
+  [selectFlight], FetchedFlights=>FetchedFlights.isFlightFetchedError
 );
 
 export const selectFlights =createSelector(
-    [selectFlight], FetchedFlights=>FetchedFlights.flight
+  [selectFlight], FetchedFlights=>FetchedFlights.flight
 )
 export const selectFlightsObj =createSelector(
-    [selectFlight], FetchedFlights=>createFlightObject(FetchedFlights.flight)
+  [selectFlight], FetchedFlights=>createFlightObject(FetchedFlights.flight)
 )
 
 export const selectFlightForSelectedPassenger =(flightNo)=>{
-   // console.log('flightNo Entered no', flightNo)
-    return createSelector(
-        [selectFlightsObj], flightObj=>flightObj[flightNo]
-)}
+  // console.log('flightNo Entered no', flightNo)
+  return createSelector(
+    [selectFlightsObj], flightObj=>flightObj[flightNo]
+  )}
 
 
 

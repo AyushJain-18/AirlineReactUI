@@ -9,10 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import {connect} from 'react-redux';
 
 import GetStepContentComponent ,{
-        QontoConnector,
-        QontoStepIcon,
-        useStyles,
-        getSteps
+  QontoConnector,
+  QontoStepIcon,
+  useStyles,
+  getSteps
 }from './web-check-in-stepper.component';
 import CustumButton from '../CustumComponents/CustumButon/custumButton.component';
 import {selectNextButtonState} from '../../store/allpassenger/allpassenger.select';
@@ -20,7 +20,7 @@ import{changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.act
 
 
 
- const  WebCheckInStepperComponent=({nextButtonState,changeNextButtonState})=> {
+const  WebCheckInStepperComponent=({nextButtonState,changeNextButtonState})=> {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -32,12 +32,12 @@ import{changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.act
   };
 
   const handleBack = () => {
-      if(activeStep>0){
-        if(activeStep === 2){
-          changeNextButtonState(true);
-        }
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if(activeStep>0){
+      if(activeStep === 2){
+        changeNextButtonState(true);
       }
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    }
   };
 
   const handleReset = () => {
@@ -51,7 +51,7 @@ import{changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.act
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={QontoStepIcon}>
-                <div className={classes.stepLabel}>{label}</div>
+              <div className={classes.stepLabel}>{label}</div>
             </StepLabel>
           </Step>
         ))}
@@ -64,17 +64,17 @@ import{changeStateOfDisplayNext} from '../../store/allpassenger/allpassenger.act
             <Typography className={classes.finishText}>SuccessFully Checked In</Typography>
             <CustumButton onClick={handleReset}>NEW-PNR</CustumButton>
           </div>
-            ) : (
+        ) : (
           <div className= {classes.instructions}>
-                <GetStepContentComponent step ={activeStep} style={{width: '100%'}}/>
-                <div className={classes.buttonContainer}>
-                    <CustumButton  onClick={handleBack} disabled={activeStep === 0}>
+            <GetStepContentComponent step ={activeStep} style={{width: '100%'}}/>
+            <div className={classes.buttonContainer}>
+              <CustumButton  onClick={handleBack} disabled={activeStep === 0}>
                         Back
-                    </CustumButton>
-                    <CustumButton onClick={handleNext} disabled={!nextButtonState}>
-                        {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </CustumButton>
-                </div>
+              </CustumButton>
+              <CustumButton onClick={handleNext} disabled={!nextButtonState}>
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </CustumButton>
+            </div>
           </div>
         )}
       </div>
@@ -87,7 +87,7 @@ const mapStateToProps =(state)=>{
   }
 }
 const mapDispatchToProps =(dispatch)=>({
-      changeNextButtonState: (value)=>(dispatch(changeStateOfDisplayNext(value))) 
+  changeNextButtonState: (value)=>(dispatch(changeStateOfDisplayNext(value))) 
 }) 
 
 export default connect(mapStateToProps,mapDispatchToProps)(WebCheckInStepperComponent);
