@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //const serverUrl ='http://localhost:3000';
-const serverUrl =  'https://pear-lovely-agouti.cyclic.app/';
+const serverUrl =  'https://happy-pullover-deer.cyclic.app';
 
 
 export const getRequest =(endpoint)=>{
